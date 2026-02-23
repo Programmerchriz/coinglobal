@@ -45,45 +45,41 @@ const CurrencyConverter = ({
   };
 
   return (
-    <section className="bg-[#161b22] rounded-xl p-5 space-y-4">
-      <h3 className="font-semibold">{symbol.toUpperCase()} Converter</h3>
+    <section className="bg-[#111827] border border-white/5 rounded-2xl p-6 space-y-5 shadow-xl">
+      <h3 className="font-semibold text-lg text-white">
+        {symbol.toUpperCase()} Converter
+      </h3>
 
-      {/* Crypto Input */}
-      <div className="bg-[#0f1419] rounded-lg px-4 py-3 flex justify-between items-center">
+      <div className="bg-[#0F1623] rounded-xl px-4 py-3 flex justify-between items-center border border-white/10">
         <input
           type="number"
           placeholder="10"
           value={cryptoAmount}
           onChange={(e) => handleCryptoChange(e.target.value)}
-          className="bg-transparent  text-white  outline-none  w-1/2 text-base appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          className="bg-transparent outline-none w-1/2 text-base text-white placeholder:text-white/30"
         />
 
-        <div className="flex items-center gap-1">
-          <div className="rounded-full flex items-center justify-center text-lg font-bold">
-            <Image src={image} alt={` Logo`} width={24} height={24} />
-          </div>
-          <span className="text-sm text-gray-400">{symbol.toUpperCase()}</span>
+        <div className="flex items-center gap-2">
+          <Image src={image} alt="logo" width={24} height={24} />
+          <span className="text-sm text-white/50">
+            {symbol.toUpperCase()}
+          </span>
         </div>
       </div>
 
-      <div className="flex justify-center text-green-400">
-        <button>
-          <ArrowUpDown />
-        </button>
+      <div className="flex justify-center text-white/50">
+        <ArrowUpDown size={18} />
       </div>
 
-      {/* Fiat Input */}
-      <div className="bg-[#0f1419] rounded-lg px-4 py-3 flex justify-between items-center">
+      <div className="bg-[#0F1623] rounded-xl px-4 py-3 flex justify-between items-center border border-white/10">
         <input
           type="number"
           placeholder={`${rate * 10}`}
           value={fiatAmount}
           onChange={(e) => handleFiatChange(e.target.value)}
-          className="bg-transparent  text-white  outline-none  w-1/2 text-base"
+          className="bg-transparent outline-none w-1/2 text-base text-white placeholder:text-white/30"
         />
-        <div>
-          <DropDown list={currencies} value={selectedCurrency} onChange={setSelectedCurrency} />
-        </div>
+        <DropDown list={currencies} value={selectedCurrency} onChange={setSelectedCurrency} />
       </div>
     </section>
   );

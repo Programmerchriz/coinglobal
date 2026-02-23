@@ -64,7 +64,7 @@ const recentTradesColumns: DataTableColumn<RecentTrade>[] = [
   {
     header: 'Buy/Sell',
     cell: (row) => (
-      <b className={row.type === 'Buy' ? 'text-green-400' : 'text-red-400'}>{row.type}</b>
+      <b className={row.type === 'Buy' ? 'text-[#22C55E]' : 'text-[#EF4444]'}>{row.type}</b>
     ),
   },
   {
@@ -149,7 +149,7 @@ const Coin = async ({ params }: CoinPageProps) => {
   const coinTickers: Ticker[] = coin.tickers;
 
   return (
-    <section className="min-h-screen text-white px-4 py-6">
+    <section className="min-h-screen bg-[#0B0F19] text-white px-4 py-6">
       {/* Header */}
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Top section */}
@@ -167,7 +167,7 @@ const Coin = async ({ params }: CoinPageProps) => {
 
               <span
                 className={cn(
-                  'px-2 py-1 text-xs rounded-lg bg-green-500/10 text-green-400 flex gap-1',
+                  'px-2 py-1 text-xs rounded-lg bg-white/5 flex gap-1 items-center',
                   trendingClasses(coin.market_data.price_change_percentage_24h).textClass
                 )}
               >
@@ -200,11 +200,11 @@ const Coin = async ({ params }: CoinPageProps) => {
             {/* Stats Row */}
             <div className="grid grid-cols-3 gap-3 mt-4 items-center">
               <div className="rounded-lg p-4">
-                <p className="text-sm text-gray-400">Today</p>
+                <p className="text-sm text-white/50">Today</p>
                 <div className="flex gap-1 items-center">
                   <p
                     className={cn(
-                      'text-green-400 font-semibold',
+                      'font-semibold',
                       trendingClasses(coin.market_data.price_change_percentage_24h).textClass
                     )}
                   >
@@ -231,11 +231,11 @@ const Coin = async ({ params }: CoinPageProps) => {
               </div>
 
               <div className="rounded-lg p-4">
-                <p className="text-sm text-gray-400">30 Days</p>
+                <p className="text-sm text-white/50">30 Days</p>
                 <div className="flex gap-1 items-center">
                   <p
                     className={cn(
-                      'text-green-400 font-semibold',
+                      'font-semibold',
                       trendingClasses(coin.market_data.price_change_percentage_30d).textClass
                     )}
                   >
@@ -262,10 +262,10 @@ const Coin = async ({ params }: CoinPageProps) => {
               </div>
 
               <div className="rounded-lg p-4">
-                <p className="text-sm text-gray-400">Price Change (24h)</p>
+                <p className="text-sm text-white/50">Price Change (24h)</p>
                 <p
                   className={cn(
-                    'text-green-400 font-semibold',
+                    'font-semibold',
                     trendingClasses(coin.market_data.price_change_24h_in_currency.usd).textClass
                   )}
                 >
@@ -287,7 +287,7 @@ const Coin = async ({ params }: CoinPageProps) => {
         {/* Chart + Coin Details */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Chart */}
-          <div className="lg:col-span-2 rounded-xl lg:p-3">
+          <div className="lg:col-span-2 bg-[#111827] border border-white/5 rounded-2xl lg:p-4 shadow-xl">
             {/* Chart Placeholder */}
             <CandlestickChart data={coinOHLCData} coinId={coin.id}>
               <div className="header pt-2">
@@ -298,7 +298,7 @@ const Coin = async ({ params }: CoinPageProps) => {
 
           {/* Coin Details */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Coin Details</h3>
+            <h3 className="font-semibold text-white">Coin Details</h3>
             <CoinDetailCard coinDetailsArray={coinDetailsArray} />
           </div>
         </div>
@@ -321,7 +321,7 @@ const Coin = async ({ params }: CoinPageProps) => {
         >
           {/* Recent Trades - 2/3 */}
           <div className="lg:col-span-2 custom-scrollbar">
-            <h4 className="text-xl md:text-3xl font-semibold mb-2">Recent Trades</h4>
+            <h4 className="text-xl md:text-3xl font-semibold mb-2 text-white">Recent Trades</h4>
 
             <DataTable
               data={recentTradesData}

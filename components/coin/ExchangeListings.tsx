@@ -9,7 +9,7 @@ import DataTable from '@/components/all/DataTable';
 const exchangeListingsColumns: DataTableColumn<Ticker>[] = [
   {
     header: 'Exchange',
-    cell: (row) => <span className="text-green-400 font-medium">{row.market.name}</span>,
+    cell: (row) => <span className="text-indigo-500 font-medium">{row.market.name}</span>,
   },
   {
     header: 'Pair',
@@ -57,7 +57,7 @@ export default function ExchangeListings({ tickers }: { tickers: Ticker[] }) {
         <button
           disabled={currentPage === 1}
           onClick={() => setCurrentPage((prev) => prev - 1)}
-          className="px-3 py-1 bg-[#0f1419] rounded hover:cursor-pointer disabled:hover:cursor-default disabled:opacity-40"
+          className={`px-3 py-1 bg-[#0F1623] border border-white/10 text-white/70 rounded-lg hover:bg-white/10 ${currentPage === 1 ? "hover:cursor-not-allowed" : "hover:cursor-pointer"} transition disabled:opacity-40`}
         >
           Prev
         </button>
@@ -67,7 +67,7 @@ export default function ExchangeListings({ tickers }: { tickers: Ticker[] }) {
         <button
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage((prev) => prev + 1)}
-          className="px-3 py-1 bg-[#0f1419] rounded hover:cursor-pointer disabled:hover:cursor-default disabled:opacity-40"
+          className={`px-3 py-1 bg-[#0F1623] border border-white/10 text-white/70 rounded-lg hover:bg-white/10 ${currentPage === totalPages ? "hover:cursor-not-allowed" : "hover:cursor-pointer"} transition disabled:opacity-40`}
         >
           Next
         </button>

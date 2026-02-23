@@ -82,16 +82,16 @@ const TopMovers = () => {
     {
       header: '', // No visible header
       cell: (row) => (
-        <div className="flex items-center justify-between bg-[#192028] px-4 py-3 rounded-lg hover:opacity-95 transition cursor-pointer">
+        <div className="flex items-center justify-between bg-[#111827] border border-white/5 px-4 py-3 rounded-lg hover:opacity-95 transition cursor-pointer">
           {/* Left */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#1f2933] flex items-center justify-center text-xs font-bold">
+            <div className="w-8 h-8 rounded-full bg-[#0F1623] flex items-center justify-center text-xs font-bold">
               {row.symbol[0]}
             </div>
 
             <div>
               <p className="text-sm font-medium">{row.name}</p>
-              <p className="text-xs text-gray-400">{row.symbol}</p>
+              <p className="text-xs text-white/50">{row.symbol}</p>
             </div>
           </div>
 
@@ -100,7 +100,7 @@ const TopMovers = () => {
             <p className="text-sm font-medium">{row.price}</p>
             <p
               className={`text-xs font-semibold ${
-                row.positive ? 'text-green-400' : 'text-red-400'
+                row.positive ? 'text-[#22C55E]' : 'text-[#EF4444]'
               }`}
             >
               {row.change}
@@ -118,7 +118,9 @@ const TopMovers = () => {
         <button
           onClick={() => setActive('gainers')}
           className={`pb-1 text-sm font-medium transition hover:cursor-pointer ${
-            active === 'gainers' ? 'text-white border-b-2 border-green-400' : 'text-gray-400'
+            active === 'gainers'
+            ? 'text-white border-b-2 border-[#22C55E]'
+            : 'text-white/50'
           }`}
         >
           Top Gainers
@@ -127,7 +129,9 @@ const TopMovers = () => {
         <button
           onClick={() => setActive('losers')}
           className={`pb-1 text-sm font-medium transition hover:cursor-pointer ${
-            active === 'losers' ? 'text-white border-b-2 border-red-400' : 'text-gray-400'
+            active === 'losers'
+            ? 'text-white border-b-2 border-[#EF4444]'
+            : 'text-white/50'
           }`}
         >
           Top Losers
