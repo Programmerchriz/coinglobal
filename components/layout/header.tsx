@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 import { SearchModal } from '@/components/all/SearchModal';
 
-const getNavLinks = (session: Session | null) => {
+const getNavLinks = (session: Session | null | undefined) => {
   if (!session) {
     return [
       {
