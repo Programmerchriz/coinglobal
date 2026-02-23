@@ -41,15 +41,17 @@ export const metadata: Metadata = {
   // }, // Bigger Logo
 };
 
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let trending, session;
+  const trending = await fetcher<{ coins: TrendingCoin[] }>('/search/trending');
+  let session;
+
   try {
-    trending = await fetcher<{ coins: TrendingCoin[] }>('/search/trending');
   
     session = await auth.api.getSession({
       headers: await headers(),
