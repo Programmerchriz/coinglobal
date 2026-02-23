@@ -100,10 +100,10 @@ export default function DashboardClientPage({ session }: { session: Session }) {
             <div className="flex flex-col gap-3 justify-between">
               <div className="flex items-center justify-between space-x-3">
                 <div className="flex items-center justify-between gap-4">
-                  {(user.image) ?
+                  {/* {(user.image) ?
                    <Image
                       src={`${user.image}`}
-                      alt="User Image"
+                      alt=""
                       width={40}
                       height={40}
                       className="rounded-full object-cover"
@@ -114,7 +114,12 @@ export default function DashboardClientPage({ session }: { session: Session }) {
                       {user.name[0]}
                     </AvatarFallback>
                   </Avatar>
-                  }
+                  } */}
+                  <Avatar>
+                    <AvatarFallback className="bg-indigo-600">
+                      {user.name[0]}
+                    </AvatarFallback>
+                  </Avatar>
                   
                   <div className="text-sm">
                     <p className="text-white font-medium">
