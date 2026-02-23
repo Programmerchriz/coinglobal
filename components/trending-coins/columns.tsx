@@ -8,7 +8,7 @@ import { cn, formatCurrency, formatPercentage } from '@/lib/utils';
 
 export const columns: DataTableColumn<TrendingCoin>[] = [
   {
-    header: 'Name',
+    header: 'Coin',
     cellClassName: 'name-cell',
     cell: (coin) => {
       const item = coin.item;

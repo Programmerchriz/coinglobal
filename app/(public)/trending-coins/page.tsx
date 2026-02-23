@@ -2,6 +2,7 @@ import { getTrendingCoins } from '@/lib/api/trendingCoins';
 
 import TrendingCoinsTable from '@/components/trending-coins/TrendingCoinsTable';
 import CoinsPagination from '@/components/all/CoinsPagination';
+import BackButton from '@/components/ui/BackButton';
 
 export default async function TrendingCoinsPage({ searchParams }: NextPageProps) {
   const { page } = await searchParams;
@@ -22,19 +23,30 @@ export default async function TrendingCoinsPage({ searchParams }: NextPageProps)
   const hasMorePages = currentPage < safeTotalPages;
 
   return (
-    <div className="main-container">
-      <h4 className="text-xl md:text-2xl font-semibold mb-2 pl-5">Trending Coins</h4>
+    <div className="min-h-screen bg-[#0B0F19] text-white px-4 md:px-8 py-8">
+      <div className="max-w-7xl mx-auto space-y-6">
 
-      <div id="trending-coins" className="custom-scrollbar">
-        <TrendingCoinsTable trendingCoins={paginatedTrendingCoins} />
+        <div>
+          <BackButton />
+        </div>
+
+        <h4 className="text-2xl md:text-3xl font-semibold text-white">
+          Trending Coins
+        </h4>
+
+        <div className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl p-4">
+          <TrendingCoinsTable trendingCoins={paginatedTrendingCoins} />
+        </div>
+
+        <div className="flex justify-center">
+          <CoinsPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            hasMorePages={hasMorePages}
+            basePath="trending-coins"
+          />
+        </div>
       </div>
-
-      <CoinsPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        hasMorePages={hasMorePages}
-        basePath="trending-coins"
-      />
     </div>
   );
 }

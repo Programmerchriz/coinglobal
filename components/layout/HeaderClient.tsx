@@ -27,9 +27,14 @@ const getNavLinks = (session: Session | null | undefined) => {
   }
 
   return [
+    // {
+    //   title: 'Home',
+    //   href: '/',
+    //     disabled: false,
+    // },
     {
-      title: 'Home',
-      href: '/',
+      title: 'Dashboard',
+      href: '/dashboard',
         disabled: false,
     },
     {
@@ -38,8 +43,8 @@ const getNavLinks = (session: Session | null | undefined) => {
         disabled: false,
     },
     {
-      title: 'Dashboard',
-      href: '/dashboard',
+      title: 'Markets',
+      href: '/markets',
         disabled: false,
     },
   ];
@@ -56,7 +61,7 @@ export default function HeaderClient ({ trendingCoins, session }: HeaderProps) {
     <header className="sticky top-0 z-50 bg-[#0B0F19]/80 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-0 sm:gap-1 md:gap-3">
           <Image
             src="/coin-glob.png"
             alt="CoinGlobal Logo"
@@ -64,13 +69,13 @@ export default function HeaderClient ({ trendingCoins, session }: HeaderProps) {
             height={40}
             className="mt-2 rounded-md"
           />
-          <h3 className="text-lg font-semibold tracking-tight">
+          <h3 className="text-lg mt-1 font-semibold tracking-tight">
             Coin<span className="font-bold italic text-indigo-500">Global</span>
           </h3>
         </Link>
 
         {/* Navigation */}
-        <nav className="flex items-center gap-3 sm:gap-6 text-sm">
+        <nav className="flex items-center justify-end gap-2 sm:gap-6 text-sm">
           {links.map((link) => (
             <Link
               key={link.title}
