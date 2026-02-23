@@ -36,6 +36,7 @@ export default function DashboardClientPage({ session }: { session: Session }) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", available: true },
@@ -48,6 +49,7 @@ export default function DashboardClientPage({ session }: { session: Session }) {
   ];
 
   const handleSignOut = async () => {
+    setIsDisabled(true);
     await signOut();
     router.push("/sign-in");
   };
@@ -137,6 +139,7 @@ export default function DashboardClientPage({ session }: { session: Session }) {
               <div>
                 <button
                   onClick={handleSignOut}
+                  disabled={isDisabled}
                   className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-white/70 hover:bg-white/5 hover:text-white hover:cursor-pointer transition-colors"
                 >
                   Sign Out

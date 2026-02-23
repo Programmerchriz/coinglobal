@@ -48,24 +48,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const trending = await fetcher<{ coins: TrendingCoin[] }>('/search/trending');
-  let session;
-
-  try {
-  
-    session = await auth.api.getSession({
-      headers: await headers(),
-    });
-
-  } catch (e) {
-    <Error />
-    console.error("Error:", e);
-  }
-
   return (
     <html lang="en" className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Header trendingCoins={trending?.coins} session={session} />
+        <Header />
         {children}
         <Toaster
           position='bottom-right'
