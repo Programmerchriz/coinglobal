@@ -40,7 +40,7 @@ export default function Loading() {
 
         {/* Loading Text */}
         <p className="text-sm text-white/50 tracking-wide">
-          Loading markets...
+          Signing you out...
         </p>
       </motion.div>
     </div>

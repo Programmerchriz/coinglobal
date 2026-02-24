@@ -5,10 +5,10 @@ import { fetcher } from '@/lib/coingecko.actions';
 
 import './globals.css';
 import Header from '../components/layout/header';
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from '@/components/ui/sonner';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-import Error from './(public)/coins/[id]/error';
+import Error from './(protected)/coins/[id]/error';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   title: 'Coin Global',
   description: 'Crypto Screener App with a built-in High-Frequency Terminal & Dashboard',
   icons: {
-    icon: "/coin-glob.png",
-    shortcut: "/coin-glob.png",
-    apple: "/coin-glob.png",
+    icon: '/coin-glob.png',
+    shortcut: '/coin-glob.png',
+    apple: '/coin-glob.png',
   },
   // openGraph: {
   //   title: "CoinGlobal",
@@ -52,16 +52,16 @@ export default async function RootLayout({
         <Header />
         {children}
         <Toaster
-          position='bottom-right'
+          position="bottom-right"
           richColors
           closeButton
-          theme='dark'
+          theme="dark"
           toastOptions={{
             classNames: {
-              toast: "bg-[#111827] border border-white/10 text-white",
-              description: "text-white/60",
-              actionButton: "bg-indogo-600 hover:bg-indigo-500 text-white",
-            }
+              toast: 'bg-[#111827] border border-white/10 text-white',
+              description: 'text-white/60',
+              actionButton: 'bg-indogo-600 hover:bg-indigo-500 text-white',
+            },
           }}
         />
       </body>

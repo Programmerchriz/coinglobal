@@ -1,9 +1,12 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 import { cn, formatCurrency, formatPercentage } from '@/lib/utils';
 import { fetcher } from '@/lib/coingecko.actions';
+
 import DataTable from '../../../components/all/DataTable';
 import CoinsPagination from '../../../components/all/CoinsPagination';
 import { AllCoinsFallback } from './fallback';
@@ -92,7 +95,6 @@ const Coins = async ({ searchParams }: NextPageProps) => {
 
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white px-4 md:px-8 py-8">
-          
       {/* Background Glow */}
       <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -100,11 +102,9 @@ const Coins = async ({ searchParams }: NextPageProps) => {
         <div>
           <BackButton />
         </div>
-        
+
         <div>
-          <h1 className="text-2xl md:text-3xl font-semibold">
-            All Coins
-          </h1>
+          <h1 className="text-2xl md:text-3xl font-semibold">All Coins</h1>
           <p className="text-white/50 text-sm mt-1">
             Explore different cryptocurrencies and their performance.
           </p>

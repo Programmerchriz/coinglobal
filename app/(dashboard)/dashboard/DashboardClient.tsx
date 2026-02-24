@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Loading from "@/components/dashboard/SignOutLoading";
 import {
   TrendingUp,
   TrendingDown,
@@ -36,7 +37,9 @@ export default function DashboardClientPage({ session }: { session: Session }) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", available: true },
@@ -50,6 +53,8 @@ export default function DashboardClientPage({ session }: { session: Session }) {
 
   const handleSignOut = async () => {
     setIsDisabled(true);
+    setIsSigningOut(true);
+  
     await signOut();
     router.push("/sign-in");
   };
@@ -71,6 +76,11 @@ export default function DashboardClientPage({ session }: { session: Session }) {
   }, []);
 
   return (
+    (isSigningOut)
+      ?
+    (<Loading />)
+      :
+    (
     <div className="min-h-screen bg-[#0B0F19] text-white flex relative">
       {/* Mobile Overlay */}
       <AnimatePresence>
@@ -214,7 +224,9 @@ export default function DashboardClientPage({ session }: { session: Session }) {
             </h1>
           </div>
 
-          <div className="">
+          <div
+            className=""
+          >
             <Link
               href="/notifications"
             >
@@ -325,6 +337,6 @@ export default function DashboardClientPage({ session }: { session: Session }) {
           </CardContent>
         </Card>
       </main>
-    </div>
+    </div>)
   );
 };

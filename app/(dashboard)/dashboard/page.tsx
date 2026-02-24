@@ -1,6 +1,5 @@
 
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
 import DashboardClientPage from '@/app/(dashboard)/dashboard/DashboardClient';
@@ -10,7 +9,7 @@ export default async function Dashboard() {
     headers: await headers(),
   });
 
-  if (!session) redirect("/sign-in");
+  if (!session) return;
 
   return (
     <DashboardClientPage

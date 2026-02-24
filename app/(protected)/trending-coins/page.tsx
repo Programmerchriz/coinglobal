@@ -1,3 +1,4 @@
+
 import { getTrendingCoins } from '@/lib/api/trendingCoins';
 
 import TrendingCoinsTable from '@/components/trending-coins/TrendingCoinsTable';

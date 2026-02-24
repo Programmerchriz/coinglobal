@@ -1,9 +1,10 @@
-import Image from 'next/image';
 
-import { TrendingDown, TrendingUp } from 'lucide-react';
+import Image from 'next/image';
 
 import { fetcher } from '@/lib/coingecko.actions';
 import { cn, formatCurrency, formatPercentage, trendingClasses } from '@/lib/utils';
+
+import { TrendingDown, TrendingUp } from 'lucide-react';
 
 import DataTable from '@/components/all/DataTable';
 import CandlestickChart from '@/components/all/CandlestickChart';
