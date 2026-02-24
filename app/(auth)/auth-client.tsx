@@ -34,18 +34,8 @@ export default function AuthClientPage({
   const handleSocialAuth = async (provider: "google") => {
     setIsLoading(true);
     setError("");
-
-    try {
-      await signInSocial(provider);
-    } catch (err) {
-      setError(
-        `Error authenticating with ${provider}: ${
-          err instanceof Error ? err.message : "Unknown error"
-        }`
-      );
-    } finally {
-      setIsLoading(false);
-    }
+    
+    await signInSocial(provider);
   };
 
   const handleEmailAuth = async (e: React.FormEvent) => {
@@ -144,13 +134,13 @@ export default function AuthClientPage({
           {/* Social Auth */}
           <button
             onClick={() => handleSocialAuth("google")}
-            disabled={true}
-            className="relative w-full flex items-center justify-center gap-3 bg-[#0F1623] border border-white/10 rounded-xl py-3 text-sm opacity-50 cursor-not-allowed"
+            disabled={isLoading}
+            className="relative w-full flex items-center justify-center gap-3 bg-[#0F1623] border border-white/10 rounded-xl py-3 text-sm hover:cursor-pointer"
           >
             {/* Coming Soon badge */}
-            <span className="absolute top-0.5 sm:top-2 left-1 sm:left-3 text-[10px] px-2 py-0.5 bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 rounded-full leading-none">
+            {/* <span className="absolute top-0.5 sm:top-2 left-1 sm:left-3 text-[10px] px-2 py-0.5 bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 rounded-full leading-none">
               Coming Soon
-            </span>
+            </span> */}
 
             {/* Google Logo */}
             <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
