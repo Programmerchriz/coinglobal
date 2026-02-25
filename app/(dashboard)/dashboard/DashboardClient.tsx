@@ -7,7 +7,6 @@ import Image from "next/image";
 
 import { useState, useEffect } from "react";
 
-import { auth } from "@/lib/auth";
 import { signOut } from "@/lib/actions/auth-actions";
 
 import { Card, CardContent } from "@/components/ui/card";
