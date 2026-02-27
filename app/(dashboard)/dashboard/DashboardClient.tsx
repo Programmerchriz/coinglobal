@@ -108,7 +108,7 @@ export default function DashboardClientPage({ session }: { session: Session }) {
           <div className="mb-8">
             <div className="flex flex-col gap-3 justify-between">
               <div className="flex items-center justify-between space-x-3">
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center justify-between gap-4 overflow-x-auto custom-scrollbar">
                   {(user.image) ?
                    <Image
                       src={`${user.image}`}

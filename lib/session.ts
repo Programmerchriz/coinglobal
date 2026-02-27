@@ -6,19 +6,19 @@ import { headers } from "next/headers";
 
 import { auth } from "@/lib/auth";
 
-export const getServerSession = cache(async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  return session;
-});
-
-
-// export const getServerSession = async () => {
+// export const getServerSession = cache(async () => {
 //   const session = await auth.api.getSession({
 //     headers: await headers(),
 //   });
 
 //   return session;
-// };
+// });
+
+
+export const getServerSession = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  return session;
+};

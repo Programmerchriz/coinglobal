@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { auth } from '@/lib/auth';
 import { cn } from '@/lib/utils';
 
-import { SearchModal } from '@/components/all/SearchModal';
+import { SearchModal } from '@/components/layout/SearchModal';
 
 const getNavLinks = (session: Session | null | undefined) => {
   if (!session) {

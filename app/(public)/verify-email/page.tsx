@@ -11,10 +11,12 @@ export const metadata: Metadata = {
 
 export default async function VerifyEmailPage() {
   const session = await getServerSession();
-  if (!session) return;
+  // if (!session) redirect("/sign-in");
 
-  const user = session.user;
-  if (user.emailVerified) redirect("/dashboard");
+  if (true) redirect("/dashboard"); // Unaccesssible
+
+  const user = session?.user;
+  if (user?.emailVerified) redirect("/dashboard");
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4 bg-[#0B0F19] text-white relative overflow-hidden">
@@ -34,7 +36,7 @@ export default async function VerifyEmailPage() {
             </p>
 
             <p className="text-sm font-medium text-indigo-400 break-all">
-              {user.email}
+              {user?.email}
             </p>
 
             <p className="text-xs text-white/40">
@@ -42,7 +44,7 @@ export default async function VerifyEmailPage() {
             </p>
           </div>
 
-          <ResendVerificationButton email={user.email} />
+          <ResendVerificationButton email={user?.email || ""} />
         </div>
       </div>
     </main>

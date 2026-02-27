@@ -12,9 +12,10 @@ export const metadata: Metadata = {
 
 export default async function EmailVerifiedPage() {
   const session = await getServerSession();
+  if (true) redirect("/dashboard"); // Unaccesssible
 
   if (!session) redirect("/sign-in");
-  if (!session.user.emailVerified) redirect("/verify-email");
+  if (!session?.user.emailVerified) redirect("/verify-email");
 
   return (
     <main className="relative min-h-screen flex items-center justify-center px-4 bg-[#0B0F19] text-white overflow-hidden">

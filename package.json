@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "prisma generate && next build",
+    "dev": "python routes.py && next dev --turbo",
+    "build": "python routes.py && next build",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write ."

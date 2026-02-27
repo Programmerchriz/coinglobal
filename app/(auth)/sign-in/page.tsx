@@ -1,7 +1,7 @@
 
 import { redirect } from "next/navigation";
-import { getServerSession } from '@/lib/session';
 
+import { getServerSession } from '@/lib/session';
 import AuthClientPage from "../auth-client";
 
 export default async function SignInPage() {

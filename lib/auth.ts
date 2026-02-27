@@ -1,9 +1,11 @@
 
+// import { redirect } from "next/navigation";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import sendEmail from './email';
-import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
+import { PrismaClient } from "@prisma/client";
+
+// import sendEmail from './email';
 
 const prisma = new PrismaClient();
 
@@ -27,24 +29,24 @@ export const auth = betterAuth({
     // requireEmailVerification: true,
   },
 
-  emailVerification: {
-    // sendOnSignUp: true,
-    // sendOnSignIn: true,
-    // autoSignInAfterVerification: true,
+  // emailVerification: {
+  //   sendOnSignUp: true,
+  //   sendOnSignIn: true,
+  //   autoSignInAfterVerification: true,
 
-    async sendVerificationEmail({
-      user,
-      url,
-    }) {
-      console.log("Sending verification email to:", user.email);
+  //   async sendVerificationEmail({
+  //     user,
+  //     url,
+  //   }) {
+  //     await sendEmail({
+  //       to: "programmerchris6002@gmail.com",
+  //       subject: "Verify your email",
+  //       text: `Click the link to verify your email ${url}`,
+  //     });
 
-      await sendEmail({
-        to: "programmerchris6002@gmail.com",
-        subject: "Verify your email",
-        text: `Click the link to verify your email ${url}`,
-      });
-    },
-  },
+  //     redirect("/verify-email");
+  //   },
+  // },
 
   user: {
     additionalFields: {

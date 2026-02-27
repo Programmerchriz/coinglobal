@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { motion } from "framer-motion";
@@ -23,6 +23,11 @@ export default function AuthClientPage({
   const router = useRouter();
   const searchParams = useSearchParams();
   
+  const callbackUrl = useMemo(() => {
+    const url = searchParams.get("callbackUrl");
+    return url?.startsWith("/") ? url : "/dashboard";
+  }, [searchParams]);
+  
   const [isSignIn, setIsSignIn] = useState(
     defaultMode === "sign-in"
   );
@@ -35,7 +40,7 @@ export default function AuthClientPage({
     setIsLoading(true);
     setError("");
     
-    await signInSocial(provider);
+    await signInSocial(provider, callbackUrl);
   };
 
   const handleEmailAuth = async (e: React.FormEvent) => {
@@ -45,12 +50,14 @@ export default function AuthClientPage({
 
     try {
       if (isSignIn) {
-        const response = await signIn(email, password);
+        const response = await signIn(email, password, callbackUrl);
 
         if (!response.user) {
           setError("Invalid email or password");
           return;
         }
+
+        router.push(callbackUrl);
 
         toast.success(
           "Successfully signed in 🎉",
@@ -58,15 +65,15 @@ export default function AuthClientPage({
             description: "Welcome back to Coin Global",
           }
         );
-
-        router.push(searchParams.get("callbackUrl") || "/dashboard");
       } else {
-        const response = await signUp(email, password, name);
+        const response = await signUp(email, password, name, callbackUrl);
 
         if (!response.user) {
           setError("Failed to create account");
           return;
         }
+
+        router.push(callbackUrl);
 
         toast.success(
           "Account created 🚀",
@@ -74,8 +81,6 @@ export default function AuthClientPage({
             description: "Welcome to Coin Global.",
           }
         );
-
-        router.push("/dashboard");
       }
     } catch (err) {
       setError(
