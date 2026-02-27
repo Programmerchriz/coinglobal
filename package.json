@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "python routes.py && next dev --turbo",
-    "build": "python routes.py && next build",
+    "build": "python routes.py && prisma generate && next build",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write ."
