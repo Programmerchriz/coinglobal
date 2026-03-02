@@ -1,4 +1,7 @@
 -- CreateEnum
+CREATE TYPE "public"."Role" AS ENUM ('USER', 'ADMIN', 'SUPER_ADMIN');
+
+-- CreateEnum
 CREATE TYPE "public"."Currency" AS ENUM ('USD', 'BTC', 'ETH', 'USDT');
 
 -- CreateEnum
@@ -19,6 +22,7 @@ CREATE TABLE "public"."user" (
     "image" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "role" "public"."Role" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -128,10 +132,10 @@ CREATE TABLE "public"."LedgerEntry" (
 CREATE UNIQUE INDEX "user_email_key" ON "public"."user"("email");
 
 -- CreateIndex
-CREATE INDEX "session_userId_idx" ON "public"."session"("userId");
+CREATE UNIQUE INDEX "session_token_key" ON "public"."session"("token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "session_token_key" ON "public"."session"("token");
+CREATE INDEX "session_userId_idx" ON "public"."session"("userId");
 
 -- CreateIndex
 CREATE INDEX "account_userId_idx" ON "public"."account"("userId");
@@ -164,10 +168,10 @@ ALTER TABLE "public"."Transaction" ADD CONSTRAINT "Transaction_userId_fkey" FORE
 ALTER TABLE "public"."Transaction" ADD CONSTRAINT "Transaction_walletId_fkey" FOREIGN KEY ("walletId") REFERENCES "public"."Wallet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."LedgerEntry" ADD CONSTRAINT "LedgerEntry_walletId_fkey" FOREIGN KEY ("walletId") REFERENCES "public"."Wallet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "public"."LedgerEntry" ADD CONSTRAINT "LedgerEntry_adminWalletId_fkey" FOREIGN KEY ("adminWalletId") REFERENCES "public"."AdminWallet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."LedgerEntry" ADD CONSTRAINT "LedgerEntry_transactionId_fkey" FOREIGN KEY ("transactionId") REFERENCES "public"."Transaction"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."LedgerEntry" ADD CONSTRAINT "LedgerEntry_walletId_fkey" FOREIGN KEY ("walletId") REFERENCES "public"."Wallet"("id") ON DELETE CASCADE ON UPDATE CASCADE;

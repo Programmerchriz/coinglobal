@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -41,8 +41,12 @@ const signUpSchema = z
 type SignUpValues = z.infer<typeof signUpSchema>;
 
 export function SignUpForm() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [isLocked, setIsLocked] = useState(false);
+  
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirect = searchParams.get('redirect') ?? '/dashboard';
 
   const form = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
@@ -56,23 +60,26 @@ export function SignUpForm() {
 
   async function onSubmit(values: SignUpValues) {
     setError(null);
+    if (isLocked) return;
+    setIsLocked(true);
 
     const { error } = await authClient.signUp.email({
       name: values.name,
       email: values.email,
       password: values.password,
-      callbackURL: '/dashboard',
+      callbackURL: redirect,
     });
 
     if (error) {
-      setError(error.message || 'Something went wrong');
+      setError(error.message || 'Invalid Email or Password');
+      setIsLocked(false);
     } else {
+      router.replace(redirect);
       toast.success('Account created 🎉');
-      router.push('/dashboard');
     }
-  }
+  };
 
-  const loading = form.formState.isSubmitting;
+  const loading = form.formState.isSubmitting || isLocked;
 
   return (
     <div className="min-h-screen py-16 bg-[#0B0F19] text-white flex justify-center px-4 relative overflow-hidden">
@@ -105,16 +112,30 @@ export function SignUpForm() {
           <button
             type="button"
             disabled={loading}
-            onClick={() =>
-              authClient.signIn.social({
-                provider: "google",
-                callbackURL: "/dashboard",
-              })
-            }
+            onClick={async () => {
+              if (isLocked) return;
+              setIsLocked(true);
+
+              try {
+                await authClient.signIn.social({
+                  provider: "google",
+                  callbackURL: redirect,
+                });
+              } catch (err) {
+                console.error(err);
+                setIsLocked(false);
+              }
+            }}
             className={`w-full flex items-center justify-center gap-3 bg-[#0F1623] border border-white/10 rounded-xl py-3 text-sm hover:border-white/20 transition ${loading ? "opacity-30 hover:cursor-not-allowed" : "hover:cursor-pointer hover:opacity-90"}`}
           >
-            <GoogleIcon className="w-5 h-5" />
-            Continue with Google
+            {loading ? (
+              <span>Signing in...</span>
+            ) : (
+              <>
+                <GoogleIcon className="w-5 h-5" />
+                Continue with Google
+              </>
+            )}
           </button>
 
           {/* Divider */}

@@ -1,11 +1,131 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../lib/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // directUrl      = env("DIRECT_DATABASE_URL")
+}
+
+model User {
+  id            String        @id
+  name          String
+  email         String        @unique
+  emailVerified Boolean       @default(false)
+  image         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  role          Role          @default(USER)
+  transactions  Transaction[]
+  wallets       Wallet[]
+  accounts      Account[]
+  sessions      Session[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Wallet {
+  id            String        @id @default(uuid())
+  userId        String
+  currency      Currency
+  balance       Decimal       @db.Decimal(20, 8)
+  lockedBalance Decimal       @default(0) @db.Decimal(20, 8)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  ledgerEntries LedgerEntry[]
+  transactions  Transaction[]
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, currency])
+}
+
+model AdminWallet {
+  id            String        @id @default(uuid())
+  currency      Currency      @unique
+  balance       Decimal       @default(0) @db.Decimal(20, 8)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  ledgerEntries LedgerEntry[]
+}
+
+model Transaction {
+  id             String            @id @default(uuid())
+  userId         String
+  walletId       String
+  type           TransactionType
+  amount         Decimal           @db.Decimal(20, 8)
+  feeAmount      Decimal           @default(0) @db.Decimal(20, 8)
+  netAmount      Decimal           @db.Decimal(20, 8)
+  status         TransactionStatus @default(PENDING)
+  idempotencyKey String?           @unique
+  txHash         String?
+  reference      String?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  ledgerEntries  LedgerEntry[]
+  user           User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wallet         Wallet            @relation(fields: [walletId], references: [id], onDelete: Cascade)
+}
+
+model LedgerEntry {
+  id            String          @id @default(uuid())
+  walletId      String?
+  adminWalletId String?
+  transactionId String
+  type          LedgerEntryType
+  amount        Decimal         @db.Decimal(20, 8)
+  createdAt     DateTime        @default(now())
+  adminWallet   AdminWallet?    @relation(fields: [adminWalletId], references: [id], onDelete: Cascade)
+  transaction   Transaction     @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  wallet        Wallet?         @relation(fields: [walletId], references: [id], onDelete: Cascade)
 }
 
 enum Role {
@@ -38,144 +158,4 @@ enum TransactionStatus {
   COMPLETED
   FAILED
   CANCELLED
-}
-
-model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  role          Role      @default(USER)
-
-  sessions      Session[]
-  accounts      Account[]
-  wallets      Wallet[]
-  transactions Transaction[]
-
-  @@unique([email])
-  @@map("user")
-}
-
-model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([token])
-  @@index([userId])
-  @@map("session")
-}
-
-model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
-
-  @@index([userId])
-  @@map("account")
-}
-
-model Verification {
-  id         String   @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@index([identifier])
-  @@map("verification")
-}
-
-model Wallet {
-  id       String   @id @default(uuid())
-  userId   String
-  currency Currency
-
-  balance       Decimal @db.Decimal(20, 8)
-  lockedBalance Decimal @default(0) @db.Decimal(20, 8)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  ledgerEntries LedgerEntry[]
-  transactions  Transaction[]
-
-  @@unique([userId, currency])
-}
-
-model AdminWallet {
-  id       String   @id @default(uuid())
-  currency Currency @unique
-  balance  Decimal  @default(0) @db.Decimal(20, 8)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  ledgerEntries LedgerEntry[]
-}
-
-model Transaction {
-  id       String @id @default(uuid())
-  userId   String
-  walletId String
-
-  type   TransactionType
-  amount Decimal         @db.Decimal(20, 8)
-
-  feeAmount Decimal @default(0) @db.Decimal(20, 8)
-  netAmount Decimal @db.Decimal(20, 8)
-
-  status TransactionStatus @default(PENDING)
-
-  idempotencyKey String? @unique
-  txHash         String?
-  reference      String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  wallet Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
-
-  ledgerEntries LedgerEntry[]
-}
-
-model LedgerEntry {
-  id            String  @id @default(uuid())
-  walletId      String?
-  adminWalletId String?
-  transactionId String
-
-  type   LedgerEntryType
-  amount Decimal         @db.Decimal(20, 8)
-
-  createdAt DateTime @default(now())
-
-  wallet      Wallet?      @relation(fields: [walletId], references: [id], onDelete: Cascade)
-  adminWallet AdminWallet? @relation(fields: [adminWalletId], references: [id], onDelete: Cascade)
-  transaction Transaction  @relation(fields: [transactionId], references: [id], onDelete: Cascade)
 }

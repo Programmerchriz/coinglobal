@@ -1,6 +1,7 @@
 
 'use client';
 
+import { useEffect, useState } from "react";
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -9,6 +10,7 @@ import { auth } from '@/lib/auth';
 import { cn } from '@/lib/utils';
 
 import { SearchModal } from '@/components/layout/SearchModal';
+import { getTrendingCoins } from "@/lib/api/trendingCoins";
 
 const getNavLinks = (session: Session | null | undefined) => {
   if (!session) {
@@ -57,10 +59,31 @@ const getNavLinks = (session: Session | null | undefined) => {
 
 type Session = typeof auth.$Infer.Session;
 
-export default function HeaderClient ({ trendingCoins, session }: HeaderProps) {
-  const pathname = usePathname();
+export default function HeaderClient ({ session }: HeaderProps) {
+  const [trendingCoins, setTrendingCoins] = useState<TrendingCoin[]>([]);
+  const [isLoadingTrending, setIsLoadingTrending] = useState(false);
 
+  const pathname = usePathname();
   const links = getNavLinks(session);
+
+  useEffect(() => {
+    if (!session) return;
+
+    const fetchTrending = async () => {
+      try {
+        setIsLoadingTrending(true);
+        const data = getTrendingCoins();
+
+        setTrendingCoins((await data).coins || []);
+      } catch (err) {
+        console.error("Trending fetch failed:", err);
+      } finally {
+        setIsLoadingTrending(false);
+      }
+    };
+
+    fetchTrending();
+  }, [session]);
 
   return (
     <header className="sticky top-0 z-50 bg-[#0B0F19]/80 backdrop-blur-xl border-b border-white/5">
@@ -97,7 +120,10 @@ export default function HeaderClient ({ trendingCoins, session }: HeaderProps) {
 
           {/* Search */}
           {(session) && (<div className="md:block">
-            <SearchModal initialTrendingCoins={trendingCoins} />
+            <SearchModal
+              initialTrendingCoins={trendingCoins}
+              isLoading={isLoadingTrending}
+            />
           </div>)}
         </nav>
       </div>

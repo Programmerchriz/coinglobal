@@ -93,8 +93,10 @@ const SearchItem = ({ coin, onSelect, isActiveName }: SearchItemProps) => {
 
 export const SearchModal = ({
   initialTrendingCoins = [],
+  isLoading,
 }: {
   initialTrendingCoins: TrendingCoin[] | undefined;
+  isLoading: boolean;
 }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
