@@ -5,7 +5,7 @@ import { getTrendingCoins } from '@/lib/api/trendingCoins';
 import HeaderClient from "./HeaderClient";
 
 export default async function Header() {
-  let session;
+  let session = null;
   
   try {
     session = await getServerSession();
@@ -13,14 +13,7 @@ export default async function Header() {
     console.error("Error:", e);
   };
 
-  if (session) {
-    const trending = await getTrendingCoins();
-    return (
-      <HeaderClient trendingCoins={trending?.coins} session={session} />
-    );
-  }
-
   return (
-    <HeaderClient trendingCoins={[]} session={session} />
+    <HeaderClient session={session} />
   );
 };

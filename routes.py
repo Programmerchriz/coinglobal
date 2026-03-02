@@ -8,7 +8,7 @@ APP_DIR = "app"
 # Route groups accessible to non-signed-in users
 PUBLIC_GROUPS = ["(auth)", "(public)"]
 
-accessible_routes = []
+accessible_routes = ["/"]
 
 
 def extract_public_routes():

@@ -35,6 +35,8 @@ type SignInValues = z.infer<typeof signInSchema>;
 
 export function SignInForm() {
   const [error, setError] = useState<string | null>(null);
+  const [isLocked, setIsLocked] = useState(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect') ?? '/dashboard';
@@ -50,22 +52,27 @@ export function SignInForm() {
 
   async function onSubmit(values: SignInValues) {
     setError(null);
+    if (isLocked) return;
+    setIsLocked(true);
 
     const { error } = await authClient.signIn.email({
       email: values.email,
       password: values.password,
       rememberMe: values.rememberMe,
+      callbackURL: redirect,
     });
 
     if (error) {
-      setError(error.message || 'Invalid credentials');
+      setError(error.message || 'Invalid Email or Password');
+      setIsLocked(false);
     } else {
+      router.replace(redirect);
       toast.success('Welcome back 🚀');
-      router.push(redirect);
     }
-  }
+    
+  };
 
-  const loading = form.formState.isSubmitting;
+  const loading = form.formState.isSubmitting || isLocked;
 
   return (
     <div className="min-h-screen pt-16 bg-[#0B0F19] text-white flex justify-center px-4 pb-0 relative overflow-hidden">
@@ -99,16 +106,30 @@ export function SignInForm() {
           <button
             type="button"
             disabled={loading}
-            onClick={() =>
-              authClient.signIn.social({
-                provider: "google",
-                callbackURL: redirect,
-              })
-            }
+            onClick={async () => {
+              if (isLocked) return;
+              setIsLocked(true);
+
+              try {
+                await authClient.signIn.social({
+                  provider: "google",
+                  callbackURL: redirect,
+                });
+              } catch (err) {
+                console.error(err);
+                setIsLocked(false);
+              }
+            }}
             className={`w-full flex items-center justify-center gap-3 bg-[#0F1623] border border-white/10 rounded-xl py-3 text-sm hover:border-white/20 transition ${loading ? "opacity-30 hover:cursor-not-allowed" : "hover:cursor-pointer hover:opacity-90"}`}
           >
-            <GoogleIcon className="w-5 h-5" />
-            Continue with Google
+            {loading ? (
+              <span>Signing in...</span>
+            ) : (
+              <>
+                <GoogleIcon className="w-5 h-5" />
+                Continue with Google
+              </>
+            )}
           </button>
 
           {/* Divider */}
