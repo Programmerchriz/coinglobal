@@ -1,10 +1,12 @@
 
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
+
+import OnboardingFooter from "@/components/public/OnboardingFooter";
 
 const FEATURES = [
   { label: "Dashboard", available: true },
@@ -138,6 +140,8 @@ export default function OnboardingClient() {
           </Link>
         </motion.div>
       </section>
+
+      <OnboardingFooter />
     </main>
   );
 };
