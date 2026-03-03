@@ -2,29 +2,33 @@
 "use client";
 
 import Image from "next/image";
-
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
 import SettingsSection from "@/components/dashboard/settings/SettingsSection";
 import SettingsItem from "@/components/dashboard/settings/SettingsItem";
+import SettingsButton from "@/components/dashboard/settings/SettingsButton";
 
 interface Props {
   user: UserProps;
 }
 
 export default function SettingsClient({ user }: Props) {
-
   return (
-    <div className="space-y-8">
-      {/* PAGE HEADER */}
+    <div className="space-y-10 pb-16">
+      {/* HEADER */}
       <div>
         <h1 className="text-2xl font-semibold text-white">Settings</h1>
         <p className="text-sm text-white/50">
-          Manage your account preferences and profile settings.
+          Manage your account preferences and system configuration.
         </p>
       </div>
+      {/* <div className="bg-app min-h-screen text-text-primary">
+        <div className="bg-surface border border-border p-6 rounded-2xl">
+          Crypto Dashboard
+        </div>
+      </div> */}
 
-      {/* PROFILE SECTION */}
+      {/* PROFILE */}
       <SettingsSection title="Profile">
         <SettingsItem
           title="Nickname & Avatar"
@@ -46,54 +50,147 @@ export default function SettingsClient({ user }: Props) {
               </Avatar>
             )
           }
-          action={
-            <Button className="h-9 px-4 text-sm font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 backdrop-blur-sm hover:cursor-pointer">
-              Edit
-            </Button>
-          }
+          action={<SettingsButton>Edit</SettingsButton>}
         />
 
         <SettingsItem
           title="Email Address"
           value={user.email}
-          action={
-            <Button className="h-9 px-4 text-sm font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 backdrop-blur-sm hover:cursor-pointer">
-              Change
-            </Button>
-          }
+          action={<SettingsButton>Change</SettingsButton>}
         />
       </SettingsSection>
 
-      {/* NOTIFICATIONS SECTION */}
+      {/* NOTIFICATIONS */}
       <SettingsSection title="Notifications">
         <SettingsItem
           title="Notification Language"
           description="Choose your preferred notification language."
           value="English"
-          action={
-            <Button className="h-9 px-4 text-sm font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 backdrop-blur-sm hover:cursor-pointer">
-              Edit
-            </Button>
-          }
+          action={<SettingsButton>Edit</SettingsButton>}
         />
 
         <SettingsItem
           title="Notification Preferences"
-          description="Manage trading alerts, news and system messages."
-          action={
-            <Button className="h-9 px-4 text-sm font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 backdrop-blur-sm hover:cursor-pointer">
-              Manage
-            </Button>
-          }
+          description="Manage alerts, news and system messages."
+          action={<SettingsButton>Manage</SettingsButton>}
         />
 
         <SettingsItem
           title="Auto Price Alerts"
-          description="Receive alerts on price changes for selected assets."
+          description="Receive alerts on major price movements."
+          action={<SettingsButton>Manage</SettingsButton>}
+        />
+      </SettingsSection>
+
+      {/* PREFERENCES */}
+      <SettingsSection title="Preferences">
+        <SettingsItem
+          title="Color Preference"
+          description="Choose market color display."
+          value="Green Up / Red Down"
+          action={<SettingsButton>Edit</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="Style Settings"
+          description="Select your UI layout preference."
+          value="Compact"
+          action={<SettingsButton>Edit</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="UTC Time Zone"
+          description="Adjust platform time zone."
+          value="UTC +1"
+          action={<SettingsButton>Edit</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="Theme"
+          description="Switch between light and dark mode."
+          value="Dark"
+          action={<SettingsButton>Edit</SettingsButton>}
+        />
+      </SettingsSection>
+
+      {/* WITHDRAWAL */}
+      <SettingsSection title="Withdrawal">
+        <SettingsItem
+          title="Withdrawal Whitelist"
+          description="Restrict withdrawals to only approved wallet addresses."
+          value="OFF"
+          action={<SettingsButton>Enable</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="One-step Withdrawal"
+          description="Allow small withdrawals without 2FA confirmation."
+          value="OFF"
+          action={<SettingsButton>Enable</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="Withdraw Setting"
+          description="Configure on-chain and off-chain withdrawal behavior."
+          value="Off-chain withdrawal"
+          action={<SettingsButton>Edit</SettingsButton>}
+        />
+      </SettingsSection>
+
+      {/* TRADE */}
+      <SettingsSection title="Trade">
+        <SettingsItem
+          title="Order Confirmation Reminders"
+          description="Require reconfirmation before submitting trades."
+          value="Stop-Limit, Margin Orders"
+          action={<SettingsButton>Manage</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="Fee Deduction"
+          description="Use platform token to reduce trading fees."
+          value="Enabled"
+          action={<SettingsButton>Manage</SettingsButton>}
+        />
+      </SettingsSection>
+
+      {/* LINK ACCOUNT */}
+      <SettingsSection title="Linked Accounts">
+        <SettingsItem
+          title="Link X Account"
+          description="Connect your X account to CoinGlobal."
+          value={`Linked: ${user.name}`}
+          action={<SettingsButton>Link</SettingsButton>}
+        />
+      </SettingsSection>
+
+      {/* PRIVACY */}
+      <SettingsSection title="Privacy">
+        <SettingsItem
+          title="Download Personal Data"
+          description="Download profile, deposits, withdrawals and trade history."
+          action={<SettingsButton>Download</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="Export Transaction Records"
+          description="Export trading and funding transaction records."
+          action={<SettingsButton>Export</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="Update Documents"
+          description="Update verification and compliance documents."
+          action={<SettingsButton>Update</SettingsButton>}
+        />
+
+        <SettingsItem
+          title="Close Account"
+          description="Permanently close your CoinGlobal account."
           action={
-            <Button className="h-9 px-4 text-sm font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 backdrop-blur-sm hover:cursor-pointer">
-              Manage
-            </Button>
+            <SettingsButton className="bg-red-500/10 text-red-400 border-red-500/30 hover:bg-red-500/20">
+              Delete
+            </SettingsButton>
           }
         />
       </SettingsSection>
