@@ -12,18 +12,20 @@ const TrendingCoins = async () => {
   const coins = trendingCoins?.coins ?? [];
 
   return (
-    <div id="trending-coins" className="custom-scrollbar animate-fade-in-up">
-      <h4 className="text-xl md:text-2xl font-semibold mb-4 text-white">
+    <div id="trending-coins" className="animate-fade-in-up">
+      <h4 className="text-xl md:text-2xl font-semibold mb-4">
         Trending Coins
       </h4>
 
-      <TrendingCoinsTable trendingCoins={coins.slice(0, 5)} />
+      <div className='custom-scrollbar overflow-x-auto'>
+        <TrendingCoinsTable trendingCoins={coins.slice(0, 5)} />
+      </div>
 
       <div className="flex justify-center items-center mt-4">
         <Link
           href="/trending-coins"
           className={cn(
-            'group px-5 py-2 bg-[#0F1623] hover:border border-white/10 text-white rounded-xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg active:scale-95 flex items-center gap-2'
+            'group px-5 py-2 bg-(--bg-sidebar) hover:border border-(--color-10) text-primary rounded-xl transition-all duration-300 hover:bg-(--color-10) hover:-translate-y-1 hover:shadow-lg active:scale-95 flex items-center gap-2'
           )}
         >
           <span>More</span>

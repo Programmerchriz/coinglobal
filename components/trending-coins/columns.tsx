@@ -16,7 +16,7 @@ export const columns: DataTableColumn<TrendingCoin>[] = [
       return (
         <Link href={`/coins/${item.id}`}>
           <Image src={item.large} alt={item.name} width={36} height={36} />
-          <p>{item.name}</p>
+          <p className='custom-scrollbar overflow-x-auto max-w-30 sm:max-w-60 md:max-w-80 lg:max-w-50'>{item.name}</p>
         </Link>
       );
     },

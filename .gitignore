@@ -45,6 +45,9 @@ next-env.d.ts
 saveApiData.js
 *.json
 
+# imgs
+/public/demo/
+
 /app/generated/prisma
 
 /lib/generated/

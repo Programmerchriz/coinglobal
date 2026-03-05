@@ -38,7 +38,7 @@ const CoinsPagination = ({
         <PaginationItem>
           <PaginationPrevious
             className={cn(
-              'bg-[#111827] border border-white/10 text-white hover:bg-white/5 rounded-lg px-3 py-2 transition',
+              'bg-(--bg-surface) border border-(--color-10) text-primary hover:bg-(--color-5) rounded-lg px-3 py-2 transition',
               currentPage === 1 && 'opacity-40 pointer-events-none'
             )}
             onClick={() =>
@@ -50,14 +50,14 @@ const CoinsPagination = ({
         {pageNumbers.map((page, index) => (
           <PaginationItem key={index}>
             {page === ELLIPSIS ? (
-              <PaginationEllipsis className="text-white/40" />
+              <PaginationEllipsis className="text-(color-40)" />
             ) : (
               <PaginationLink
                 className={cn(
                   'px-4 py-2 rounded-lg text-sm transition border',
                   currentPage === page
-                    ? 'bg-indigo-600 border-indigo-600 text-white'
-                    : 'bg-[#111827] border-white/10 text-white/70 hover:bg-white/5'
+                    ? 'bg-(--color-primary) border-(--color-primary) text-white'
+                    : 'bg-(--bg-surface) border-(--color-5) text-(--color-70) hover:bg-(--color-5)'
                 )}
                 onClick={() => handlePageChange(page)}
               >
@@ -70,7 +70,7 @@ const CoinsPagination = ({
         <PaginationItem>
           <PaginationNext
             className={cn(
-              'bg-[#111827] border border-white/10 text-white hover:bg-white/5 rounded-lg px-3 py-2 transition',
+              'bg-(--bg-surface) border border-(--color-10) text-primary hover:(--color-5) rounded-lg px-3 py-2 transition',
               currentPage === totalPages && 'opacity-40 pointer-events-none'
             )}
             onClick={() =>

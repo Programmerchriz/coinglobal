@@ -28,10 +28,10 @@ export default async function CategoriesPage({ searchParams }: NextPageProps) {
   const hasMorePages = currentPage < totalPages;
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white px-4 md:px-8 py-8">
+    <div className="min-h-screen bg-(--bg-app) text-(--text-primary) px-4 md:px-8 py-8">
       
     {/* Background Glow */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-indigo-10) rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-6">
         <div>
@@ -42,13 +42,13 @@ export default async function CategoriesPage({ searchParams }: NextPageProps) {
           <h1 className="text-2xl md:text-3xl font-semibold">
             All Categories
           </h1>
-          <p className="text-white/50 text-sm mt-1">
+          <p className="text-(--color-50) text-sm mt-1">
             Explore crypto market categories and sector performance.
           </p>
         </div>
 
         {/* Table Card */}
-        <div className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl animate-fade-in-up transition-all duration-500 hover:shadow-2xl">
+        <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl animate-fade-in-up transition-all duration-500 hover:shadow-2xl">
           <div id="categories" className="custom-scrollbar p:4 md:p-6">
             <CategoriesTable categories={paginatedCategories} />
           </div>

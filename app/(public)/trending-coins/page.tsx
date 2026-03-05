@@ -24,18 +24,18 @@ export default async function TrendingCoinsPage({ searchParams }: NextPageProps)
   const hasMorePages = currentPage < safeTotalPages;
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white px-4 md:px-8 py-8">
+    <div className="min-h-screen bg-(--bg-app) text-primary px-4 md:px-8 py-8">
       <div className="max-w-7xl mx-auto space-y-6">
 
         <div>
           <BackButton />
         </div>
 
-        <h4 className="text-2xl md:text-3xl font-semibold text-white">
+        <h4 className="text-2xl md:text-3xl font-semibold text-primary">
           Trending Coins
         </h4>
 
-        <div className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl p-4">
+        <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl p-4">
           <TrendingCoinsTable trendingCoins={paginatedTrendingCoins} />
         </div>
 

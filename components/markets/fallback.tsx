@@ -2,7 +2,7 @@ import DataTable from '@/components/all/DataTable';
 
 export const CoinOverviewFallback = () => {
   return (
-    <section id="coin-overview-fallback" className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl p-4">
+    <section id="coin-overview-fallback" className="border rounded-2xl shadow-xl p-4">
       {/* Header */}
       <div className="header">
         <div className="header-image skeleton" />
@@ -115,7 +115,7 @@ export const CategoriesFallback = () => {
   const rows: Category[] = Array.from({ length: 6 });
 
   return (
-    <section id="categories-fallback" className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl p-4">
+    <section id="categories-fallback" className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl p-4">
       <h4>Top Categories</h4>
 
       <DataTable<Category>

@@ -31,10 +31,10 @@ const CoinOverview = async () => {
           <div className="header pt-2 flex items-center gap-4">
             <Image src={coin.image.large} alt={coin.name} width={56} height={56} />
             <div className="info">
-              <p className="text-white/70">
+              <p className="">
                 {coin.name} / {coin.symbol.toUpperCase()}
               </p>
-              <h1 className="text-3xl font-bold text-white">
+              <h1 className="text-3xl font-bold">
                 {formatCurrency(coin.market_data.current_price.usd)}
               </h1>
             </div>

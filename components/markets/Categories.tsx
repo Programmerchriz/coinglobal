@@ -6,7 +6,7 @@ const Categories = async () => {
 
   return (
     <div id="categories" className="custom-scrollbar animate-fade-in-up">
-      <h4 className="text-xl md:text-2xl font-semibold mb-4 text-white">
+      <h4 className="text-xl md:text-2xl font-semibold mb-4 text-(--text-primary)">
         Top Categories
       </h4>
 

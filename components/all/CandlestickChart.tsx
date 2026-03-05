@@ -150,7 +150,7 @@ const CandlestickChart = ({
           className="button-group"
         >
           <span
-            className="text-sm mx-2 font-medium text-white/50"
+            className="text-sm mx-2 font-medium text-(--color-50)"
           >
             Period:
           </span>

@@ -24,13 +24,13 @@ const DataTable = <T,>({
     <Table className={cn('w-full', tableClassName)}>
       <TableHeader className={headerClassName}>
         <TableRow
-          className={cn('border-b border-white/5', headerRowClassName)}
+          className={cn('border-b border-(--color-5)', headerRowClassName)}
         >
           {columns.map((column, i) => (
             <TableHead
               key={i}
               className={cn(
-                'text-white/50 text-xs uppercase tracking-wide py-4 first:pl-4 last:pr-4',
+                'text-(--color-50) text-xs uppercase tracking-wide py-4 first:pl-4 last:pr-4',
                 headerCellClassName
               )}
             >
@@ -45,7 +45,7 @@ const DataTable = <T,>({
           <TableRow
             key={rowKey(row, rowIndex)}
             className={cn(
-              'border-b border-white/5 hover:bg-white/5 transition-colors',
+              'border-b border-(--color-5) hover:bg-(--color-5) transition-colors',
               bodyRowClassName
             )}
           >
@@ -53,7 +53,7 @@ const DataTable = <T,>({
               <TableCell
                 key={columnIndex}
                 className={cn(
-                  'py-4 text-sm text-white/90 first:pl-4 last:pr-4',
+                  'py-4 text-sm text-(--color-90) first:pl-4 last:pr-4',
                   bodyCellClassName,
                   column.cellClassName
                 )}
