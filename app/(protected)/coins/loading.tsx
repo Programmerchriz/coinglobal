@@ -1,6 +1,7 @@
+
 import DataTable from '@/components/all/DataTable';
 
-export const AllCoinsFallback = () => {
+export default function Loading () {
   const columns = [
     {
       header: 'Rank',

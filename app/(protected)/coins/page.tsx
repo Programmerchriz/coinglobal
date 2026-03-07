@@ -9,8 +9,8 @@ import { fetcher } from '@/lib/coingecko.actions';
 
 import DataTable from '../../../components/all/DataTable';
 import CoinsPagination from '../../../components/all/CoinsPagination';
-import { AllCoinsFallback } from './fallback';
 import BackButton from '@/components/ui/BackButton';
+import Loading from './loading';
 
 const columns: DataTableColumn<CoinMarketData>[] = [
   {
@@ -87,16 +87,16 @@ const Coins = async ({ searchParams }: NextPageProps) => {
     });
   } catch (error) {
     console.error('Error fetching categories:', error);
-    return <AllCoinsFallback />;
+    return <Loading />;
   }
 
   const hasMorePages = allCoins.length === perPage;
   const estimatedTotalPages = currentPage >= 100 ? Math.ceil(currentPage / 100) * 100 + 100 : 100;
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white px-4 md:px-8 py-8">
+    <div className="relative min-h-screen bg-(--bg-base) text-(--color-100) px-4 md:px-8 py-8">
       {/* Background Glow */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-6">
         <div>
@@ -104,15 +104,18 @@ const Coins = async ({ searchParams }: NextPageProps) => {
         </div>
 
         <div>
-          <h1 className="text-2xl md:text-3xl font-semibold">All Coins</h1>
-          <p className="text-white/50 text-sm mt-1">
+          <h1 className="text-2xl md:text-3xl font-semibold">
+            All Coins
+          </h1>
+
+          <p className="text-(--color-50) text-sm mt-1">
             Explore different cryptocurrencies and their performance.
           </p>
         </div>
 
         {/* Table Card */}
-        <div className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl">
-          <div id="coins-page" className="custom-scrollbar p:4 md:p-6">
+        <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl">
+          <div id="coins-page" className="custom-scrollbar p-4 md:p-6">
             <DataTable
               data={allCoins}
               columns={columns}

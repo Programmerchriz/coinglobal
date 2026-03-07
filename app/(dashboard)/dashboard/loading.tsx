@@ -1,7 +1,7 @@
 
 "use client";
 
-export function Loading() {
+export default function Loading () {
   return (
     <div className="animate-pulse space-y-6">
 

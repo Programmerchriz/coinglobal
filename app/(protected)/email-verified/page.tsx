@@ -18,26 +18,27 @@ export default async function EmailVerifiedPage() {
   if (!session?.user.emailVerified) redirect("/verify-email");
 
   return (
-    <main className="relative min-h-screen flex items-center justify-center px-4 bg-[#0B0F19] text-white overflow-hidden">
+    <main className="relative min-h-screen flex items-center justify-center px-4 bg-(--bg-app) text-(--color-100) overflow-hidden">
       {/* Background Glow Effects */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-indigo-600/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-[-200px] right-[-200px] w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-3xl" />
+      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl" />
+      <div className="absolute bottom-[-200px] right-[-200px] w-[400px] h-[400px] bg-(--bg-glass-purple) rounded-full blur-3xl" />
 
       <div className="relative z-10 w-full max-w-md">
-        <div className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl p-8 text-center space-y-6">
+        <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl p-8 text-center space-y-6">
           
           <div className="space-y-2">
             <h1 className="text-2xl font-semibold">
               Email verified
             </h1>
-            <p className="text-sm text-white/50">
+
+            <p className="text-sm text-(--color-50)">
               Your email has been verified successfully.
             </p>
           </div>
 
           <Button
             asChild
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl py-3 text-sm font-medium transition"
+            className="w-full bg-(--color-primary) hover:bg-(--color-primary-hover) text-white rounded-xl py-3 text-sm font-medium transition"
           >
             <Link href="/dashboard">
               Go to dashboard

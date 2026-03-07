@@ -151,7 +151,7 @@ const Coin = async ({ params }: CoinPageProps) => {
   const coinTickers: Ticker[] = coin.tickers;
 
   return (
-    <section className="min-h-screen bg-[#0B0F19] text-white px-4 py-6">
+    <section className="min-h-screen bg-(--bg-app) text-(--text-primary) px-4 py-6">
       {/* Header */}
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Top section */}
@@ -173,17 +173,20 @@ const Coin = async ({ params }: CoinPageProps) => {
 
               <span
                 className={cn(
-                  'px-2 py-1 text-xs rounded-lg bg-white/5 flex gap-1 items-center',
+                  "px-2 py-1 text-xs rounded-lg bg-(--color-5) flex gap-1 items-center",
                   trendingClasses(coin.market_data.price_change_percentage_24h).textClass
                 )}
               >
                 {formatPercentage(coin.market_data.price_change_percentage_24h)}
+
                 {isTrendingUp(coin.market_data.price_change_percentage_24h) ? (
                   <TrendingUp
                     width={16}
                     height={16}
                     className={cn(
-                      trendingClasses(coin.market_data.price_change_percentage_24h).textClass
+                      trendingClasses(
+                        coin.market_data.price_change_percentage_24h
+                      ).textClass
                     )}
                   />
                 ) : (
@@ -191,10 +194,13 @@ const Coin = async ({ params }: CoinPageProps) => {
                     width={16}
                     height={16}
                     className={cn(
-                      trendingClasses(coin.market_data.price_change_percentage_24h).textClass
+                      trendingClasses(
+                        coin.market_data.price_change_percentage_24h
+                      ).textClass
                     )}
                   />
-                )}{' '}
+                )}
+
                 (24h)
               </span>
             </div>
@@ -206,22 +212,32 @@ const Coin = async ({ params }: CoinPageProps) => {
             {/* Stats Row */}
             <div className="grid grid-cols-3 gap-3 mt-4 items-center">
               <div className="rounded-lg p-4">
-                <p className="text-sm text-white/50">Today</p>
+                <p className="text-sm text-(--color-50)">Today</p>
+
                 <div className="flex gap-1 items-center">
                   <p
                     className={cn(
-                      'font-semibold',
-                      trendingClasses(coin.market_data.price_change_percentage_24h).textClass
+                      "font-semibold",
+                      trendingClasses(
+                        coin.market_data.price_change_percentage_24h
+                      ).textClass
                     )}
                   >
-                    {formatPercentage(coin.market_data.price_change_percentage_24h)}
+                    {formatPercentage(
+                      coin.market_data.price_change_percentage_24h
+                    )}
                   </p>
-                  {isTrendingUp(coin.market_data.price_change_percentage_24h) ? (
+
+                  {isTrendingUp(
+                    coin.market_data.price_change_percentage_24h
+                  ) ? (
                     <TrendingUp
                       width={16}
                       height={16}
                       className={cn(
-                        trendingClasses(coin.market_data.price_change_percentage_24h).textClass
+                        trendingClasses(
+                          coin.market_data.price_change_percentage_24h
+                        ).textClass
                       )}
                     />
                   ) : (
@@ -229,7 +245,9 @@ const Coin = async ({ params }: CoinPageProps) => {
                       width={16}
                       height={16}
                       className={cn(
-                        trendingClasses(coin.market_data.price_change_percentage_24h).textClass
+                        trendingClasses(
+                          coin.market_data.price_change_percentage_24h
+                        ).textClass
                       )}
                     />
                   )}
@@ -237,22 +255,32 @@ const Coin = async ({ params }: CoinPageProps) => {
               </div>
 
               <div className="rounded-lg p-4">
-                <p className="text-sm text-white/50">30 Days</p>
+                <p className="text-sm text-(--color-50)">30 Days</p>
+
                 <div className="flex gap-1 items-center">
                   <p
                     className={cn(
-                      'font-semibold',
-                      trendingClasses(coin.market_data.price_change_percentage_30d).textClass
+                      "font-semibold",
+                      trendingClasses(
+                        coin.market_data.price_change_percentage_30d
+                      ).textClass
                     )}
                   >
-                    {formatPercentage(coin.market_data.price_change_percentage_30d)}
+                    {formatPercentage(
+                      coin.market_data.price_change_percentage_30d
+                    )}
                   </p>
-                  {isTrendingUp(coin.market_data.price_change_percentage_30d) ? (
+
+                  {isTrendingUp(
+                    coin.market_data.price_change_percentage_30d
+                  ) ? (
                     <TrendingUp
                       width={16}
                       height={16}
                       className={cn(
-                        trendingClasses(coin.market_data.price_change_percentage_30d).textClass
+                        trendingClasses(
+                          coin.market_data.price_change_percentage_30d
+                        ).textClass
                       )}
                     />
                   ) : (
@@ -260,7 +288,9 @@ const Coin = async ({ params }: CoinPageProps) => {
                       width={16}
                       height={16}
                       className={cn(
-                        trendingClasses(coin.market_data.price_change_percentage_30d).textClass
+                        trendingClasses(
+                          coin.market_data.price_change_percentage_30d
+                        ).textClass
                       )}
                     />
                   )}
@@ -268,14 +298,19 @@ const Coin = async ({ params }: CoinPageProps) => {
               </div>
 
               <div className="rounded-lg p-4">
-                <p className="text-sm text-white/50">Price Change (24h)</p>
+                <p className="text-sm text-(--color-50)">Price Change (24h)</p>
+
                 <p
                   className={cn(
-                    'font-semibold',
-                    trendingClasses(coin.market_data.price_change_24h_in_currency.usd).textClass
+                    "font-semibold",
+                    trendingClasses(
+                      coin.market_data.price_change_24h_in_currency.usd
+                    ).textClass
                   )}
                 >
-                  {formatCurrency(coin.market_data.price_change_24h_in_currency.usd)}
+                  {formatCurrency(
+                    coin.market_data.price_change_24h_in_currency.usd
+                  )}
                 </p>
               </div>
             </div>
@@ -293,8 +328,7 @@ const Coin = async ({ params }: CoinPageProps) => {
         {/* Chart + Coin Details */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Chart */}
-          <div className="lg:col-span-2 bg-[#111827] border border-white/5 rounded-2xl lg:p-4 shadow-xl">
-            {/* Chart Placeholder */}
+          <div className="lg:col-span-2 bg-(--bg-surface) border border-(--color-5) rounded-2xl lg:p-4 shadow-xl">
             <CandlestickChart data={coinOHLCData} coinId={coin.id}>
               <div className="header pt-2">
                 <h3 className="font-semibold">Trend Overview</h3>
@@ -304,7 +338,10 @@ const Coin = async ({ params }: CoinPageProps) => {
 
           {/* Coin Details */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-white">Coin Details</h3>
+            <h3 className="font-semibold text-(--text-primary)">
+              Coin Details
+            </h3>
+
             <CoinDetailCard coinDetailsArray={coinDetailsArray} />
           </div>
         </div>
@@ -312,9 +349,10 @@ const Coin = async ({ params }: CoinPageProps) => {
         {/* Exchange Listings */}
         <div
           id="coins-page"
-          className="custom-scrollbar py-3 grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6 px-0 custom-scrollbar"
+          className="custom-scrollbar py-3 grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6 px-0"
         >
           <ExchangeListings tickers={coinTickers} />
+
           <div className="lg:col-span-1">
             <TopMovers />
           </div>
@@ -323,11 +361,13 @@ const Coin = async ({ params }: CoinPageProps) => {
         {/* Recent Trades */}
         <div
           id="coins-page"
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6 px-0 pr-0 custom-scrollbar"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6 px-0 pr-0"
         >
-          {/* Recent Trades - 2/3 */}
-          <div className="lg:col-span-2 custom-scrollbar">
-            <h4 className="text-xl md:text-3xl font-semibold mb-2 text-white">Recent Trades</h4>
+          {/* Recent Trades */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xl md:text-3xl font-semibold mb-2">
+              Recent Trades
+            </h4>
 
             <DataTable
               data={recentTradesData}
@@ -339,7 +379,6 @@ const Coin = async ({ params }: CoinPageProps) => {
             />
           </div>
 
-          {/* Top Movers - 1/3 */}
           <div className="lg:col-span-1"></div>
         </div>
       </div>

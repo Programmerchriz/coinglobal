@@ -53,9 +53,9 @@ export default async function RootLayout({
           theme="dark"
           toastOptions={{
             classNames: {
-              toast: 'bg-[#111827] border border-white/10 text-white',
-              description: 'text-white/60',
-              actionButton: 'bg-indogo-600 hover:bg-indigo-500 text-white',
+              toast: 'bg-(--bg-surface) border border-(--color-10) text-(--text-primary)',
+              description: 'text-(--color-60)',
+              actionButton: 'bg-(--color-primary) hover:(--color-primary-hover) text-(--text-primary)',
             },
           }}
         />

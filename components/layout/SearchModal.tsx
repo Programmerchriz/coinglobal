@@ -151,93 +151,97 @@ export const SearchModal = ({
   const isResultsVisible = !isSearching && hasQuery && searchResults.length > 0;
 
   return (
-    <div id="search-modal">
-      <Button
-        variant="outline"
-        onClick={() => setOpen(true)}
-        className="flex items-center gap-2 rounded-xl border-border/50 bg-background/60 backdrop-blur-md hover:bg-muted/60 hover:cursor-pointer transition-all"
-      >
-        <SearchIcon size={16} className="text-muted-foreground" />
-        <span className="hidden md:block text-sm text-muted-foreground">
-          Search
-        </span>
-        <kbd className="ml-2 hidden md:flex items-center gap-1 rounded-md border border-border/60 bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-          <span>⌘</span>K
-        </kbd>
-      </Button>
+    isLoading
+      ?
+        <></>
+      :
+        <div id="search-modal">
+          <Button
+            variant="outline"
+            onClick={() => setOpen(true)}
+            className="flex items-center gap-2 rounded-xl border-border/50 bg-background/60 backdrop-blur-md hover:bg-muted/60 hover:cursor-pointer transition-all"
+          >
+            <SearchIcon size={16} className="text-muted-foreground" />
+            <span className="hidden md:block text-sm text-muted-foreground">
+              Search
+            </span>
+            <kbd className="ml-2 hidden md:flex items-center gap-1 rounded-md border border-border/60 bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+              <span>⌘</span>K
+            </kbd>
+          </Button>
 
-      <CommandDialog
-        open={open}
-        onOpenChange={setOpen}
-        className="overflow-hidden rounded-2xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl"
-      >
-        {/* Input */}
-        <div className="border-b border-border/50 px-4 py-3 bg-muted/30">
-          <CommandInput
-            placeholder="Search for a token by name or symbol..."
-            value={searchQuery}
-            onValueChange={setSearchQuery}
-            className="h-11 rounded-lg bg-background/60 px-4 text-sm focus:ring-0 focus:outline-none"
-          />
+          <CommandDialog
+            open={open}
+            onOpenChange={setOpen}
+            className="overflow-hidden rounded-2xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl"
+          >
+            {/* Input */}
+            <div className="border-b border-border/50 px-4 py-3 bg-muted/30">
+              <CommandInput
+                placeholder="Search for a token by name or symbol..."
+                value={searchQuery}
+                onValueChange={setSearchQuery}
+                className="h-11 rounded-lg bg-background/60 px-4 text-sm focus:ring-0 focus:outline-none"
+              />
+            </div>
+
+            {/* List */}
+            <CommandList className="max-h-[400px] overflow-y-auto custom-scrollbar px-2 py-3">
+              {isSearching && (
+                <div className="py-6 text-center text-sm text-muted-foreground">
+                  Searching...
+                </div>
+              )}
+
+              {isSearchEmpty && (
+                <div className="py-6 text-center text-sm text-muted-foreground">
+                  Type to search for coins...
+                </div>
+              )}
+
+              {isTrendingListVisible && (
+                <CommandGroup className="space-y-1">
+                  <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Trending
+                  </p>
+                  {trendingCoins.map(({ item }) => (
+                    <SearchItem
+                      key={item.id}
+                      coin={item}
+                      onSelect={handleSelect}
+                      isActiveName={false}
+                    />
+                  ))}
+                </CommandGroup>
+              )}
+
+              {isNoResults && (
+                <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
+                  No coins found.
+                </CommandEmpty>
+              )}
+
+              {isResultsVisible && (
+                <CommandGroup
+                  heading={
+                    <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      Search Results
+                    </p>
+                  }
+                  className="space-y-1"
+                >
+                  {searchResults.slice(0, SEARCH_LIMIT).map((coin) => (
+                    <SearchItem
+                      key={coin.id}
+                      coin={coin}
+                      onSelect={handleSelect}
+                      isActiveName
+                    />
+                  ))}
+                </CommandGroup>
+              )}
+            </CommandList>
+          </CommandDialog>
         </div>
-
-        {/* List */}
-        <CommandList className="max-h-[400px] overflow-y-auto custom-scrollbar px-2 py-3">
-          {isSearching && (
-            <div className="py-6 text-center text-sm text-muted-foreground">
-              Searching...
-            </div>
-          )}
-
-          {isSearchEmpty && (
-            <div className="py-6 text-center text-sm text-muted-foreground">
-              Type to search for coins...
-            </div>
-          )}
-
-          {isTrendingListVisible && (
-            <CommandGroup className="space-y-1">
-              <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Trending
-              </p>
-              {trendingCoins.map(({ item }) => (
-                <SearchItem
-                  key={item.id}
-                  coin={item}
-                  onSelect={handleSelect}
-                  isActiveName={false}
-                />
-              ))}
-            </CommandGroup>
-          )}
-
-          {isNoResults && (
-            <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
-              No coins found.
-            </CommandEmpty>
-          )}
-
-          {isResultsVisible && (
-            <CommandGroup
-              heading={
-                <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Search Results
-                </p>
-              }
-              className="space-y-1"
-            >
-              {searchResults.slice(0, SEARCH_LIMIT).map((coin) => (
-                <SearchItem
-                  key={coin.id}
-                  coin={coin}
-                  onSelect={handleSelect}
-                  isActiveName
-                />
-              ))}
-            </CommandGroup>
-          )}
-        </CommandList>
-      </CommandDialog>
-    </div>
   );
 };
