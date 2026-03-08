@@ -331,7 +331,7 @@
     }
 
     .trending-coins-table {
-      @apply bg-(--bg-surface)overflow-hidden;
+      @apply bg-(--bg-surface) overflow-hidden;
 
       .name-cell {
         @apply font-bold;
