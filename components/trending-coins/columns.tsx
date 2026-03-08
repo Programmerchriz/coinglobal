@@ -29,7 +29,7 @@ export const columns: DataTableColumn<TrendingCoin>[] = [
       const isTrendingUp = item.data.price_change_percentage_24h.usd > 0;
 
       return (
-        <div className={cn('price-change', isTrendingUp ? 'text-green-500' : 'text-red-500')}>
+        <div className={cn('price-change', isTrendingUp ? 'text-(--color-success)' : 'text-(--color-danger)')}>
           <p className="flex items-center gap-1">
             {formatPercentage(item.data.price_change_percentage_24h.usd)}
             {isTrendingUp ? (

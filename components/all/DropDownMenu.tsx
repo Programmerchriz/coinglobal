@@ -24,16 +24,16 @@ export function DropDown({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="uppercase text-sm text-white/50 px-2 hover:bg-white/10 rounded-lg"
+          className="uppercase text-sm text-(--color-50) px-2 hover:bg-(--color-10) rounded-lg"
         >
           {curr}
-          <ChevronDown className="h-4 w-4 text-white/30" />
+          <ChevronDown className="h-4 w-4 text-(--color-30)" />
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
         align="end"
-        className="bg-[#111827] border border-white/5 rounded-xl shadow-xl"
+        className="bg-(--bg-surface) border border-(--color-5) rounded-xl shadow-xl"
       >
         {list.map((item) => {
           const isActive = curr === item;
@@ -47,8 +47,8 @@ export function DropDown({
               }}
               className={`
                 uppercase cursor-pointer rounded-lg
-                ${isActive ? 'bg-indigo-500 text-white' : 'text-white/70'}
-                hover:bg-white/10
+                ${isActive ? "bg-(--color-primary) text-white" : "text-(--color-70)"}
+                hover:bg-(--color-10)
               `}
             >
               {item.toUpperCase()}

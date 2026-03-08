@@ -35,14 +35,27 @@ const CoinDetailCard = ({
 
 const DetailCard = ({ title, value, isLink }: DetailCardProps) => {
   return (
-    <div className="bg-[#161b22] rounded-lg p-4">
-      <p className="text-sm text-gray-400 mb-1">{title}</p>
-      <div className="flex gap-1">
-        <p className={`text-sm font-medium ${isLink ? "text-green-400" : "text-white"}`}>{value}</p>
-        {isLink && (<ArrowUpRight width={20} className="text-green-400" />)}
-      </div>
+  <div className="bg-(--bg-surface) border border-(--color-5) rounded-lg p-4">
+    <p className="text-sm text-(--color-40) mb-1">{title}</p>
+
+    <div className="flex gap-1 items-center">
+      <p
+        className={`text-sm font-medium ${
+          isLink ? "text-(--color-success)" : "text-(--color-100)"
+        }`}
+      >
+        {value}
+      </p>
+
+      {isLink && (
+        <ArrowUpRight
+          width={20}
+          className="text-(--color-success)"
+        />
+      )}
     </div>
-  );
+  </div>
+);
 };
 
 export default CoinDetailCard;

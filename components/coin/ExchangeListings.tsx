@@ -9,7 +9,7 @@ import DataTable from '@/components/all/DataTable';
 const exchangeListingsColumns: DataTableColumn<Ticker>[] = [
   {
     header: 'Exchange',
-    cell: (row) => <span className="text-indigo-500 font-medium">{row.market.name}</span>,
+    cell: (row) => <span className="text-(--color-primary-hover) font-medium">{row.market.name}</span>,
   },
   {
     header: 'Pair',
@@ -43,31 +43,46 @@ export default function ExchangeListings({ tickers }: { tickers: Ticker[] }) {
 
   return (
     <div className="lg:col-span-2 custom-scrollbar">
-      <h4 className="text-xl md:text-2xl font-semibold mb-2">Exchange Listings</h4>
+      <h4 className="text-xl md:text-2xl font-semibold mb-2 text-(--color-100)">
+        Exchange Listings
+      </h4>
+
       <DataTable
         data={paginatedData}
         columns={exchangeListingsColumns}
-        rowKey={(row) => `${row.market.name}-${row.base}-${row.target}-${row.converted_last.usd}`}
+        rowKey={(row) =>
+          `${row.market.name}-${row.base}-${row.target}-${row.converted_last.usd}`
+        }
         tableClassName="coins-table"
         headerClassName="py-3!"
         bodyCellClassName="min-w-[175px] py-7!"
       />
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center md:justify-end gap-3 mt-4 text-sm">
+
+      <div className="flex justify-center items-center md:justify-end gap-3 mt-4 text-sm text-(--color-70)">
         <button
           disabled={currentPage === 1}
           onClick={() => setCurrentPage((prev) => prev - 1)}
-          className={`px-3 py-1 bg-[#0F1623] border border-white/10 text-white/70 rounded-lg hover:bg-white/10 ${currentPage === 1 ? "hover:cursor-not-allowed" : "hover:cursor-pointer"} transition disabled:opacity-40`}
+          className={`px-3 py-1 bg-(--bg-elevated) border border-(--color-10) text-(--color-70) rounded-lg hover:bg-(--color-10) ${
+            currentPage === 1
+              ? "hover:cursor-not-allowed"
+              : "hover:cursor-pointer"
+          } transition disabled:opacity-40`}
         >
           Prev
         </button>
+
         <span>
           {currentPage} / {totalPages}
         </span>
+
         <button
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage((prev) => prev + 1)}
-          className={`px-3 py-1 bg-[#0F1623] border border-white/10 text-white/70 rounded-lg hover:bg-white/10 ${currentPage === totalPages ? "hover:cursor-not-allowed" : "hover:cursor-pointer"} transition disabled:opacity-40`}
+          className={`px-3 py-1 bg-(--bg-elevated) border border-(--color-10) text-(--color-70) rounded-lg hover:bg-(--color-10) ${
+            currentPage === totalPages
+              ? "hover:cursor-not-allowed"
+              : "hover:cursor-pointer"
+          } transition disabled:opacity-40`}
         >
           Next
         </button>

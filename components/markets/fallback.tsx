@@ -58,7 +58,7 @@ export const TrendingCoinsFallback = () => {
   const rows: TrendingCoin[] = Array.from({ length: 6 });
 
   return (
-    <section id="trending-coins-fallback" className="bg-[#111827] border border-white/5 rounded-2xl shadow-xl p-4">
+    <section id="trending-coins-fallback" className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl p-4">
       <h4>Trending Coins</h4>
 
       <div className="trending-coins-table">

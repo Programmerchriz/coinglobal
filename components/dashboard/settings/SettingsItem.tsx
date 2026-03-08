@@ -17,7 +17,7 @@ export default function SettingsItem({
   action,
 }: Props) {
   return (
-    <div className="group flex items-center justify-between border border-white/5 rounded-xl px-5 py-4 bg-[#111827] hover:bg-[#151c2b] transition-all duration-200">
+    <div className="group flex items-center justify-between border border-(--border-standard) rounded-xl px-5 py-4 bg-(--bg-surface) hover:bg-(--bg-elevated) transition-all duration-200">
       <div className="flex items-center gap-4">
         {icon && (
           <div className="shrink-0">
@@ -26,18 +26,18 @@ export default function SettingsItem({
         )}
 
         <div className="space-y-1">
-          <p className="text-white font-medium tracking-tight">
+          <p className="text-(--text-primary) font-medium tracking-tight">
             {title}
           </p>
 
           {description && (
-            <p className="text-xs text-white/50 leading-relaxed max-w-md">
+            <p className="text-xs text-(--color-50) leading-relaxed max-w-md">
               {description}
             </p>
           )}
 
           {value && !description && (
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-(--color-60)">
               {value}
             </p>
           )}

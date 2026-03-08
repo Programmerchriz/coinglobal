@@ -15,9 +15,9 @@ export function PasswordInput({
       <Input
         type={showPassword ? "text" : "password"}
         className={cn(
-          "pr-11 bg-[#0F1623] border border-white/10 text-white placeholder:text-white/40 rounded-xl transition-all duration-200",
-          "focus:border-indigo-500 focus:ring-2 focus:ring-indigo-600/40",
-          "hover:border-white/20",
+          "pr-11 bg-(--bg-elevated) border border-(--color-10) text-(--color-100) placeholder:text-(--color-40) rounded-xl transition-all duration-200",
+          "focus:border-(--color-primary) focus:ring-2 focus:ring-(--color-primary-soft)",
+          "hover:border-(--color-20)",
           "[&::-ms-reveal]:hidden",
           className
         )}
@@ -28,17 +28,16 @@ export function PasswordInput({
         type="button"
         onClick={() => setShowPassword(!showPassword)}
         title={showPassword ? "Hide password" : "Show password"}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-indigo-400 transition-colors duration-200"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-(--color-40) hover:text-(--color-primary) transition-colors duration-200"
       >
         {showPassword ? (
-          <EyeOffIcon className="w-5 h-5" />
+          <EyeOffIcon className="w-5 h-5 hover:cursor-pointer" />
         ) : (
-          <EyeIcon className="w-5 h-5" />
+          <EyeIcon className="w-5 h-5 hover:cursor-pointer" />
         )}
       </button>
 
-      {/* Subtle glow on focus */}
-      <div className="pointer-events-none absolute inset-0 rounded-xl ring-0 group-focus-within:ring-2 group-focus-within:ring-indigo-600/20 transition-all duration-200" />
+      <div className="pointer-events-none absolute inset-0 rounded-xl ring-0 group-focus-within:ring-2 group-focus-within:ring-(--color-primary-soft) transition-all duration-200" />
     </div>
   );
 };

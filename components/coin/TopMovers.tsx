@@ -82,25 +82,34 @@ const TopMovers = () => {
     {
       header: '', // No visible header
       cell: (row) => (
-        <div className="flex items-center justify-between bg-[#111827] border border-white/5 px-4 py-3 rounded-lg hover:opacity-95 transition cursor-pointer">
-          {/* Left */}
+        <div className="flex items-center justify-between bg-(--bg-surface) border border-(--color-5) px-4 py-3 rounded-lg hover:opacity-95 transition cursor-pointer">
+          
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#0F1623] flex items-center justify-center text-xs font-bold">
+            <div className="w-8 h-8 rounded-full bg-(--bg-elevated) flex items-center justify-center text-xs font-bold text-(--color-100)">
               {row.symbol[0]}
             </div>
 
             <div>
-              <p className="text-sm font-medium">{row.name}</p>
-              <p className="text-xs text-white/50">{row.symbol}</p>
+              <p className="text-sm font-medium text-(--color-100)">
+                {row.name}
+              </p>
+
+              <p className="text-xs text-(--color-50)">
+                {row.symbol}
+              </p>
             </div>
           </div>
 
-          {/* Right */}
           <div className="text-right">
-            <p className="text-sm font-medium">{row.price}</p>
+            <p className="text-sm font-medium text-(--color-100)">
+              {row.price}
+            </p>
+
             <p
               className={`text-xs font-semibold ${
-                row.positive ? 'text-[#22C55E]' : 'text-[#EF4444]'
+                row.positive
+                  ? "text-(--color-success)"
+                  : "text-(--color-danger)"
               }`}
             >
               {row.change}
@@ -113,38 +122,36 @@ const TopMovers = () => {
 
   return (
     <div className="w-full">
-      {/* Tabs */}
       <div className="flex gap-6 my-8 ml-3">
         <button
-          onClick={() => setActive('gainers')}
+          onClick={() => setActive("gainers")}
           className={`pb-1 text-sm font-medium transition hover:cursor-pointer ${
-            active === 'gainers'
-            ? 'text-white border-b-2 border-[#22C55E]'
-            : 'text-white/50'
+            active === "gainers"
+              ? "text-(--color-100) border-b-2 border-(--color-success)"
+              : "text-(--color-50)"
           }`}
         >
           Top Gainers
         </button>
 
         <button
-          onClick={() => setActive('losers')}
+          onClick={() => setActive("losers")}
           className={`pb-1 text-sm font-medium transition hover:cursor-pointer ${
-            active === 'losers'
-            ? 'text-white border-b-2 border-[#EF4444]'
-            : 'text-white/50'
+            active === "losers"
+              ? "text-(--color-100) border-b-2 border-(--color-danger)"
+              : "text-(--color-50)"
           }`}
         >
           Top Losers
         </button>
       </div>
 
-      {/* DataTable rendered as list */}
       <DataTable
         data={data}
         columns={columns}
         rowKey={(row) => row.id}
         tableClassName="mt-2"
-        headerClassName="hidden" // hide header
+        headerClassName="hidden"
         bodyCellClassName="w-full p-0 py-2 border-0"
       />
     </div>

@@ -55,12 +55,14 @@ export default function DashboardSidebar({
           x: isDesktop ? 0 : isOpen ? 0 : -300,
         }}
         transition={{ duration: 0.3 }}
-        className="fixed top-20 h-[calc(100vh-4rem)] z-50 w-64 bg-[#0F1623] border-r border-white/5 p-4 pb-6 flex flex-col"
+        className="fixed top-20 h-[calc(100vh-4rem)] z-50 w-64 bg-(--bg-sidebar) border-r border-(--border-standard) p-4 pb-6 flex flex-col"
       >
         {/* TOP SECTION */}
         <div className="mb-8">
           <div className="flex flex-col gap-3 justify-between">
+
             <div className="flex items-center justify-between space-x-3">
+
               <div className="flex items-center justify-between gap-4 overflow-x-auto">
                 {user.image ? (
                   <Image
@@ -72,49 +74,56 @@ export default function DashboardSidebar({
                   />
                 ) : (
                   <Avatar>
-                    <AvatarFallback className="bg-indigo-600">
+                    <AvatarFallback className="bg-(--color-primary)">
                       {user.name[0]}
                     </AvatarFallback>
                   </Avatar>
                 )}
 
                 <div className="text-sm overflow-x-auto custom-scrollbar">
-                  <p className="text-white font-medium">{user.name}</p>
-                  <p className="text-white/50 text-xs">{user.email}</p>
+                  <p className="text-(--text-primary) font-medium">
+                    {user.name}
+                  </p>
+
+                  <p className="text-(--color-50) text-xs">
+                    {user.email}
+                  </p>
                 </div>
               </div>
 
-              <div>
-                <button
-                  className="lg:hidden hover:cursor-pointer"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <X size={20} />
-                </button>
-              </div>
+              <button
+                className="lg:hidden hover:cursor-pointer text-(--color-60)"
+                onClick={() => setIsOpen(false)}
+              >
+                <X size={20} />
+              </button>
+
             </div>
 
             <div className="flex justify-between items-center">
+
               <button
                 onClick={onSignOut}
                 disabled={isDisabled}
-                className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-white/70 hover:bg-white/5 hover:text-white hover:cursor-pointer transition-colors"
+                className="text-xs px-3 py-1.5 rounded-lg border border-(--border-input) text-(--color-70) hover:bg-(--color-5) hover:text-(--text-primary) hover:cursor-pointer transition-colors"
               >
                 Sign Out
               </button>
 
               <Link
                 href="/settings"
-                className="p-2 bg-[#111827] border border-white/5 rounded-xl hover:bg-white/5 transition"
+                className="p-2 bg-(--bg-surface) border border-(--border-standard) rounded-xl hover:bg-(--color-5) transition"
               >
                 <Settings />
               </Link>
+
             </div>
           </div>
         </div>
 
-        {/* SCROLLABLE NAV AREA */}
+        {/* NAV */}
         <nav className="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar">
+
           {navItems.map((item, i) => (
             <button
               key={i}
@@ -122,38 +131,48 @@ export default function DashboardSidebar({
               className={`relative flex items-center gap-3 w-full px-3 py-2 rounded-xl text-sm transition
                 ${
                   item.available
-                    ? "hover:bg-white/5 hover:cursor-pointer text-white"
-                    : "opacity-50 cursor-not-allowed text-white/60"
+                    ? "hover:bg-(--color-5) hover:cursor-pointer text-(--text-primary)"
+                    : "opacity-50 cursor-not-allowed text-(--color-60)"
                 }
               `}
             >
-              <item.icon size={18} className="text-white/60" />
+              <item.icon size={18} className="text-(--color-60)" />
+
               {item.label}
 
               {!item.available && (
-                <span className="absolute -top-2 right-2 text-[10px] px-2 py-0.5 rounded-full bg-indigo-600/20 text-indigo-400 border border-indigo-500/30">
+                <span className="absolute -top-2 right-2 text-[10px] px-2 py-0.5 rounded-full bg-(--color-primary)/20 text-(--color-primary) border border-(--color-primary)/30">
                   Coming Soon
                 </span>
               )}
+
             </button>
           ))}
+
         </nav>
 
-        {/* BOTTOM SECTION */}
+        {/* BOTTOM */}
         <div className="pt-6">
-          <Card className="bg-gradient-to-br from-indigo-600 to-purple-600 border-none text-white rounded-2xl">
+
+          <Card className="bg-gradient-to-br from-(--color-primary) to-(--color-accent) border-none text-white rounded-2xl">
+
             <CardContent className="p-4">
+
               <p className="text-sm font-medium mb-2">
                 AI Trading Assistant
               </p>
-              <p className="text-xs text-white/80 mb-4">
+
+              <p className="text-xs text-(--color-80) mb-4">
                 Unlock powerful trading insights and strategies.
               </p>
+
               <Button className="w-full bg-white text-black hover:bg-white/90 hover:cursor-not-allowed rounded-xl opacity-50">
                 Coming Soon
               </Button>
+
             </CardContent>
           </Card>
+
         </div>
       </motion.aside>
     </AnimatePresence>

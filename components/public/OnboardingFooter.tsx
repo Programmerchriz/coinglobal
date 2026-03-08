@@ -11,31 +11,31 @@ export default function OnboardingFooter() {
           <h3 className="text-xl font-semibold mb-3">
             Coin Global
           </h3>
-          <p className="text-sm text-[color:var(--color-60)]">
+          <p className="text-sm text-(--color-60)">
             A powerful crypto dashboard built for modern traders.
           </p>
         </div>
 
         {/* Links */}
         <div className="space-y-2 text-sm">
-          <p className="uppercase text-xs tracking-wider text-[color:var(--color-50)]">
+          <p className="uppercase text-xs tracking-wider text-(--color-50)">
             Company
           </p>
           <Link
             href="#"
-            className="block transition hover:text-[color:var(--color-primary-hover)]"
+            className="block transition hover:text-(--color-primary-hover)"
           >
             About
           </Link>
           <Link
             href="#"
-            className="block transition hover:text-[color:var(--color-primary-hover)]"
+            className="block transition hover:text-(--color-primary-hover)"
           >
             Features
           </Link>
           <Link
             href="#"
-            className="block transition hover:text-[color:var(--color-primary-hover)]"
+            className="block transition hover:text-(--color-primary-hover)"
           >
             Roadmap
           </Link>
@@ -43,7 +43,7 @@ export default function OnboardingFooter() {
 
         {/* CTA (still commented out as requested) */}
         {/* <div>
-          <p className="uppercase text-xs tracking-wider mb-3 text-[color:var(--color-50)]">
+          <p className="uppercase text-xs tracking-wider mb-3 text-(--color-50)">
             Get Started
           </p>
           <Link
@@ -55,7 +55,7 @@ export default function OnboardingFooter() {
         </div> */}
       </div>
 
-      <div className="mt-12 pt-6 text-center text-sm border-t border-[color:var(--color-5)] text-[color:var(--color-40)]">
+      <div className="mt-12 pt-6 text-center text-sm border-t border-(--color-5) text-(--color-40)">
         © {new Date().getFullYear()} Coin Global. All rights reserved.
       </div>
     </footer>

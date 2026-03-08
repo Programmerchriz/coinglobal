@@ -45,41 +45,46 @@ const CurrencyConverter = ({
   };
 
   return (
-    <section className="bg-[#111827] border border-white/5 rounded-2xl p-6 space-y-5 shadow-xl">
-      <h3 className="font-semibold text-lg text-white">
+    <section className="bg-(--bg-surface) border border-(--color-5) rounded-2xl p-6 space-y-5 shadow-xl">
+      <h3 className="font-semibold text-lg text-(--color-100)">
         {symbol.toUpperCase()} Converter
       </h3>
 
-      <div className="bg-[#0F1623] rounded-xl px-4 py-3 flex justify-between items-center border border-white/10">
+      <div className="bg-(--bg-elevated) rounded-xl px-4 py-3 flex justify-between items-center border border-(--color-10)">
         <input
           type="number"
           placeholder="10"
           value={cryptoAmount}
           onChange={(e) => handleCryptoChange(e.target.value)}
-          className="bg-transparent outline-none w-1/2 text-base text-white placeholder:text-white/30"
+          className="bg-transparent outline-none w-1/2 text-base text-(--color-100) placeholder:text-(--color-30)"
         />
 
         <div className="flex items-center gap-2">
           <Image src={image} alt="logo" width={24} height={24} />
-          <span className="text-sm text-white/50">
+          <span className="text-sm text-(--color-50)">
             {symbol.toUpperCase()}
           </span>
         </div>
       </div>
 
-      <div className="flex justify-center text-white/50">
+      <div className="flex justify-center text-(--color-50)">
         <ArrowUpDown size={18} />
       </div>
 
-      <div className="bg-[#0F1623] rounded-xl px-4 py-3 flex justify-between items-center border border-white/10">
+      <div className="bg-(--bg-elevated) rounded-xl px-4 py-3 flex justify-between items-center border border-(--color-10)">
         <input
           type="number"
           placeholder={`${rate * 10}`}
           value={fiatAmount}
           onChange={(e) => handleFiatChange(e.target.value)}
-          className="bg-transparent outline-none w-1/2 text-base text-white placeholder:text-white/30"
+          className="bg-transparent outline-none w-1/2 text-base text-(--color-100) placeholder:text-(--color-30)"
         />
-        <DropDown list={currencies} value={selectedCurrency} onChange={setSelectedCurrency} />
+
+        <DropDown
+          list={currencies}
+          value={selectedCurrency}
+          onChange={setSelectedCurrency}
+        />
       </div>
     </section>
   );

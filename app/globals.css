@@ -7,29 +7,36 @@
   /* Backgrounds */
   --bg-app: #0B0F19;
   --bg-surface: #111827;
+  --bg-elevated: #0F1623; /* NEW: nested surfaces (inputs, inner cards) */
   --bg-sidebar: #0F1623;
+  --bg-hover: #151c2b;
+
+  /* Glass Surfaces */
+  --bg-glass: rgba(17, 24, 39, 0.6); /* NEW: translucent glass cards */
   --bg-glass-purple: #9333EA33;
   --bg-glass-indigo: #4F46E533;
+
   --bg-indigo-10: #4F46E51A;
 
   /* Brand */
   --color-primary: #4F46E5;
   --color-primary-hover: #6366F1;
   --color-accent: #9333EA;
+
   --color-outline: #0b0f1a;
   --color-outline-hover: #4F46E533;
   --color-shadow: #4F46E54D;
 
-  
+  /* Neutral Scale */
   --color-90: rgba(255,255,255,0.9);
   --color-80: rgba(255,255,255,0.8);
-  --color-70: rgba(255,255,255,0.7); /* secondary */
+  --color-70: rgba(255,255,255,0.7);
   --color-60: rgba(255,255,255,0.6);
-  --color-50: rgba(255,255,255,0.5); /* muted */
+  --color-50: rgba(255,255,255,0.5);
   --color-40: rgba(255,255,255,0.4);
-  --color-30: rgba(255,255,255,0.3); /* subtle */
+  --color-30: rgba(255,255,255,0.3);
   --color-20: rgba(255,255,255,0.2);
-  --color-10: rgba(255,255,255,0.1); /* border-input & border-light */
+  --color-10: rgba(255,255,255,0.1);
   --color-5: rgba(255,255,255,0.05);
 
   /* Status */
@@ -42,7 +49,7 @@
   --color-error-40: #EF444433;
   --color-error-20: #EF444433;
   --color-error-10: #EF44441A;
-  
+
   --color-warning: #FCD34D;
   --color-warning-40: #FCD34D33;
   --color-warning-20: #FCD34D33;
@@ -51,11 +58,10 @@
   /* Text */
   --text-primary: #FFFFFF;
   --text-error: #F87171;
-  
+
   /* Borders */
   --border-standard: rgba(255,255,255,0.05);
   --border-input: rgba(255,255,255,0.1);
-  /* --border-light: rgba(255,255,255,0.1); */
 
   /* Radius */
   --radius-sm: 0.5rem;
@@ -318,14 +324,14 @@
   }
 
 #trending-coins-fallback {
-    @apply w-full flex flex-col justify-center h-full py-4 bg-[#111827] rounded-xl;
+    @apply w-full flex flex-col justify-center h-full py-4 bg-(--bg-surface) rounded-xl;
 
     h4 {
       @apply text-xl md:text-2xl font-semibold mb-2 px-5;
     }
 
     .trending-coins-table {
-      @apply bg-[#111827] overflow-hidden;
+      @apply bg-(--bg-surface)overflow-hidden;
 
       .name-cell {
         @apply font-bold;
@@ -425,12 +431,14 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #1e2833;
+  /* background: #1e2833; */
+  background: var(--bg-elevated);
   border-radius: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #171a34;
+  /* background: #171a34; */
+  background: var(--color-20);
 }
 
 /* Table Custom Scrollbar */
@@ -448,10 +456,10 @@
 }
 
 .custom-scrollbar [data-slot='table-container']::-webkit-scrollbar-thumb {
-  background: #1e2833;
+  background: var(--bg-elevated);
   border-radius: 8px;
 }
 
 .custom-scrollbar [data-slot='table-container']::-webkit-scrollbar-thumb:hover {
-  background: #171a34;
+  background: var(--color-20);
 }

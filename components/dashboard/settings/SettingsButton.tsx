@@ -19,7 +19,7 @@ export default function SettingsButton({
     <Button
       type={type}
       className={cn(
-        "h-9 px-4 text-sm font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 rounded-xl transition-all duration-200 backdrop-blur-sm hover:cursor-pointer",
+        "h-9 px-4 text-sm font-medium bg-(color-5) hover:bg-(color-10) text-(text-primary) border border-(color-10) hover:border-(color-20) rounded-xl transition-all duration-200 backdrop-blur-sm hover:cursor-pointer",
         className
       )}
     >

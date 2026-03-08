@@ -99,8 +99,8 @@ function FormLabel({
       data-slot="form-label"
       data-error={!!error}
       className={cn(
-        "text-xs font-medium text-white/60 transition-colors",
-        "data-[error=true]:text-red-400",
+        "text-xs font-medium text-(--color-60) transition-colors",
+        "data-[error=true]:text-(--color-danger)",
         className
       )}
       htmlFor={formItemId}
@@ -134,7 +134,7 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
     <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn("text-xs text-white/40", className)}
+      className={cn("text-xs text-(--color-40)", className)}
       {...props}
     />
   );
@@ -153,7 +153,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="form-message"
       id={formMessageId}
       className={cn(
-        "text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-lg",
+        "text-xs text-(--color-danger) bg-(--bg-danger-soft) border border-(--color-danger-soft) px-3 py-2 rounded-lg",
         className
       )}
       {...props}

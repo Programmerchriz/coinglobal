@@ -86,10 +86,11 @@ export default function HeaderClient ({ session }: HeaderProps) {
   }, [session]);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0B0F19]/80 backdrop-blur-xl border-b border-white/5">
+    <header className="sticky top-0 z-50 bg-(--bg-app)/80 backdrop-blur-xl border-b border-(--border-standard)">
       <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className={`flex items-center gap-0 sm:gap-1 md:gap-3`}>
+
+        <Link href="/" className="flex items-center gap-1 md:gap-3">
+
           <Image
             src="/coin-glob.png"
             alt="CoinGlobal Logo"
@@ -97,34 +98,43 @@ export default function HeaderClient ({ session }: HeaderProps) {
             height={40}
             className="mt-2 rounded-md"
           />
-          <h3 className="text-lg mt-1 font-semibold tracking-tight">
-            Coin<span className="font-bold italic text-indigo-500">Global</span>
+
+          <h3 className="text-lg mt-1 font-semibold tracking-tight text-(--text-primary)">
+            Coin
+            <span className="font-bold italic text-(--color-primary)">
+              Global
+            </span>
           </h3>
+
         </Link>
 
-        {/* Navigation */}
         <nav className={`flex items-center justify-end text-sm ${session ? "gap-2 sm:gap-6 mr-2" : "gap-5 mr-4"}`}>
+
           {links.map((link) => (
             <Link
               key={link.title}
               href={link.href}
               aria-disabled={link.disabled}
               className={cn(
-                'transition-colors hover:text-indigo-400',
-                pathname === link.href ? 'text-indigo-500 font-medium' : 'text-white/70'
+                "transition-colors hover:text-(--color-primary-hover)",
+                pathname === link.href
+                  ? "text-(--color-primary) font-medium"
+                  : "text-(--color-70)"
               )}
             >
               {link.title}
             </Link>
           ))}
 
-          {/* Search */}
-          {(session) && (<div className="md:block">
-            <SearchModal
-              initialTrendingCoins={trendingCoins}
-              isLoading={isLoadingTrending}
-            />
-          </div>)}
+          {session && (
+            <div className="md:block">
+              <SearchModal
+                initialTrendingCoins={trendingCoins}
+                isLoading={isLoadingTrending}
+              />
+            </div>
+          )}
+
         </nav>
       </div>
     </header>
