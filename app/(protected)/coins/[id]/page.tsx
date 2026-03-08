@@ -12,7 +12,6 @@ import CurrencyConverter from '@/components/coin/CurrencyConverter';
 import CoinDetailCard from '@/components/coin/CoinDetailCard';
 import ExchangeListings from '@/components/coin/ExchangeListings';
 import TopMovers from '@/components/coin/TopMovers';
-import Error from './error';
 import BackButton from '@/components/ui/BackButton';
 
 const recentTradesData = [
@@ -77,7 +76,7 @@ const recentTradesColumns: DataTableColumn<RecentTrade>[] = [
 
 const Coin = async ({ params }: CoinPageProps) => {
   const { id } = await params;
-  if (!id) return <Error />;
+  if (!id) throw new Error("Coin id not found");
 
   const isTrendingUp = (value: number) => value > 0;
 
@@ -96,7 +95,7 @@ const Coin = async ({ params }: CoinPageProps) => {
     ]);
   } catch (error) {
     console.error('Error fetching categories:', error);
-    return <Error />;
+    throw new Error("Failed to fetch coin data");
   }
 
   const currencies = [
