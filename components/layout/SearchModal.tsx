@@ -48,7 +48,7 @@ const SearchItem = ({ coin, onSelect, isActiveName }: SearchItemProps) => {
             alt={coin.name}
             width={36}
             height={36}
-            className="rounded-full ring-1 ring-(--border-standard) group-hover:ring-(--border-input) transition"
+            className="rounded-full ring-1 ring-(--color-standard) group-hover:ring-(--border-input) transition"
           />
         </div>
 
@@ -162,13 +162,13 @@ export const SearchModal = ({
           <Button
             variant="outline"
             onClick={() => setOpen(true)}
-            className="flex items-center gap-2 rounded-xl border-border/50 bg-background/60 backdrop-blur-md hover:bg-muted/60 hover:cursor-pointer transition-all"
+            className="flex items-center gap-2 rounded-xl bg-background/60 backdrop-blur-md hover:bg-muted/60 hover:cursor-pointer md:hover:cursor-text transition-all border border-(--color-10)"
           >
             <SearchIcon size={16} className="text-muted-foreground" />
             <span className="hidden md:block text-sm text-muted-foreground">
               Search
             </span>
-            <kbd className="ml-2 hidden md:flex items-center gap-1 rounded-md border border-border/60 bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+            <kbd className="ml-2 hidden md:flex items-center gap-1 rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
               <span>⌘</span>K
             </kbd>
           </Button>

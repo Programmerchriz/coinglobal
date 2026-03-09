@@ -1,4 +1,5 @@
 
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
 import { fetcher } from '@/lib/coingecko.actions';
@@ -96,6 +97,10 @@ const Coin = async ({ params }: CoinPageProps) => {
   } catch (error) {
     console.error('Error fetching categories:', error);
     throw new Error("Failed to fetch coin data");
+  }
+
+  if (!coin) {
+    notFound();
   }
 
   const currencies = [

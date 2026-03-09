@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 
 import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 import { LoadingButton } from "@/components/auth/LoadingButton";
 
 interface ResendVerificationButtonProps {
@@ -56,10 +57,11 @@ export function ResendVerificationButton({
 
   return (
     <div className="space-y-4">
+
       {success && (
         <div
           role="status"
-          className="text-sm text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3"
+          className="text-sm text-(--color-success) bg-(--color-success-10) border border-(--color-success-20) rounded-xl p-3"
         >
           {success}
         </div>
@@ -68,14 +70,14 @@ export function ResendVerificationButton({
       {error && (
         <div
           role="alert"
-          className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl p-3"
+          className="text-sm text-(--color-error) bg-(--color-error-10) border border-(--color-error-20) rounded-xl p-3"
         >
           {error}
         </div>
       )}
 
       {cooldown > 0 && (
-        <div className="text-xs text-white/40 text-center">
+        <div className="text-xs text-(--color-50) text-center">
           You can resend again in {cooldown}s
         </div>
       )}
@@ -84,14 +86,16 @@ export function ResendVerificationButton({
         onClick={resendVerificationEmail}
         loading={isLoading}
         disabled={isDisabled}
-        className={`w-full rounded-xl py-3 text-sm font-medium transition hover:cursor-pointer ${
+        className={cn(
+          "w-full rounded-xl py-3 text-sm font-medium transition hover:cursor-pointer",
           isDisabled
-            ? "bg-indigo-600/50 cursor-not-allowed"
-            : "bg-indigo-600 hover:bg-indigo-500 text-white"
-        }`}
+            ? "bg-(--color-primary)/50 cursor-not-allowed text-(--text-primary)"
+            : "bg-(--color-primary) hover:bg-(--color-primary-hover) text-(--text-primary)"
+        )}
       >
         Resend verification email
       </LoadingButton>
+
     </div>
   );
 };

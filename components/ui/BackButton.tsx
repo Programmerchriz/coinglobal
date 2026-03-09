@@ -23,12 +23,12 @@ export default function BackButton({
       onClick={() => router.back()}
       className={cn(
         "inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 hover:cursor-pointer",
-        
+
         variant === "default" &&
-          "bg-[#111827] border border-white/10 text-white hover:bg-white/5 hover:border-white/20",
+          "bg-(--bg-surface) border border-(--border-standard) text-(--text-primary) hover:bg-(--color-5) hover:border-(--border-input)",
 
         variant === "ghost" &&
-          "text-white/70 hover:text-white hover:bg-white/5",
+          "text-(--color-70) hover:text-(--text-primary) hover:bg-(--color-5)",
 
         "active:scale-95",
         className

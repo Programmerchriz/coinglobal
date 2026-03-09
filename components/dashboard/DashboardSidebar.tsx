@@ -55,7 +55,7 @@ export default function DashboardSidebar({
           x: isDesktop ? 0 : isOpen ? 0 : -300,
         }}
         transition={{ duration: 0.3 }}
-        className="fixed top-20 h-[calc(100vh-4rem)] z-50 w-64 bg-(--bg-sidebar) border-r border-(--border-standard) p-4 pb-6 flex flex-col"
+        className="fixed top-16 h-[calc(100vh-4rem)] z-50 w-64 bg-(--bg-sidebar) border-r border-(--border-standard) p-4 pb-6 flex flex-col"
       >
         {/* TOP SECTION */}
         <div className="mb-8">
@@ -74,7 +74,7 @@ export default function DashboardSidebar({
                   />
                 ) : (
                   <Avatar>
-                    <AvatarFallback className="bg-(--color-primary)">
+                    <AvatarFallback className="bg-(--color-primary) text-white">
                       {user.name[0]}
                     </AvatarFallback>
                   </Avatar>
@@ -141,7 +141,7 @@ export default function DashboardSidebar({
               {item.label}
 
               {!item.available && (
-                <span className="absolute -top-2 right-2 text-[10px] px-2 py-0.5 rounded-full bg-(--color-primary)/20 text-(--color-primary) border border-(--color-primary)/30">
+                <span className="absolute -top-1 right-8 text-[8px] px-2 py-0.5 rounded-full bg-(--color-primary)/20 text-(--color-primary) border border-(--color-primary)/30">
                   Coming Soon
                 </span>
               )}
@@ -162,11 +162,11 @@ export default function DashboardSidebar({
                 AI Trading Assistant
               </p>
 
-              <p className="text-xs text-(--color-80) mb-4">
+              <p className="text-xs text-(--color-90) mb-4">
                 Unlock powerful trading insights and strategies.
               </p>
 
-              <Button className="w-full bg-white text-black hover:bg-white/90 hover:cursor-not-allowed rounded-xl opacity-50">
+              <Button className="w-full bg-(--text-primary) text-(--text-secondary) hover:bg-(--color-90) hover:cursor-not-allowed rounded-xl opacity-50">
                 Coming Soon
               </Button>
 

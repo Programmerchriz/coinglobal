@@ -44,7 +44,7 @@ const Page = async () => {
             <Link
               href="/categories"
               className={cn(
-                'group px-6 py-3 bg-(--color-primary) hover:bg-(--color-primary-hover) active:scale-95 text-(--text-primary) font-medium rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-indigo-600/30 hover:-translate-y-1'
+                'btn-primary group px-6 py-3 hover:bg-(--color-primary-hover) active:scale-95 font-medium rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-indigo-600/30 hover:-translate-y-1'
               )}
             >
               <span>All Categories</span>

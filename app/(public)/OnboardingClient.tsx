@@ -23,7 +23,7 @@ export default function OnboardingClient() {
   const { ref, inView } = useInView({ triggerOnce: true });
 
   return (
-    <main className="text-white">
+    <main className="text-(--text-primary)">
       {/* Hero Section */}
       <section className="min-h-screen flex pt-50 md:pt-0 items-start md:items-center justify-center px-6 lg:px-24 text-center">
         <motion.div
@@ -41,7 +41,7 @@ export default function OnboardingClient() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/sign-up"
-              className="btn-primary px-6 py-3 font-medium transition"
+              className="btn-primary text-white px-6 py-3 font-medium transition"
             >
               Get Started
             </Link>
@@ -112,7 +112,7 @@ export default function OnboardingClient() {
                   Coming Soon
                 </span>
               ) : (
-                <span className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-[color:var(--color-success)] text-white">
+                <span className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-[color:var(--color-success)] text-(--text-primary)">
                   Live
                 </span>
               )}

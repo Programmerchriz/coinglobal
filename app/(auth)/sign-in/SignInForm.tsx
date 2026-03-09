@@ -158,7 +158,7 @@ export function SignInForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full bg-(--color-primary) rounded-xl py-3 text-sm font-medium transition ${
+                className={`w-full bg-(--color-primary) text-white rounded-xl py-3 text-sm font-medium transition ${
                   loading
                     ? 'opacity-30 cursor-not-allowed'
                     : 'hover:cursor-pointer hover:bg-(--color-primary-hover)'
@@ -172,7 +172,7 @@ export function SignInForm() {
           <div className="mt-6 text-center text-sm text-(--color-50)">
             Already have an account?{' '}
             <Link
-              href="/sign-in"
+              href="/sign-up"
               className="text-(--color-primary) hover:text-(--color-primary-hover)"
             >
               Sign up

@@ -1,11 +1,12 @@
 "use client";
 
+import { CandlestickSeries, ColorType, createChart, IChartApi, ISeriesApi, OhlcData } from "lightweight-charts";
+import { startTransition, useEffect, useRef, useState, useTransition } from "react";
+import { useTheme } from "next-themes";
+
 import { getCandlestickConfig, getChartConfig, PERIOD_BUTTONS, PERIOD_CONFIG } from "@/constants";
 import { fetcher } from "@/lib/coingecko.actions";
-import { convertOHLCData, getPricePrecision } from "@/lib/utils";
-
-import { CandlestickSeries, createChart, IChartApi, ISeriesApi, OhlcData } from "lightweight-charts";
-import { startTransition, useEffect, useRef, useState, useTransition } from "react";
+import { cn, convertOHLCData, getPricePrecision } from "@/lib/utils";
 
 const CandlestickChart = ({
   children,
@@ -17,6 +18,8 @@ const CandlestickChart = ({
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
+
+  const { theme } = useTheme();
 
   const [ period, setPeriod ] = useState(initialPeriod);
   const [ ohlcData, setOhlcData ] = useState<OHLCData[] | null>(data ?? []);
@@ -109,7 +112,7 @@ const CandlestickChart = ({
       chart.remove();
       candleSeriesRef.current = null;
     };
-  }, [height, period]);
+  }, [height]);
 
   useEffect(() => {
     if (!candleSeriesRef.current || !ohlcData) return;
@@ -132,6 +135,65 @@ const CandlestickChart = ({
       },
     });
   }, [ohlcData, period]);
+
+  useEffect(() => {
+    if (!chartRef.current) return;
+
+    const isDark = theme === "dark";
+
+    const chartColors = {
+      layout: {
+        dark: {
+          bg: "#0a0a0a",
+          text: "#d1d5db",
+        },
+
+        light: {
+          bg: "#F7F9FC",
+          text: "#374151",
+        },
+      },
+
+      grid: {
+        dark: {
+          vert: "rgba(255, 255, 255, 0.08)",
+          hor: "rgba(255, 255, 255, 0.08)",
+        },
+
+        light: {
+          vert: "rgba(0, 0, 0, 0.08)",
+          hor: "rgba(0, 0, 0, 0.08)",
+        },
+      },
+    };
+
+    chartRef.current.applyOptions({
+      layout: {
+        background: {
+          type: ColorType.Solid,
+          color: isDark ? chartColors.layout.dark.bg : chartColors.layout.light.bg,
+        },
+        textColor: isDark ? chartColors.layout.dark.text : chartColors.layout.light.text,
+      },
+
+      grid: {
+        vertLines: {
+          color: isDark ? chartColors.grid.dark.vert : chartColors.grid.light.vert,
+        },
+        horzLines: {
+          color: isDark ? chartColors.grid.dark.hor : chartColors.grid.light.hor,
+        },
+      },
+    });
+
+    candleSeriesRef.current?.applyOptions({
+      upColor: isDark ? "#22c55e" : "#16a34a",
+      downColor: isDark ? "#ef4444" : "#dc2626",
+      wickUpColor: isDark ? "#22c55e" : "#16a34a",
+      wickDownColor: isDark ? "#ef4444" : "#dc2626",
+    });
+
+  }, [theme]);
 
   return (
     <div
@@ -157,7 +219,7 @@ const CandlestickChart = ({
           {PERIOD_BUTTONS.map(({ value, label }) => (
             <button
               key={value}
-              className={ period === value ? "config-button-active" : "config-button" }
+              className={ cn("text-white", period === value ? "config-button-active" : "config-button") }
               onClick={() => handlePeriodChange(value)}
               disabled={isPending}
             >

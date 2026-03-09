@@ -192,7 +192,7 @@ export function SignUpForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full bg-(--color-primary) rounded-xl py-3 text-sm font-medium transition ${
+                className={`w-full bg-(--color-primary) text-white rounded-xl py-3 text-sm font-medium transition ${
                   loading
                     ? 'opacity-30 cursor-not-allowed'
                     : 'hover:cursor-pointer hover:bg-(--color-primary-hover)'

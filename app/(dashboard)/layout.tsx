@@ -54,7 +54,7 @@ export default function ProtectedLayout({
   if (!session) return (null);
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white flex relative">
+    <div className="min-h-screen bg-(--bg-app) text-(--text-primary) flex relative">
       {/* Mobile Overlay */}
       <AnimatePresence>
         {isOpen && !isDesktop && (
@@ -62,7 +62,7 @@ export default function ProtectedLayout({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-40"
+            className="fixed inset-0 bg-(--color-opp-50) z-40"
             onClick={() => setIsOpen(false)}
           />
         )}

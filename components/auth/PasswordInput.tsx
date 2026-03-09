@@ -16,7 +16,7 @@ export function PasswordInput({
         type={showPassword ? "text" : "password"}
         className={cn(
           "pr-11 bg-(--bg-elevated) border border-(--color-10) text-(--color-100) placeholder:text-(--color-40) rounded-xl transition-all duration-200",
-          "focus:border-(--color-primary) focus:ring-2 focus:ring-(--color-primary-soft)",
+          "focus:border-(--color-primary) focus:ring-2 focus:ring-(--color-primary)",
           "hover:border-(--color-20)",
           "[&::-ms-reveal]:hidden",
           className
@@ -37,7 +37,7 @@ export function PasswordInput({
         )}
       </button>
 
-      <div className="pointer-events-none absolute inset-0 rounded-xl ring-0 group-focus-within:ring-2 group-focus-within:ring-(--color-primary-soft) transition-all duration-200" />
+      <div className="pointer-events-none absolute inset-0 rounded-xl ring-0 group-focus-within:ring-2 group-focus-within:ring-(--color-primary) transition-all duration-200" />
     </div>
   );
 };
