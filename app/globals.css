@@ -364,7 +364,7 @@
 
   .config-button-active {
     @apply rounded-sm px-2.5 py-1.5 border-0 cursor-pointer text-sm;
-    color: var(--text-primary);
+    color: white;
     background-color: var(--color-primary);
   }
 

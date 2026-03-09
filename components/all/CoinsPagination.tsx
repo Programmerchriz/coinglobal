@@ -56,7 +56,7 @@ const CoinsPagination = ({
                 className={cn(
                   'px-4 py-2 rounded-lg text-sm transition border',
                   currentPage === page
-                    ? 'bg-(--color-primary) border-(--color-primary) text-(--text-primary)'
+                    ? 'bg-(--color-primary) border-(--color-primary) text-white'
                     : 'bg-(--bg-surface) border-(--color-5) text-(--color-70) hover:bg-(--color-5)'
                 )}
                 onClick={() => handlePageChange(page)}

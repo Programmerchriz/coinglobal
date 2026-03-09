@@ -3,18 +3,23 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import SettingsSection from "@/components/dashboard/settings/SettingsSection";
 import SettingsItem from "@/components/dashboard/settings/SettingsItem";
 import SettingsButton from "@/components/dashboard/settings/SettingsButton";
 import ProfileSettingsModal from "@/components/settings/ProfileSettingsModal";
+import { Moon, Sun, ToggleLeft } from "lucide-react";
 
 interface Props {
   user: UserProps;
 }
 
 export default function SettingsClient({ user }: Props) {
+  const { theme, setTheme } = useTheme();
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+
   return (
     <div className="space-y-10 pb-16">
       {/* HEADER */}
@@ -44,7 +49,7 @@ export default function SettingsClient({ user }: Props) {
               />
             ) : (
               <Avatar className="h-12 w-12">
-                <AvatarFallback className="bg-(--color-primary) text-(--text-primary)">
+                <AvatarFallback className="bg-(--color-primary) text-white">
                   {user.name[0]}
                 </AvatarFallback>
               </Avatar>
@@ -108,8 +113,12 @@ export default function SettingsClient({ user }: Props) {
         <SettingsItem
           title="Theme"
           description="Switch between light and dark mode."
-          value="Dark"
-          action={<SettingsButton>Edit</SettingsButton>}
+          value={theme === "dark" ? "Dark" : "Light"}
+          action={
+            <SettingsButton onClick={toggleTheme}>
+              {theme === "dark" ? <Sun size={16}/> : <Moon size={16}/>}
+            </SettingsButton>
+          }
         />
       </SettingsSection>
 

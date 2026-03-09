@@ -166,7 +166,7 @@ export default function DashboardSidebar({
                 Unlock powerful trading insights and strategies.
               </p>
 
-              <Button className="w-full bg-(--text-primary) hover:bg-(--color-90) hover:cursor-not-allowed rounded-xl opacity-50">
+              <Button className="w-full bg-(--text-primary) text-(--text-secondary) hover:bg-(--color-90) hover:cursor-not-allowed rounded-xl opacity-50">
                 Coming Soon
               </Button>
 

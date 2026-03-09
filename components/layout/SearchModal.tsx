@@ -162,7 +162,7 @@ export const SearchModal = ({
           <Button
             variant="outline"
             onClick={() => setOpen(true)}
-            className="flex items-center gap-2 rounded-xl bg-background/60 backdrop-blur-md hover:bg-muted/60 hover:cursor-pointer transition-all"
+            className="flex items-center gap-2 rounded-xl bg-background/60 backdrop-blur-md hover:bg-muted/60 hover:cursor-pointer md:hover:cursor-text transition-all border border-(--color-10)"
           >
             <SearchIcon size={16} className="text-muted-foreground" />
             <span className="hidden md:block text-sm text-muted-foreground">

@@ -1,5 +1,9 @@
+
+
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
+import { ThemeProvider } from "next-themes";
 
 import './globals.css';
 import Header from '../components/layout/header';
@@ -42,23 +46,30 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Header />
-        {children}
-        <Toaster
-          position="bottom-right"
-          richColors
-          closeButton
-          theme="dark"
-          toastOptions={{
-            classNames: {
-              toast: 'bg-(--bg-surface) border border-(--color-10) text-(--text-primary)',
-              description: 'text-(--color-60)',
-              actionButton: 'bg-(--color-primary) hover:(--color-primary-hover) text-(--text-primary)',
-            },
-          }}
-        />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <Header />
+          {children}
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            theme="dark"
+            toastOptions={{
+              classNames: {
+                toast: 'bg-(--bg-surface) border border-(--color-10) text-(--text-primary)',
+                description: 'text-(--color-60)',
+                actionButton: 'bg-(--color-primary) hover:(--color-primary-hover) text-(--text-primary)',
+              },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   );
