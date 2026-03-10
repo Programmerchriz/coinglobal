@@ -501,6 +501,18 @@
   animation: scalePulse 1.5s ease-in-out infinite;
 }
 
+.skeleton {
+  background: var(--color-10);
+  border-radius: 6px;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6 }
+  50% { opacity: 1 }
+  100% { opacity: 0.6 }
+}
+
 .page-loading-blur::before {
   content: "";
   position: fixed;

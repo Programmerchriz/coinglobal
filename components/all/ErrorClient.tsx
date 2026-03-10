@@ -36,7 +36,7 @@ export default function ErrorClient({
 
         <button
           onClick={() => reset()}
-          className="w-full bg-(--color-primary) hover:bg-(--color-primary-hover) transition-colors py-2 rounded-xl text-sm font-medium hover:cursor-pointer"
+          className="w-full bg-(--color-primary) text-white hover:bg-(--color-primary-hover) transition-colors py-2 rounded-xl text-sm font-medium hover:cursor-pointer"
         >
           Try Again
         </button>

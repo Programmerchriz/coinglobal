@@ -158,12 +158,12 @@ const Coin = async ({ params }: CoinPageProps) => {
     <section className="min-h-screen bg-(--bg-app) text-(--text-primary) px-4 py-6">
       {/* Header */}
       <div className="max-w-7xl mx-auto space-y-6">
+        <div>
+          <BackButton />
+        </div>
+
         {/* Top section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div>
-            <BackButton />
-          </div>
-
           {/* Left: Coin Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
@@ -321,12 +321,14 @@ const Coin = async ({ params }: CoinPageProps) => {
           </div>
 
           {/* Right: BTC Converter */}
-          <CurrencyConverter
-            symbol={coin.symbol}
-            image={coin.image.large}
-            currencies={currencies}
-            currenciesObj={currenciesObj}
-          />
+          <div className='lg:col-span-1 space-y-4'>
+            <CurrencyConverter
+              symbol={coin.symbol}
+              image={coin.image.large}
+              currencies={currencies}
+              currenciesObj={currenciesObj}
+            />
+          </div>
         </div>
 
         {/* Chart + Coin Details */}

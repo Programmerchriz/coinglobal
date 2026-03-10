@@ -24,7 +24,7 @@ export function DropDown({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="uppercase text-sm text-(--color-50) px-2 hover:bg-(--color-10) rounded-lg"
+          className="uppercase text-sm text-(--color-50) px-2 hover:bg-(--color-10) hover:cursor-pointer rounded-lg"
         >
           {curr}
           <ChevronDown className="h-4 w-4 text-(--color-30)" />
@@ -47,7 +47,7 @@ export function DropDown({
               }}
               className={`
                 uppercase cursor-pointer rounded-lg
-                ${isActive ? "bg-(--color-primary) text-white" : "text-(--color-70)"}
+                ${isActive ? "bg-(--color-primary) text-white hover:cursor-pointer" : "text-(--color-70)"}
                 hover:bg-(--color-10)
               `}
             >

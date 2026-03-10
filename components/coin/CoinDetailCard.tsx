@@ -35,7 +35,7 @@ const CoinDetailCard = ({
 
 const DetailCard = ({ title, value, isLink }: DetailCardProps) => {
   return (
-  <div className="bg-(--bg-surface) border border-(--color-5) rounded-lg p-4">
+  <div className={`bg-(--bg-surface) border border-(--color-5) rounded-lg p-4 ${isLink ? "hover:bg-(--color-10)" : ""}`}>
     <p className="text-sm text-(--color-40) mb-1">{title}</p>
 
     <div className="flex gap-1 items-center">
