@@ -40,6 +40,7 @@ const CandlestickChart = ({
       setOhlcData(newData ?? []);
     } catch (e) {
       console.error("Failed to fetch OHLCData:", e);
+      throw new Error("Failed to fetch chart data");
     };
   };
 

@@ -1,17 +1,10 @@
 
-import { redirect } from "next/navigation";
-import { getServerSession } from '@/lib/session';
-
 import { getCategories } from '@/lib/api/categories';
 import CategoriesTable from '@/components/categories/CategoriesTable';
 import CoinsPagination from '@/components/all/CoinsPagination';
 import BackButton from '@/components/ui/BackButton';
 
 export default async function CategoriesPage({ searchParams }: NextPageProps) {
-  const session = await getServerSession();
-
-  if (!session) redirect("/sign-in");
-
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
   const perPage: number = 10;

@@ -87,7 +87,7 @@ const Coins = async ({ searchParams }: NextPageProps) => {
     });
   } catch (error) {
     console.error('Error fetching categories:', error);
-    return <Loading />;
+    throw new Error("Failed to fetch categories data");
   }
 
   const hasMorePages = allCoins.length === perPage;

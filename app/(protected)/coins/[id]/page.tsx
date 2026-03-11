@@ -96,7 +96,7 @@ const Coin = async ({ params }: CoinPageProps) => {
     ]);
   } catch (error) {
     console.error('Error fetching categories:', error);
-    throw new Error("Failed to fetch coin data");
+    throw new Error("Failed to fetch categories data");
   }
 
   if (!coin) {

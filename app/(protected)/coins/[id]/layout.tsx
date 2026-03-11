@@ -1,15 +1,12 @@
 
-import { redirect } from "next/navigation";
-import { getServerSession } from '@/lib/session';
+import { requireSession } from "@/lib/require-session";
 
 export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
-
-  if (!session) redirect("/sign-in");
+  // await requireSession();
 
   return <>{children}</>;
 };

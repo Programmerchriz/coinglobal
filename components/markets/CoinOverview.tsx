@@ -44,7 +44,7 @@ const CoinOverview = async () => {
     );
   } catch (error) {
     console.error('Error fetching coin overview:', error);
-    return <CoinOverviewFallback />;
+    throw new Error("Failed to coins data");
   }
 
   return;

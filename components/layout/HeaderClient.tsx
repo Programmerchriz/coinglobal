@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 
 import { SearchModal } from '@/components/layout/SearchModal';
 import { getTrendingCoins } from "@/lib/api/trendingCoins";
+import { requireSession } from "@/lib/require-session";
 
 const getNavLinks = (session: Session | null | undefined) => {
   if (!session) {
@@ -67,8 +68,6 @@ export default function HeaderClient ({ session }: HeaderProps) {
   const links = getNavLinks(session);
 
   useEffect(() => {
-    if (!session) return;
-
     const fetchTrending = async () => {
       try {
         setIsLoadingTrending(true);
@@ -77,6 +76,7 @@ export default function HeaderClient ({ session }: HeaderProps) {
         setTrendingCoins((await data).coins || []);
       } catch (err) {
         console.error("Trending fetch failed:", err);
+        throw new Error("Failed to trending coins data");
       } finally {
         setIsLoadingTrending(false);
       }

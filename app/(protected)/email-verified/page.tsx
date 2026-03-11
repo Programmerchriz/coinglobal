@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { getServerSession } from '@/lib/session';
+import { getServerSession } from "@/lib/session";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -12,10 +12,9 @@ export const metadata: Metadata = {
 
 export default async function EmailVerifiedPage() {
   const session = await getServerSession();
-  if (true) redirect("/dashboard"); // Unaccesssible
 
-  if (!session) redirect("/sign-in");
   if (!session?.user.emailVerified) redirect("/verify-email");
+  if (true) redirect("/dashboard"); // Unaccesssible
 
   return (
     <main className="relative min-h-screen flex items-center justify-center px-4 bg-(--bg-app) text-(--color-100) overflow-hidden">
