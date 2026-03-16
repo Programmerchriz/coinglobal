@@ -1,13 +1,13 @@
 
-import { redirect } from "next/navigation";
-import { getServerSession } from "@/lib/session";
+// import { redirect } from "next/navigation";
+// import { getServerSession } from "@/lib/session";
 
-export async function requireSession() {
-  const session = await getServerSession();
+// export async function requireSession() {
+//   const session = await getServerSession();
 
-  if (!session) {
-    redirect("/sign-in");
-  }
+//   if (!session) {
+//     redirect("/sign-in");
+//   }
 
-  return session;
-};
+//   return session;
+// };

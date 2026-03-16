@@ -1,5 +1,5 @@
 
-import { requireSession } from "@/lib/require-session";
+import { requireSession } from "@/lib/session";
 import LayoutClient from "./LayoutClient";
 
 export default async function ProtectedLayout({
