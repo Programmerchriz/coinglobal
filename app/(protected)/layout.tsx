@@ -1,5 +1,5 @@
 
-import { requireSession } from "@/lib/require-session";
+import { requireSession } from "@/lib/session";
 
 export default async function ProtectedLayout({
   children,

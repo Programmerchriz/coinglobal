@@ -45,6 +45,9 @@ next-env.d.ts
 saveApiData.js
 *.json
 
+# docker
+*.yml
+
 # imgs
 /public/demo/
 

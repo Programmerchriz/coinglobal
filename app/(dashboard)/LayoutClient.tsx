@@ -2,11 +2,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu } from "lucide-react";
 
 import { signOut } from "@/lib/actions/auth-actions";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import Loading from "@/components/auth/SignOutLoading";
+
+const SIGNOUT_DELAY = 1500;
 
 export default function LayoutClient({
   children,
@@ -15,9 +19,12 @@ export default function LayoutClient({
   children: React.ReactNode;
   session: Session;
 }) {
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
@@ -35,45 +42,50 @@ export default function LayoutClient({
 
   const handleSignOut = async () => {
     setIsDisabled(true);
-    await signOut();
+    // setIsLoading(true);
+    router.push("/sign-out");
   };
 
   return (
-    <div className="min-h-screen bg-(--bg-app) text-(--text-primary) flex relative">
-      {/* Mobile Overlay */}
-      <AnimatePresence>
-        {isOpen && !isDesktop && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-(--color-opp-50) z-40"
-            onClick={() => setIsOpen(false)}
+    isLoading
+      ?
+        <Loading />
+      :
+        <div className="min-h-screen bg-(--bg-app) text-(--text-primary) flex relative">
+          {/* Mobile Overlay */}
+          <AnimatePresence>
+            {isOpen && !isDesktop && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-(--color-opp-50) z-40"
+                onClick={() => setIsOpen(false)}
+              />
+            )}
+          </AnimatePresence>
+
+          <DashboardSidebar
+            user={session.user}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            isDesktop={isDesktop}
+            onSignOut={handleSignOut}
+            isDisabled={isDisabled}
           />
-        )}
-      </AnimatePresence>
 
-      <DashboardSidebar
-        user={session.user}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        isDesktop={isDesktop}
-        onSignOut={handleSignOut}
-        isDisabled={isDisabled}
-      />
+          <main className="flex-1 w-full lg:ml-64 p-4 sm:p-6">
+            <div className="lg:hidden mb-6">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="hover:cursor-pointer"
+              >
+                <Menu size={22} />
+              </button>
+            </div>
 
-      <main className="flex-1 w-full lg:ml-64 p-4 sm:p-6">
-        <div className="lg:hidden mb-6">
-          <button
-            onClick={() => setIsOpen(true)}
-            className="hover:cursor-pointer"
-          >
-            <Menu size={22} />
-          </button>
+            {children}
+          </main>
         </div>
-
-        {children}
-      </main>
-    </div>
   );
 };

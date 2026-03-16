@@ -60,8 +60,8 @@ export const signOut = async () => {
   await auth.api.signOut({
     headers: await headers(),
   });
-
-  redirect("/sign-in");
+  
+  // redirect("/sign-in");
 };
 
 export const signInSocial = async (

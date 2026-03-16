@@ -2,4 +2,4 @@
 
 export const publicRoutes = ["/", "/categories", "/markets", "/sign-in", "/sign-up", "/trending-coins", "/verify-email"] as const;
 
-export const protectedRoutes = ["/coins", "/coins/[id]", "/dashboard", "/email-verified", "/notifications", "/notifications/settings", "/settings"] as const;
+export const protectedRoutes = ["/coins", "/coins/[id]", "/dashboard", "/email-verified", "/notifications", "/notifications/settings", "/settings", "/sign-out"] as const;
