@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import Header from '../components/layout/header';
+import { getTheme } from '@/lib/actions/theme-actions';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -94,20 +95,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const session = await getServerSession();
-  // let theme: "light" | "dark" = "dark";
-
-  // if (session?.user?.id) {
-  //   const user = await prisma.user.findUnique({
-  //     where: { id: session.user.id },
-  //     select: { theme: true },
-  //   });
-
-  //   theme = (user?.theme?.toLowerCase() as "light" | "dark") ?? "dark";
-  // }
+  const theme = await getTheme();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={theme} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* <ThemeProvider> */}
           <Header />
