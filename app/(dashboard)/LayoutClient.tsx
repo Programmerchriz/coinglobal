@@ -84,7 +84,9 @@ export default function LayoutClient({
               </button>
             </div>
 
-            {children}
+            <AnimatePresence mode="wait">
+              {children}
+            </AnimatePresence>
           </main>
         </div>
   );

@@ -1,24 +1,39 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import SettingsSection from "@/components/dashboard/settings/SettingsSection";
 import SettingsItem from "@/components/dashboard/settings/SettingsItem";
 import SettingsButton from "@/components/dashboard/settings/SettingsButton";
 import ProfileSettingsModal from "@/components/settings/ProfileSettingsModal";
-import { Moon, Sun, ToggleLeft } from "lucide-react";
+import { updateTheme } from "@/lib/actions/theme-actions";
 
 interface Props {
   user: UserProps;
 }
 
 export default function SettingsClient({ user }: Props) {
-  const { theme, setTheme } = useTheme();
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const [ theme, setTheme ] = useState("light");
+
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    updateTheme(newTheme);
+    
+    const html = document.documentElement;
+
+    if (newTheme === "light") {
+      html.classList.remove("dark");
+      html.classList.add("light");
+    } else {
+      html.classList.remove("light");
+      html.classList.add("dark");
+    }
+  };
 
   return (
     <div className="space-y-10 pb-16">
@@ -115,7 +130,9 @@ export default function SettingsClient({ user }: Props) {
           description="Switch between light and dark mode."
           value={theme === "dark" ? "Dark" : "Light"}
           action={
-            <SettingsButton onClick={toggleTheme}>
+            <SettingsButton
+              onClick={toggleTheme}
+            >
               {theme === "dark" ? <Sun size={16}/> : <Moon size={16}/>}
             </SettingsButton>
           }
