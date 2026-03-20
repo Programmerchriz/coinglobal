@@ -45,6 +45,7 @@ export const signIn = async (
   const safeCallback =
     callbackURL?.startsWith("/") ? callbackURL : "/dashboard?welcome=signin";
 
+  console.log(safeCallback);
   const response = await auth.api.signInEmail({
     body: {
       email,

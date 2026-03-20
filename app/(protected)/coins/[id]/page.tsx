@@ -14,6 +14,7 @@ import CoinDetailCard from '@/components/coin/CoinDetailCard';
 import ExchangeListings from '@/components/coin/ExchangeListings';
 import TopMovers from '@/components/coin/TopMovers';
 import BackButton from '@/components/ui/BackButton';
+import { getTheme } from '@/lib/actions/theme-actions';
 
 const recentTradesData = [
   {
@@ -80,6 +81,7 @@ const Coin = async ({ params }: CoinPageProps) => {
   if (!id) throw new Error("Coin id not found");
 
   const isTrendingUp = (value: number) => value > 0;
+  const theme = await getTheme();
 
   let coin: CoinDetailsData, coinOHLCData: OHLCData[];
 
@@ -335,7 +337,7 @@ const Coin = async ({ params }: CoinPageProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Chart */}
           <div className="lg:col-span-2 bg-(--bg-surface) border border-(--color-5) rounded-2xl lg:p-4 shadow-xl">
-            <CandlestickChart data={coinOHLCData} coinId={coin.id}>
+            <CandlestickChart data={coinOHLCData} coinId={coin.id} theme={theme}>
               <div className="header pt-2">
                 <h3 className="font-semibold">Trend Overview</h3>
               </div>

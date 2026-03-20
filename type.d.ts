@@ -14,6 +14,7 @@ declare global {
     data?: OHLCData[];
     liveOhlcv?: OHLCData | null;
     coinId: string;
+    theme: string;
     height?: number;
     children?: React.ReactNode;
     mode?: 'historical' | 'live';

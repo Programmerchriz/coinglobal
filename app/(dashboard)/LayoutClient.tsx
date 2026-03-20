@@ -2,15 +2,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu } from "lucide-react";
+import { toast } from "sonner";
 
-import { signOut } from "@/lib/actions/auth-actions";
+const LOADING_DELAY = 1500;
+const REPLACE_DELAY = 100000;
+
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import Loading from "@/components/auth/SignOutLoading";
-
-const SIGNOUT_DELAY = 1500;
 
 export default function LayoutClient({
   children,
@@ -20,11 +21,24 @@ export default function LayoutClient({
   session: Session;
 }) {
   const router = useRouter();
+  const params = useSearchParams();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(params.keys());
+
+    if (params.get("auth") === "success") {
+      toast.success("Welcome back 👋", {
+        description: "You've successfully signed in.",
+      });
+
+      setTimeout(() => router.replace("/dashboard"), REPLACE_DELAY);
+    }
+  }, [params, router]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
@@ -42,8 +56,10 @@ export default function LayoutClient({
 
   const handleSignOut = async () => {
     setIsDisabled(true);
-    // setIsLoading(true);
+    setIsLoading(true);
     router.push("/sign-out");
+
+    setTimeout(() => setIsLoading(false), LOADING_DELAY);
   };
 
   return (
