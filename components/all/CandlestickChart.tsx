@@ -12,14 +12,13 @@ const CandlestickChart = ({
   children,
   data,
   coinId,
+  theme,
   height = 360,
   initialPeriod = "daily",
 }: CandlestickChartProps) => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
-
-  const { theme } = useTheme();
 
   const [ period, setPeriod ] = useState(initialPeriod);
   const [ ohlcData, setOhlcData ] = useState<OHLCData[] | null>(data ?? []);

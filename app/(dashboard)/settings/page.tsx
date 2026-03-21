@@ -8,7 +8,7 @@ import Loading from "./loading";
 
 export default async function SettingsPage() {
   const session = await getServerSession();
-  if (!session) redirect("/sign-in");
+  if (!session) redirect("/signin");
 
   return (
     <Suspense fallback={<Loading />}>

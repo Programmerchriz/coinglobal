@@ -1,22 +1,21 @@
+'use client';
 
-"use client";
+import Link from 'next/link';
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 
-import Link from "next/link";
-import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion";
-
-import OnboardingFooter from "@/components/public/OnboardingFooter";
+import OnboardingFooter from '@/components/public/OnboardingFooter';
 
 const FEATURES = [
-  { label: "Dashboard", available: true },
-  { label: "Portfolio", available: false },
-  { label: "Market", available: false },
-  { label: "AI Trading Assistant", available: false },
-  { label: "Staking", available: false },
-  { label: "Orders", available: false },
-  { label: "P2P Orders", available: false },
-  { label: "Reports", available: false },
+  { label: 'Dashboard', available: true },
+  { label: 'Portfolio', available: false },
+  { label: 'Market', available: false },
+  { label: 'AI Trading Assistant', available: false },
+  { label: 'Staking', available: false },
+  { label: 'Orders', available: false },
+  { label: 'P2P Orders', available: false },
+  { label: 'Reports', available: false },
 ];
 
 export default function OnboardingClient() {
@@ -36,19 +35,17 @@ export default function OnboardingClient() {
             Build Your Crypto World with Coin Global
           </h1>
           <p className="text-lg text-[color:var(--color-70)]">
-            A powerful crypto dashboard with advanced features — coming soon to revolutionize your trading experience.
+            A powerful crypto dashboard with advanced features — coming soon to revolutionize your
+            trading experience.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/sign-up"
+              href="/signup"
               className="btn-primary text-white px-6 py-3 font-medium transition"
             >
               Get Started
             </Link>
-            <Link
-              href="/sign-in"
-              className="btn-outline px-6 py-3 font-medium transition"
-            >
+            <Link href="/signin" className="btn-outline px-6 py-3 font-medium transition">
               Sign In
             </Link>
           </div>
@@ -56,7 +53,7 @@ export default function OnboardingClient() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 text-center" style={{ backgroundColor: "var(--bg-sidebar)" }}>
+      <section className="py-24 text-center" style={{ backgroundColor: 'var(--bg-sidebar)' }}>
         <div className="max-w-4xl mx-auto space-y-6">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -71,16 +68,10 @@ export default function OnboardingClient() {
             ref={ref}
             className="text-5xl lg:text-7xl font-bold text-[color:var(--color-primary)]"
           >
-            {inView ? (
-              <CountUp end={12345678} duration={2.8} separator="," prefix="$" />
-            ) : (
-              "$0"
-            )}
+            {inView ? <CountUp end={12345678} duration={2.8} separator="," prefix="$" /> : '$0'}
           </motion.div>
 
-          <p className="text-[color:var(--color-50)]">
-            And growing — every second
-          </p>
+          <p className="text-[color:var(--color-50)]">And growing — every second</p>
         </div>
       </section>
 
@@ -104,9 +95,7 @@ export default function OnboardingClient() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="onboarding-features card p-6 flex flex-col justify-between"
             >
-              <div className="text-xl font-medium">
-                {f.label}
-              </div>
+              <div className="text-xl font-medium">{f.label}</div>
               {!f.available ? (
                 <span className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-[color:var(--border-input)] text-[color:var(--color-warning)]">
                   Coming Soon
@@ -122,20 +111,15 @@ export default function OnboardingClient() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 text-center" style={{ backgroundColor: "var(--bg-sidebar)" }}>
+      <section className="py-20 text-center" style={{ backgroundColor: 'var(--bg-sidebar)' }}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center"
         >
-          <h2 className="text-3xl font-semibold mb-4">
-            Ready to Get Started?
-          </h2>
-          <Link
-            href="/sign-up"
-            className="btn-primary px-8 py-4 font-medium transition"
-          >
+          <h2 className="text-3xl font-semibold mb-4">Ready to Get Started?</h2>
+          <Link href="/signup" className="btn-primary px-8 py-4 font-medium transition">
             Create an Account Today
           </Link>
         </motion.div>
@@ -144,4 +128,4 @@ export default function OnboardingClient() {
       <OnboardingFooter />
     </main>
   );
-};
+}

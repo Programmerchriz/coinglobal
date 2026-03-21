@@ -3,8 +3,11 @@ import { formatCurrency } from '@/lib/utils';
 import Image from 'next/image';
 import { CoinOverviewFallback } from '@/components/markets/fallback';
 import CandlestickChart from '@/components/all/CandlestickChart';
+import { getTheme } from '@/lib/actions/theme-actions';
 
 const CoinOverview = async () => {
+  const theme = await getTheme();
+
   try {
     const [coin, coinOHLCData] = await Promise.all([
       fetcher<CoinDetailsData>('/coins/bitcoin', {
@@ -27,7 +30,7 @@ const CoinOverview = async () => {
 
     return (
       <div id="coin-overview" className="animate-fade-in-up">
-        <CandlestickChart data={coinOHLCData} coinId="bitcoin">
+        <CandlestickChart data={coinOHLCData} coinId="bitcoin" theme={theme}>
           <div className="header pt-2 flex items-center gap-4">
             <Image src={coin.image.large} alt={coin.name} width={56} height={56} />
             <div className="info">

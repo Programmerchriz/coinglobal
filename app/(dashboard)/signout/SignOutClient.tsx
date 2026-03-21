@@ -15,7 +15,7 @@ export default function SignOutClient() {
   useEffect(() => {
     const timer = setTimeout(async () => {
       await signOut();
-      router.replace("/sign-in");
+      router.replace("/signin");
     }, SIGNOUT_DELAY);
 
     return () => clearTimeout(timer);

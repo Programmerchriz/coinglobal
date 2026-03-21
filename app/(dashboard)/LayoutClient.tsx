@@ -2,15 +2,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu } from "lucide-react";
+import { toast } from "sonner";
 
-import { signOut } from "@/lib/actions/auth-actions";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import Loading from "@/components/auth/SignOutLoading";
 
-const SIGNOUT_DELAY = 1500;
+const LOADING_DELAY = 1500;
+const REPLACE_DELAY = 500;
 
 export default function LayoutClient({
   children,
@@ -20,11 +21,36 @@ export default function LayoutClient({
   session: Session;
 }) {
   const router = useRouter();
+  const params = useSearchParams();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const welcome = params.get("welcome");
+  
+  useEffect(() => {
+    if (welcome == "signin") {
+      setTimeout(() => {
+        toast.success("Welcome back 👋", {
+          description: "You've successfully signed in.",
+        });
+      }, 100);
+
+    }
+
+    if (welcome == "signup") {
+      setTimeout(() => {
+        toast.success("Account created 🎉", {
+          description: "Your account has been set up successfully.",
+        });
+      }, 100);
+
+    }
+
+    setTimeout(() => router.replace("/dashboard"), REPLACE_DELAY);
+  }, [welcome, router]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
@@ -42,8 +68,10 @@ export default function LayoutClient({
 
   const handleSignOut = async () => {
     setIsDisabled(true);
-    // setIsLoading(true);
-    router.push("/sign-out");
+    setIsLoading(true);
+    router.push("/signout");
+
+    setTimeout(() => setIsLoading(false), LOADING_DELAY);
   };
 
   return (

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function VerifyEmailPage() {
   const session = await getServerSession();
-  // if (!session) redirect("/sign-in");
+  // if (!session) redirect("/signin");
 
   if (true) redirect("/dashboard"); // Unaccesssible
 

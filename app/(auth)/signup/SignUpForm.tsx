@@ -22,6 +22,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
 import Loading from '../../../components/auth/fallback';
+import { useState } from 'react';
 
 const signUpSchema = z
   .object({
@@ -39,9 +40,10 @@ type SignUpValues = z.infer<typeof signUpSchema>;
 
 export function SignUpForm() {
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') ?? '/dashboard';
+  const redirect = searchParams.get('redirect') ?? '/dashboard?welcome=signup';
+    const [googleLoading, setGoogleLoading] = useState(false);
 
-  const { error, isLocked, handleAuth } = useAuthHandler('Account created 🎉', redirect);
+  const { error, isLocked, handleAuth } = useAuthHandler(redirect);
 
   const form = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
@@ -53,7 +55,7 @@ export function SignUpForm() {
     },
   });
 
-  const loading = form.formState.isSubmitting || isLocked;
+  const loading = form.formState.isSubmitting || isLocked || googleLoading;
 
   return loading ? (
     <Loading />
@@ -85,14 +87,16 @@ export function SignUpForm() {
           <button
             type="button"
             disabled={loading}
-            onClick={() =>
+            onClick={() => {
+              setGoogleLoading(true);
+
               handleAuth(() =>
                 authClient.signIn.social({
                   provider: 'google',
                   callbackURL: redirect,
                 })
-              )
-            }
+              );
+            }}
             className={`w-full flex items-center justify-center gap-3 bg-(--bg-sidebar) border border-(--color-10) rounded-xl py-3 text-sm transition ${
               loading ? 'opacity-30 cursor-not-allowed' : 'hover:cursor-pointer hover:opacity-90'
             }`}
@@ -206,7 +210,7 @@ export function SignUpForm() {
           <div className="mt-6 text-center text-sm text-(--color-50)">
             Already have an account?{' '}
             <Link
-              href="/sign-in"
+              href="/signin"
               className="text-(--color-primary) hover:text-(--color-primary-hover)"
             >
               Sign in
