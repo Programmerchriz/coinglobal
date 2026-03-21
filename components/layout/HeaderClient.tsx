@@ -28,7 +28,7 @@ const getNavLinks = (session: Session | null | undefined) => {
       },
       {
         title: 'Sign Up',
-        href: '/sign-up',
+        href: '/signup',
         disabled: false,
       },
     ];

@@ -107,7 +107,7 @@ export default async function RootLayout({
             position="bottom-right"
             richColors
             closeButton
-            theme={"dark"}
+            theme={theme as "dark" | "light"}
             toastOptions={{
               classNames: {
                 toast: 'bg-(--bg-surface) border border-(--color-10) text-(--text-primary)',

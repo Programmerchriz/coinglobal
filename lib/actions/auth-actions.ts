@@ -62,7 +62,7 @@ export const signOut = async () => {
     headers: await headers(),
   });
   
-  // redirect("/sign-in");
+  // redirect("/signin");
 };
 
 export const signInSocial = async (

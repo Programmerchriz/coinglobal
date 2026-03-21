@@ -11,7 +11,11 @@ type AuthResponse = {
   error: { message?: string } | null;
 };
 
-export function useAuthHandler(successMessage: string, redirect: string) {
+// toast.success("Account created 🎉", {
+//   description: "Your account has been set up successfully.",
+// });
+
+export function useAuthHandler(redirect: string) {
   const [error, setError] = useState<string | null>(null);
   const [isLocked, setIsLocked] = useState(false);
 
@@ -34,7 +38,7 @@ export function useAuthHandler(successMessage: string, redirect: string) {
         return;
       }
 
-      router.replace(redirect);
+      console.log(redirect);
     } catch (err) {
       console.error(err);
       setError('Something went wrong');

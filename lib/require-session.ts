@@ -6,7 +6,7 @@
 //   const session = await getServerSession();
 
 //   if (!session) {
-//     redirect("/sign-in");
+//     redirect("/signin");
 //   }
 
 //   return session;
