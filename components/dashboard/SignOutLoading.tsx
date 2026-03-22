@@ -6,18 +6,18 @@ import { motion } from 'framer-motion';
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-(--bg-app) overflow-hidden">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[var(--bg-glass)] backdrop-blur-xl border border-[var(--color-5)]/50 overflow-hidden">
       
       {/* Background Glow Effects */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl" />
-      <div className="absolute bottom-[-200px] right-[-200px] w-[400px] h-[400px] bg-(--bg-glass-purple) rounded-full blur-3xl" />
+      <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-[var(--bg-glass-indigo)]/70 rounded-full blur-3xl opacity-60" />
+      <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-[var(--bg-glass-purple)]/70 rounded-full blur-3xl opacity-60" />
 
       {/* Center Loader Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative z-10 bg-(--bg-surface) border border-(--color-5) rounded-2xl px-10 py-8 shadow-2xl flex flex-col items-center gap-4"
+        className="relative z-10 bg-[var(--bg-glass)]/90 backdrop-blur-2xl border border-[var(--color-5)]/75 rounded-3xl px-10 py-8 shadow-2xl flex flex-col items-center gap-4 ring-1 ring-[var(--color-5)]/30"
       >
         {/* Logo */}
         <motion.div
@@ -34,12 +34,12 @@ export default function Loading() {
             width={60}
             height={60}
             priority
-            className="animate-scale"
+            className="animate-scale drop-shadow-lg"
           />
         </motion.div>
 
         {/* Loading Text */}
-        <p className="text-sm text-(--color-50) tracking-wide">
+        <p className="text-lg text-[var(--color-50)] tracking-wide font-medium backdrop-blur-sm">
           Signing you out...
         </p>
       </motion.div>

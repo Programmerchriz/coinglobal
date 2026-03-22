@@ -22,7 +22,6 @@ import {
 } from '@/components/auth/Form';
 import { Input } from '@/components/ui/input';
 import Loading from '@/app/(auth)/loading';
-import Error from '@/app/(auth)/error';
 
 const signInSchema = z.object({
   email: z.string().email('Enter a valid email'),
