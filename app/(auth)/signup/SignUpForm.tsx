@@ -210,7 +210,7 @@ export function SignUpForm() {
           <div className="mt-6 text-center text-sm text-(--color-50)">
             Already have an account?{' '}
             <Link
-              href="/signin"
+              href={`/signin?redirect=${redirect}`}
               className="text-(--color-primary) hover:text-(--color-primary-hover)"
             >
               Sign in

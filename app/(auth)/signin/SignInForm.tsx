@@ -34,7 +34,10 @@ type SignInValues = z.infer<typeof signInSchema>;
 
 export function SignInForm() {
   const searchParams = useSearchParams();
+  console.log("Redirect param:", searchParams.get("redirect"));
   const redirect = searchParams.get('redirect') ?? '/dashboard?welcome=signin';
+  
+  console.log("Redirect param:", searchParams.get("redirect"));
   const [googleLoading, setGoogleLoading] = useState(false);
 
   const { error, isLocked, handleAuth } = useAuthHandler(redirect);
@@ -176,7 +179,7 @@ export function SignInForm() {
           <div className="mt-6 text-center text-sm text-(--color-50)">
             Already have an account?{' '}
             <Link
-              href="/signup"
+              href={`/signup?redirect=${redirect}`}
               className="text-(--color-primary) hover:text-(--color-primary-hover)"
             >
               Sign up
