@@ -2,9 +2,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { authClient } from '@/lib/auth-client';
 
 type AuthAction = () => Promise<{ error?: { message?: string } }>;
 type AuthResponse = {
@@ -19,11 +16,10 @@ export function useAuthHandler(redirect: string) {
   const [error, setError] = useState<string | null>(null);
   const [isLocked, setIsLocked] = useState(false);
 
-  const router = useRouter();
-
   const handleAuth = async (
     action: () => Promise<AuthResponse>
   ) => {
+    console.log("Redirect param:", redirect);
     if (isLocked) return;
 
     setIsLocked(true);
@@ -38,7 +34,7 @@ export function useAuthHandler(redirect: string) {
         return;
       }
 
-      console.log(redirect);
+      console.log("Redirect param:", redirect);
     } catch (err) {
       console.error(err);
       setError('Something went wrong');

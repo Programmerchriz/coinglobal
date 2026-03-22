@@ -29,7 +29,7 @@ export default function LayoutClient({
   const [isLoading, setIsLoading] = useState(false);
 
   const welcome = params.get("welcome");
-  
+
   useEffect(() => {
     if (welcome == "signin") {
       setTimeout(() => {
@@ -49,7 +49,9 @@ export default function LayoutClient({
 
     }
 
-    setTimeout(() => router.replace("/dashboard"), REPLACE_DELAY);
+    if (welcome) {
+      setTimeout(() => router.replace(window.location.pathname));
+    };
   }, [welcome, router]);
 
   useEffect(() => {
