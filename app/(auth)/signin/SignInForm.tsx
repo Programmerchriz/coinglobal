@@ -34,10 +34,8 @@ type SignInValues = z.infer<typeof signInSchema>;
 
 export function SignInForm() {
   const searchParams = useSearchParams();
-  console.log("Redirect param:", searchParams.get("redirect"));
   const redirect = searchParams.get('redirect') ?? '/dashboard?welcome=signin';
   
-  console.log("Redirect param:", searchParams.get("redirect"));
   const [googleLoading, setGoogleLoading] = useState(false);
 
   const { error, isLocked, handleAuth } = useAuthHandler(redirect);
@@ -189,5 +187,4 @@ export function SignInForm() {
       </motion.div>
     </div>
   );
-  // <Error />
 }

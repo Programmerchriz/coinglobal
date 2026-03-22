@@ -50,7 +50,7 @@ export default function LayoutClient({
     }
 
     if (welcome) {
-      setTimeout(() => router.replace(window.location.pathname));
+      setTimeout(() => router.replace(window.location.pathname), REPLACE_DELAY);
     };
   }, [welcome, router]);
 
