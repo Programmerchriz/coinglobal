@@ -39,7 +39,7 @@ export default function ProfileSettingsModal({
 
           <button
             onClick={onClose}
-            className="p-1 rounded-md hover:bg-[var(--bg-hover)] transition"
+            className="p-1 rounded-md hover:bg-(--bg-hover) transition"
           >
             <X size={18} />
           </button>
@@ -54,17 +54,17 @@ export default function ProfileSettingsModal({
               borderColor: "var(--border-standard)",
             }}
           >
-            <span className="text-sm text-[var(--color-60)]">Avatar</span>
+            <span className="text-sm text-(--color-60)">Avatar</span>
           </div>
 
-          <p className="text-xs mt-3 text-[var(--color-50)] text-center">
+          <p className="text-xs mt-3 text-(--color-50) text-center">
             You will be able to edit your avatar in 7 days.
           </p>
         </div>
 
         {/* Nickname Input */}
         <div className="mb-4">
-          <label className="text-sm text-[var(--color-60)]">
+          <label className="text-sm text-(--color-60)">
             Nickname
           </label>
 
@@ -83,18 +83,18 @@ export default function ProfileSettingsModal({
               className="bg-transparent outline-none flex-1 text-sm"
             />
 
-            <span className="text-xs text-[var(--color-40)]">
+            <span className="text-xs text-(--color-40)">
               {nickname.length}/60
             </span>
           </div>
 
-          <p className="text-xs mt-2 text-[var(--color-50)]">
+          <p className="text-xs mt-2 text-(--color-50)">
             You will be able to edit your nickname in 7 days.
           </p>
         </div>
 
         {/* Info */}
-        <div className="text-xs text-[var(--color-50)] space-y-1 mb-6">
+        <div className="text-xs text-(--color-50) space-y-1 mb-6">
           <p>* Avatar will also be displayed in the platform.</p>
           <p>
             * Nickname will be used across the platform and may be subject to

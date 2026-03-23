@@ -37,7 +37,7 @@ export function SignInForm() {
   
   const [googleLoading, setGoogleLoading] = useState(false);
 
-  const { error, isLocked, handleAuth } = useAuthHandler(redirect);
+  const { error, isLocked, handleAuth } = useAuthHandler();
 
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
@@ -54,8 +54,8 @@ export function SignInForm() {
     <Loading />
   ) : (
     <div className="min-h-screen py-16 bg-(--bg-app) text-(--text-primary) flex justify-center px-4 relative overflow-hidden">
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl" />
-      <div className="absolute bottom-[-200px] right-[-200px] w-[400px] h-[400px] bg-(--bg-glass-purple) rounded-full blur-3xl" />
+      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--bg-glass-indigo) rounded-full blur-3xl" />
+      <div className="absolute -bottom-50 -right-50 w-100 h-100 bg-(--bg-glass-purple) rounded-full blur-3xl" />
 
       <motion.div
         initial={{ opacity: 0, y: 60 }}

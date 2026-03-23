@@ -8,8 +8,6 @@ const API_KEY = process.env.COINGECKO_API_KEY;
 if (!BASE_URL) throw new Error('Could not get base url');
 if (!API_KEY) throw new Error('Could not get api key');
 
-// https://pro-api.coingecko.com/api/v3/coins?id=api-key
-
 export async function fetcher<T>(
   endpoint: string,
   params?: QueryParams,

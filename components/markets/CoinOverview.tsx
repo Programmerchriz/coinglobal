@@ -1,7 +1,6 @@
 import { fetcher } from '@/lib/coingecko.actions';
 import { formatCurrency } from '@/lib/utils';
 import Image from 'next/image';
-import { CoinOverviewFallback } from '@/components/markets/fallback';
 import CandlestickChart from '@/components/all/CandlestickChart';
 import { getTheme } from '@/lib/actions/theme-actions';
 
@@ -17,14 +16,11 @@ const CoinOverview = async () => {
         community_data: false,
         developer_data: false,
         sparkline: false,
-        // default_pair_format: "symbol",
       }),
 
       fetcher<OHLCData[]>('/coins/bitcoin/ohlc', {
         vs_currency: 'usd',
         days: 1,
-        // interval: 'hourly',
-        // precision: 'full',
       }),
     ]);
 

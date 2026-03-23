@@ -8,8 +8,8 @@ export default function CoinNotFound() {
   return (
     <main className="relative min-h-screen flex items-center justify-center px-4 bg-(--bg-app) text-(--text-primary) overflow-hidden">
 
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--color-primary)/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-[-200px] right-[-200px] w-[400px] h-[400px] bg-(--color-accent)/20 rounded-full blur-3xl" />
+      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-50 -right-50 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 
       <div className="relative z-10 w-full max-w-md">
         <div className="bg-(--bg-surface) border border-(--border-standard) rounded-2xl shadow-xl p-8 text-center space-y-6">

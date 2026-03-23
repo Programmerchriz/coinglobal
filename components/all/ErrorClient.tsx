@@ -19,9 +19,8 @@ export default function ErrorClient({
   return (
     <section className="relative min-h-screen flex items-start lg:items-center justify-center px-4 py-16">
 
-      {/* Background glow */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl" />
-      <div className="absolute bottom-[-200px] right-[-200px] w-[400px] h-[400px] bg-(--bg-glass-purple) rounded-full blur-3xl" />
+      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-50 -right-50 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-md w-full text-center p-8 rounded-2xl border border-(--color-5) bg-(--bg-surface) shadow-2xl space-y-4">
 

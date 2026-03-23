@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 
-// import AuthClientPage from "../auth-client";
 import { SignUpForm } from './SignUpForm';
 import Fallback from '@/components/auth/fallback';
 

@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils';
 
 import { SearchModal } from '@/components/layout/SearchModal';
 import { getTrendingCoins } from "@/lib/api/trendingCoins";
-import { requireSession } from "@/lib/session";
 
 const getNavLinks = (session: Session | null | undefined) => {
   if (!session) {
@@ -35,11 +34,6 @@ const getNavLinks = (session: Session | null | undefined) => {
   }
 
   return [
-    // {
-    //   title: 'Home',
-    //   href: '/',
-    //     disabled: false,
-    // },
     {
       title: 'Dashboard',
       href: '/dashboard',

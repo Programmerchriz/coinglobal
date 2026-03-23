@@ -3,23 +3,17 @@
 
 import { useState } from 'react';
 
-type AuthAction = () => Promise<{ error?: { message?: string } }>;
 type AuthResponse = {
   error: { message?: string } | null;
 };
 
-// toast.success("Account created 🎉", {
-//   description: "Your account has been set up successfully.",
-// });
-
-export function useAuthHandler(redirect: string) {
+export function useAuthHandler() {
   const [error, setError] = useState<string | null>(null);
   const [isLocked, setIsLocked] = useState(false);
 
   const handleAuth = async (
     action: () => Promise<AuthResponse>
   ) => {
-    console.log("Redirect param:", redirect);
     if (isLocked) return;
 
     setIsLocked(true);
@@ -34,7 +28,6 @@ export function useAuthHandler(redirect: string) {
         return;
       }
 
-      console.log("Redirect param:", redirect);
     } catch (err) {
       console.error(err);
       setError('Something went wrong');

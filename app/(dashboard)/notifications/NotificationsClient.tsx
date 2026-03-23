@@ -9,7 +9,7 @@ export default function NotificationsClient() {
   return (
     <div className="relative min-h-screen bg-(--bg-app) text-(--text-primary) px-4 md:px-8 pb-8">
       {/* Glow */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-indigo-10) rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--bg-indigo-10) rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto space-y-6">
         
@@ -59,7 +59,7 @@ export default function NotificationsClient() {
               >
                 {tab}
                 {i === 0 && (
-                  <span className="absolute -bottom-3 left-0 w-full h-[2px] bg-(--color-primary) rounded-full" />
+                  <span className="absolute -bottom-3 left-0 w-full h-0.5 bg-(--color-primary) rounded-full" />
                 )}
               </button>
             ))}

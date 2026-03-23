@@ -189,7 +189,7 @@ export const SearchModal = ({
             </div>
 
             {/* List */}
-            <CommandList className="max-h-[400px] overflow-y-auto custom-scrollbar px-2 py-3">
+            <CommandList className="max-h-100 overflow-y-auto custom-scrollbar px-2 py-3">
               {isSearching && (
                 <div className="py-6 text-center text-sm text-muted-foreground">
                   Searching...

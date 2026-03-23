@@ -154,7 +154,7 @@ export default function DashboardSidebar({
         {/* BOTTOM */}
         <div className="pt-6">
 
-          <Card className="bg-gradient-to-br from-(--color-primary) to-(--color-accent) border-none text-white rounded-2xl">
+          <Card className="bg-linear-to-br from-(--color-primary) to-(--color-accent) border-none text-white rounded-2xl">
 
             <CardContent className="p-4">
 

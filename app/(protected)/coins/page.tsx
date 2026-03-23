@@ -10,7 +10,6 @@ import { fetcher } from '@/lib/coingecko.actions';
 import DataTable from '../../../components/all/DataTable';
 import CoinsPagination from '../../../components/all/CoinsPagination';
 import BackButton from '@/components/ui/BackButton';
-import Loading from './loading';
 
 const columns: DataTableColumn<CoinMarketData>[] = [
   {
@@ -96,7 +95,7 @@ const Coins = async ({ searchParams }: NextPageProps) => {
   return (
     <div className="relative min-h-screen bg-(--bg-base) text-(--color-100) px-4 md:px-8 py-8">
       {/* Background Glow */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--bg-glass-indigo) rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-6">
         <div>

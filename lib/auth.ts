@@ -1,15 +1,10 @@
-// import { redirect } from "next/navigation";
+
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { nextCookies } from 'better-auth/next-js';
 import { prisma } from './prisma';
-// import { PrismaClient } from "@prisma/client";
 import { createAuthMiddleware, APIError } from 'better-auth/api';
 import { passwordSchema } from './validation';
-
-// import sendEmail from './email';
-
-// const prisma = new PrismaClient();
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: 'postgresql' }),

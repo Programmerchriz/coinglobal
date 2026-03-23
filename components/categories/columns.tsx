@@ -1,8 +1,7 @@
 
-import Link from "next/link";
 import Image from "next/image";
 import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
-import { TrendingUp, TrendingDown, ChevronRightIcon } from "lucide-react";
+import { TrendingUp, TrendingDown } from "lucide-react";
 
 export const columns: DataTableColumn<Category>[] = [
   {

@@ -14,7 +14,6 @@ import { ChevronDown } from 'lucide-react';
 
 export function DropDown({
   list,
-  value,
   onChange,
 }: DropDownProps) {
   const [curr, setCurr] = useState(list[0]);

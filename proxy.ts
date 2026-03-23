@@ -1,27 +1,20 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { getServerSession } from './lib/session';
 import { auth } from "./lib/auth";
-import { publicRoutes, protectedRoutes } from './lib/generated/routes';
+import { protectedRoutes } from './lib/generated/routes';
 
 export default async function proxy(request: NextRequest) {
-  console.log("Middleware running:", request.nextUrl.pathname);
-
   const session = await auth.api.getSession({
     headers: request.headers,
   });
   
   const { pathname } = request.nextUrl;
-  console.log("Pathname:", pathname);
 
-  const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
-  const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route));
+  const isProtectedRoute = protectedRoutes.some(route => pathname === route || pathname.startsWith(route + "/"));
 
   if (isProtectedRoute && !session) {
-    console.log("Pathname:", pathname);
     const signInUrl = new URL('/signin', request.url);
-    console.log("Pathname:", pathname);
 
     if (!(pathname.startsWith("/signin") || pathname.startsWith("/signup"))) {
       signInUrl.searchParams.set(
@@ -29,8 +22,6 @@ export default async function proxy(request: NextRequest) {
         pathname + request.nextUrl.search
       );
     };
-    
-    console.log("Redirecting to:", signInUrl.toString());
 
     return NextResponse.redirect(signInUrl);
   }
@@ -47,5 +38,7 @@ export default async function proxy(request: NextRequest) {
 };
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!api|_next|favicon.ico).*)",
+  ],
 };

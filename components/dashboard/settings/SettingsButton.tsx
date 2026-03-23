@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-// import ProfileSettingsModal from "@/components/settings/ProfileSettingsModal";
 
 interface Props {
   children: ReactNode;
@@ -18,8 +17,6 @@ export default function SettingsButton({
   onClick,
   type = "button",
 }: Props) {
-  // const [open, setOpen] = useState(false);
-
   return (
     <>
       <Button
@@ -32,11 +29,6 @@ export default function SettingsButton({
       >
         {children}
       </Button>
-
-      {/* <ProfileSettingsModal
-        open={open}
-        onClose={() => setOpen(false)}
-      /> */}
     </>
   );
 };
