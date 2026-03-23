@@ -1,8 +1,7 @@
 "use client";
 
-import { CandlestickSeries, ColorType, createChart, IChartApi, ISeriesApi, OhlcData } from "lightweight-charts";
-import { startTransition, useEffect, useRef, useState, useTransition } from "react";
-import { useTheme } from "next-themes";
+import { CandlestickSeries, ColorType, createChart, IChartApi, ISeriesApi } from "lightweight-charts";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 import { getCandlestickConfig, getChartConfig, PERIOD_BUTTONS, PERIOD_CONFIG } from "@/constants";
 import { fetcher } from "@/lib/coingecko.actions";
@@ -32,8 +31,6 @@ const CandlestickChart = ({
       const newData = await fetcher<OHLCData[]>(`/coins/${coinId}/ohlc`, {
         vs_currency: 'usd',
         days: config.days,
-        // interval: config.interval,
-        // precison: "full",
       });
 
       setOhlcData(newData ?? []);

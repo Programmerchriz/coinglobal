@@ -8,9 +8,9 @@ import { Menu } from "lucide-react";
 import { toast } from "sonner";
 
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-import Loading from "@/components/auth/SignOutLoading";
+import Loading from "@/components/dashboard/SignOutLoading";
 
-const LOADING_DELAY = 1500;
+const LOADING_DELAY = 3500;
 const REPLACE_DELAY = 500;
 
 export default function LayoutClient({
@@ -50,7 +50,7 @@ export default function LayoutClient({
     }
 
     if (welcome) {
-      setTimeout(() => router.replace(window.location.pathname));
+      setTimeout(() => router.replace(window.location.pathname), REPLACE_DELAY);
     };
   }, [welcome, router]);
 
@@ -77,47 +77,57 @@ export default function LayoutClient({
   };
 
   return (
-    isLoading
-      ?
-        <Loading />
-      :
-        <div className="min-h-screen bg-(--bg-app) text-(--text-primary) flex relative">
-          {/* Mobile Overlay */}
-          <AnimatePresence>
-            {isOpen && !isDesktop && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-(--color-opp-50) z-40"
-                onClick={() => setIsOpen(false)}
-              />
-            )}
-          </AnimatePresence>
+    <div className="min-h-screen bg-(--bg-app) text-(--text-primary) flex relative">
+      {/* SignOut Overlay */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-9999"
+          >
+            <Loading />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          <DashboardSidebar
-            user={session.user}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            isDesktop={isDesktop}
-            onSignOut={handleSignOut}
-            isDisabled={isDisabled}
+      {/* Mobile Overlay */}
+      <AnimatePresence>
+        {isOpen && !isDesktop && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-(--color-opp-50) z-40"
+            onClick={() => setIsOpen(false)}
           />
+        )}
+      </AnimatePresence>
 
-          <main className="flex-1 w-full lg:ml-64 p-4 sm:p-6">
-            <div className="lg:hidden mb-6">
-              <button
-                onClick={() => setIsOpen(true)}
-                className="hover:cursor-pointer"
-              >
-                <Menu size={22} />
-              </button>
-            </div>
+      <DashboardSidebar
+        user={session.user}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        isDesktop={isDesktop}
+        onSignOut={handleSignOut}
+        isDisabled={isDisabled}
+      />
 
-            <AnimatePresence mode="wait">
-              {children}
-            </AnimatePresence>
-          </main>
+      <main className="flex-1 w-full lg:ml-64 p-4 sm:p-6">
+        <div className="lg:hidden mb-6">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="hover:cursor-pointer"
+          >
+            <Menu size={22} />
+          </button>
         </div>
+
+        <AnimatePresence mode="wait">
+          {children}
+        </AnimatePresence>
+      </main>
+    </div>
   );
 };

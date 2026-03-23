@@ -6,7 +6,7 @@ const config: Config = {
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
   ],
-  darkMode: "class", // enables .dark for dark mode
+  darkMode: "class",
   theme: {
     extend: {
       colors: {

@@ -34,7 +34,7 @@ export default function OnboardingClient() {
           <h1 className="text-4xl lg:text-6xl font-bold">
             Build Your Crypto World with Coin Global
           </h1>
-          <p className="text-lg text-[color:var(--color-70)]">
+          <p className="text-lg text-(--color-70)">
             A powerful crypto dashboard with advanced features — coming soon to revolutionize your
             trading experience.
           </p>
@@ -66,12 +66,12 @@ export default function OnboardingClient() {
 
           <motion.div
             ref={ref}
-            className="text-5xl lg:text-7xl font-bold text-[color:var(--color-primary)]"
+            className="text-5xl lg:text-7xl font-bold text-(--color-primary)"
           >
             {inView ? <CountUp end={12345678} duration={2.8} separator="," prefix="$" /> : '$0'}
           </motion.div>
 
-          <p className="text-[color:var(--color-50)]">And growing — every second</p>
+          <p className="text-(--color-50)">And growing — every second</p>
         </div>
       </section>
 
@@ -97,11 +97,11 @@ export default function OnboardingClient() {
             >
               <div className="text-xl font-medium">{f.label}</div>
               {!f.available ? (
-                <span className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-[color:var(--border-input)] text-[color:var(--color-warning)]">
+                <span className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-(--border-input) text-(--color-warning)">
                   Coming Soon
                 </span>
               ) : (
-                <span className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-[color:var(--color-success)] text-(--text-primary)">
+                <span className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-(--color-success) text-(--text-primary)">
                   Live
                 </span>
               )}

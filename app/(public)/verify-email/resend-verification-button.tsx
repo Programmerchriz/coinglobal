@@ -20,7 +20,6 @@ export function ResendVerificationButton({
 
   const [cooldown, setCooldown] = useState(0);
 
-  // Countdown effect
   useEffect(() => {
     if (cooldown <= 0) return;
 

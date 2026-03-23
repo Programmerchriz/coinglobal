@@ -23,8 +23,8 @@ export default async function CategoriesPage({ searchParams }: NextPageProps) {
   return (
     <div className="min-h-screen bg-(--bg-app) text-(--text-primary) px-4 md:px-8 py-8">
       
-    {/* Background Glow */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-indigo-10) rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-50 -right-50 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-6">
         <div>

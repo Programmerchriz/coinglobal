@@ -6,11 +6,10 @@ import { motion } from 'framer-motion';
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-(--bg-app) overflow-hidden">
+    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-(--bg-app) overflow-hidden">
       
-      {/* Background Glow Effects */}
-      <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl" />
-      <div className="absolute bottom-[-200px] right-[-200px] w-[400px] h-[400px] bg-(--bg-glass-purple) rounded-full blur-3xl" />
+      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-50 -right-50 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 
       {/* Center Loader Card */}
       <motion.div
