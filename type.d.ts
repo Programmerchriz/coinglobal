@@ -430,6 +430,8 @@ declare global {
     name: string;
     image?: string | null | undefined;
     role: string;
+    theme: string;
+    username: string;
   };
 
 }
