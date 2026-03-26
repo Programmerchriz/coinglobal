@@ -18,6 +18,7 @@ interface Props {
 
 export default function SettingsClient({ user }: Props) {
   const [ theme, setTheme ] = useState("light");
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -70,7 +71,7 @@ export default function SettingsClient({ user }: Props) {
               </Avatar>
             )
           }
-          action={<SettingsButton>Edit</SettingsButton>}
+          action={<SettingsButton onClick={() => setIsProfileModalOpen(true)}>Edit</SettingsButton>}
         />
 
         <SettingsItem
@@ -220,6 +221,12 @@ export default function SettingsClient({ user }: Props) {
           }
         />
       </SettingsSection>
+
+      <ProfileSettingsModal
+        user={user}
+        open={isProfileModalOpen} 
+        onClose={() => setIsProfileModalOpen(false)} 
+      />
     </div>
   );
 };

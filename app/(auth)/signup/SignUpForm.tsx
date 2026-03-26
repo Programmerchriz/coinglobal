@@ -10,6 +10,8 @@ import { motion } from 'framer-motion';
 import { authClient } from '@/lib/auth-client';
 import { useAuthHandler } from '../auth-client';
 import { passwordSchema } from '@/lib/validation';
+import { generateUsername } from '@/lib/auth-utils';
+
 import { PasswordInput } from '@/components/auth/PasswordInput';
 import {
   Form,
@@ -43,7 +45,7 @@ export function SignUpForm() {
   const redirect = searchParams.get('redirect') ?? '/dashboard?welcome=signup';
     const [googleLoading, setGoogleLoading] = useState(false);
 
-  const { error, isLocked, handleAuth } = useAuthHandler();
+  const { error, isLocked, handleAuth } = useAuthHandler(redirect);
 
   const form = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
@@ -125,16 +127,18 @@ export function SignUpForm() {
 
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit((values) =>
+              onSubmit={form.handleSubmit(async (values) => {
+                const username = await generateUsername(values.email);
                 handleAuth(() =>
                   authClient.signUp.email({
                     name: values.name,
                     email: values.email,
                     password: values.password,
+                    username: username,
                     callbackURL: redirect,
                   })
-                )
-              )}
+                );
+              })}
               className="space-y-4"
             >
               <FormField

@@ -40,7 +40,7 @@ export default function DashboardSidebar({
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", available: true },
     { icon: BarChart3, label: "Portfolio", available: false },
-    { icon: Layers, label: "Market", available: false },
+    { icon: Layers, label: "Markets", available: false },
     { icon: Repeat, label: "Staking", available: false },
     { icon: ScrollText, label: "Orders", available: false },
     { icon: Wallet, label: "P2P Orders", available: false },

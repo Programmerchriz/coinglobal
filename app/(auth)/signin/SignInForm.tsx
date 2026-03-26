@@ -37,7 +37,7 @@ export function SignInForm() {
   
   const [googleLoading, setGoogleLoading] = useState(false);
 
-  const { error, isLocked, handleAuth } = useAuthHandler();
+  const { error, isLocked, handleAuth } = useAuthHandler(redirect);
 
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
