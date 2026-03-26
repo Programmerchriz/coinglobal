@@ -2,12 +2,15 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type AuthResponse = {
   error: { message?: string } | null;
 };
 
-export function useAuthHandler() {
+export function useAuthHandler(redirectParam: string) {
+  const router = useRouter();
+
   const [error, setError] = useState<string | null>(null);
   const [isLocked, setIsLocked] = useState(false);
 
@@ -27,6 +30,10 @@ export function useAuthHandler() {
         setIsLocked(false);
         return;
       }
+
+      setTimeout(() => setIsLocked(false), 3500);
+      router.replace(redirectParam);
+      router.refresh();
 
     } catch (err) {
       console.error(err);

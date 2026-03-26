@@ -2,18 +2,38 @@
 "use client";
 
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Camera, X } from "lucide-react";
+import Image from "next/image";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 
 interface ProfileSettingsModalProps {
+  user: UserProps;
   open: boolean;
   onClose: () => void;
 }
 
 export default function ProfileSettingsModal({
+  user,
   open,
   onClose,
 }: ProfileSettingsModalProps) {
-  const [nickname, setNickname] = useState("");
+  const [username, setUsername] = useState("");
+  const [userImage, setUserImage] = useState("");
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setUserImage(url);
+      e.target.value = ''; // Reset for re-selection
+    }
+  };
+
+  const handleUploadImage = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const fileInput = document.getElementById('avatar-upload') as HTMLInputElement;
+    fileInput?.click();
+  };
 
   if (!open) return null;
 
@@ -23,6 +43,13 @@ export default function ProfileSettingsModal({
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
+      />
+      <input
+        id="avatar-upload"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFileSelect}
       />
 
       {/* Modal */}
@@ -46,26 +73,54 @@ export default function ProfileSettingsModal({
         </div>
 
         {/* Avatar */}
-        <div className="flex flex-col items-center mb-6">
-          <div
-            className="w-16 h-16 rounded-full flex items-center justify-center border"
-            style={{
-              backgroundColor: "var(--bg-elevated)",
-              borderColor: "var(--border-standard)",
-            }}
+        <div className="flex flex-col items-center mb-6 relative group">
+          <button
+            className="w-16 h-16 rounded-full flex items-center justify-center border relative hover:cursor-pointer"
+            onClick={handleUploadImage}
           >
-            <span className="text-sm text-(--color-60)">Avatar</span>
-          </div>
+            {
+              user.image ? (
+                <Image
+                  src={user.image}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="rounded-full object-cover w-full h-full"
+                />
+              ) : (
+                <div 
+                  className="w-full h-full rounded-full flex items-center justify-center border"
+                  style={{
+                    backgroundColor: "var(--bg-elevated)",
+                    borderColor: "var(--border-standard)",
+                  }}
+                >
+                  <Avatar className="h-16 w-16">
+                    <AvatarFallback className="bg-(--color-primary) text-white text-lg">
+                      {user.name[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+              )
+            }
+          </button>
 
-          <p className="text-xs mt-3 text-(--color-50) text-center">
-            You will be able to edit your avatar in 7 days.
-          </p>
+           <button
+            className="absolute -bottom-1 right-40 w-7 h-7 rounded-full border-2 border-(--bg-surface) flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-105 bg-(--bg-elevated) hover:cursor-pointer"
+            style={{
+              borderColor: "var(--bg-elevated)",
+              backgroundColor: "var(--bg-surface)",
+            }}
+            onClick={handleUploadImage}
+          >
+            <Camera className="w-4 h-4 text-(--color-50)" />
+          </button>
         </div>
 
-        {/* Nickname Input */}
+        {/* Username Input */}
         <div className="mb-4">
           <label className="text-sm text-(--color-60)">
-            Nickname
+            Username
           </label>
 
           <div
@@ -76,28 +131,28 @@ export default function ProfileSettingsModal({
             }}
           >
             <input
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              maxLength={60}
-              placeholder="Enter nickname"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              maxLength={20}
+              placeholder="Enter Username"
               className="bg-transparent outline-none flex-1 text-sm"
             />
 
             <span className="text-xs text-(--color-40)">
-              {nickname.length}/60
+              {username.length}/20
             </span>
           </div>
 
-          <p className="text-xs mt-2 text-(--color-50)">
-            You will be able to edit your nickname in 7 days.
-          </p>
+          {/* <p className="text-xs mt-2 text-(--color-50)">
+            You will be able to edit your username in 7 days.
+          </p> */}
         </div>
 
         {/* Info */}
         <div className="text-xs text-(--color-50) space-y-1 mb-6">
           <p>* Avatar will also be displayed in the platform.</p>
           <p>
-            * Nickname will be used across the platform and may be subject to
+            * Username will be used across the platform and may be subject to
             moderation.
           </p>
         </div>

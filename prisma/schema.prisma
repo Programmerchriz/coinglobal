@@ -12,12 +12,15 @@ model User {
   id            String        @id
   name          String
   email         String        @unique
+  username      String        @unique         @db.VarChar(20)
   emailVerified Boolean       @default(false)
+
   image         String?
   theme         String        @default("dark")
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   role          Role          @default(USER)
+  
   transactions  Transaction[]
   wallets       Wallet[]
   accounts      Account[]

@@ -1,4 +1,3 @@
-
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { nextCookies } from 'better-auth/next-js';
@@ -55,13 +54,21 @@ export const auth = betterAuth({
         type: 'string',
         input: false,
       },
+      username: {
+        type: 'string',
+        required: true,
+      },
     },
   },
 
   hooks: {
     before: createAuthMiddleware(async (ctx) => {
+      if (ctx.path === '/get-session') {
+        return;
+      }
+
       if (
-        ctx.path === '/signup/password'
+        ctx.path.endsWith('/sign-up/email')
         // || ctx.path === "/reset-password"
         // || ctx.path === "/change-password"
       ) {
@@ -74,6 +81,8 @@ export const auth = betterAuth({
             message: 'Password not strong enough',
           });
         }
+
+        if (!ctx.body?.email) throw new APIError('BAD_REQUEST', { message: 'Email required' });
       }
     }),
   },
