@@ -24,8 +24,13 @@ const config: Config = {
         "text-muted": "rgba(255,255,255,0.5)",
         "text-subtle": "rgba(255,255,255,0.3)",
       },
+
       boxShadow: {
         xl: "0 20px 25px -5px rgba(0,0,0,0.2), 0 10px 10px -5px rgba(0,0,0,0.04)",
+      },
+
+      screens: {
+        "xs": "450px",
       },
     },
   },

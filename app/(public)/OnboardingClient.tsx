@@ -18,7 +18,7 @@ const FEATURES = [
   { label: 'Reports', available: false },
 ];
 
-export default function OnboardingClient() {
+export default function OnboardingClient({ session }: { session: Session | null | undefined }) {
   const { ref, inView } = useInView({ triggerOnce: true });
 
   return (
@@ -38,17 +38,32 @@ export default function OnboardingClient() {
             A powerful crypto dashboard with advanced features — coming soon to revolutionize your
             trading experience.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/signup"
-              className="btn-primary text-white px-6 py-3 font-medium transition"
-            >
-              Get Started
-            </Link>
-            <Link href="/signin" className="btn-outline px-6 py-3 font-medium transition">
-              Sign In
-            </Link>
-          </div>
+            {
+              session ?
+              (
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    href="/dashboard"
+                    className="btn-primary text-white px-6 py-3 font-medium transition"
+                  >
+                    View Dashboard
+                  </Link>
+                </div>
+              ) :
+              (
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    href="/signup"
+                    className="btn-primary text-white px-6 py-3 font-medium transition"
+                  >
+                    Get Started
+                  </Link>
+                  <Link href="/signin" className="btn-outline px-6 py-3 font-medium transition">
+                    Sign In
+                  </Link>
+                </div>
+              )
+            }
         </motion.div>
       </section>
 
@@ -119,9 +134,25 @@ export default function OnboardingClient() {
           className="flex flex-col items-center"
         >
           <h2 className="text-3xl font-semibold mb-4">Ready to Get Started?</h2>
-          <Link href="/signup" className="btn-primary px-8 py-4 font-medium transition">
-            Create an Account Today
-          </Link>
+          {
+            session ?
+            (
+              <Link
+                href="/dashboard"
+                className="btn-primary px-8 py-4 font-medium transition"
+              >
+                Go to Dashboard
+              </Link>
+            ) :
+            (
+              <Link
+                href="/signup"
+                className="btn-primary px-8 py-4 font-medium transition"
+              >
+                Create an Account Today
+              </Link>
+            )
+          }
         </motion.div>
       </section>
 

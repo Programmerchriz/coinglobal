@@ -1,9 +1,12 @@
 
+import { getServerSession } from "@/lib/session";
 import OnboardingClient from './OnboardingClient';
 
-const OnboardingPage = () => {
+const OnboardingPage = async () => {
+  const session = await getServerSession();
+
   return (
-    <OnboardingClient />
+    <OnboardingClient session={session} />
   );
 };
 
