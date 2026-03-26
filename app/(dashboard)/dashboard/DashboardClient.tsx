@@ -2,14 +2,18 @@
 "use client";
 
 import Link from "next/link";
-import { TrendingUp, TrendingDown, Bell } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { TrendingUp, TrendingDown, Bell, ChevronRightIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export default function DashboardClientPage() {
+  const router = useRouter();
+
   return (
     <>
       {/* Header */}
@@ -132,6 +136,18 @@ export default function DashboardClientPage() {
                 </span>
               </div>
             ))}
+          </div>
+
+          <div className="flex justify-end items-center mt-6">
+            <button
+              onClick={() => router.push("/watchlist")}
+              className={cn(
+                'btn-primary group px-6 py-3 hover:bg-(--color-primary-hover) active:scale-95 font-medium rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-indigo-600/30 hover:-translate-y-1 hover:cursor-pointer'
+              )}
+            >
+              <span>Full Watchlist</span>
+              <ChevronRightIcon className="transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
           </div>
         </CardContent>
       </Card>
