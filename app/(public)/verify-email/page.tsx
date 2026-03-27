@@ -1,39 +1,33 @@
+import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-
-import { getServerSession } from "@/lib/session";
-import { ResendVerificationButton } from "./resend-verification-button";
+import { getServerSession } from '@/lib/session';
+import { ResendVerificationButton } from './resend-verification-button';
 
 export const metadata: Metadata = {
-  title: "Verify Email",
+  title: 'Verify Email',
 };
 
 export default async function VerifyEmailPage() {
   const session = await getServerSession();
   // if (!session) redirect("/signin");
 
-  if (true) redirect("/dashboard"); // Unaccesssible
+  if (true) redirect('/dashboard'); // Unaccesssible
 
   const user = session?.user;
-  if (user?.emailVerified) redirect("/dashboard");
+  if (user?.emailVerified) redirect('/dashboard');
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4 bg-(--bg-surface) text-(--text-primary) relative overflow-hidden">
-      
-      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
-      <div className="absolute -bottom-50 -right-50 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
+      <div className="absolute -top-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 
       <div className="relative z-10 w-full max-w-md">
         <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-2xl p-8 backdrop-blur-xl text-center space-y-6">
           <div className="space-y-3">
-            <h1 className="text-2xl font-semibold">
-              Verify your email
-            </h1>
+            <h1 className="text-2xl font-semibold">Verify your email</h1>
 
-            <p className="text-sm text-(--color-50)">
-              We’ve sent a verification link to:
-            </p>
+            <p className="text-sm text-(--color-50)">We’ve sent a verification link to:</p>
 
             <p className="text-sm font-medium text-(--color-primary-hover) break-all">
               {user?.email}
@@ -44,9 +38,9 @@ export default async function VerifyEmailPage() {
             </p>
           </div>
 
-          <ResendVerificationButton email={user?.email || ""} />
+          <ResendVerificationButton email={user?.email || ''} />
         </div>
       </div>
     </main>
   );
-};
+}
