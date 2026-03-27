@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { Heart, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import DataTable from '@/components/all/DataTable';
 import { columns } from '@/components/watchlist/columns';
+import BackButton from '@/components/ui/BackButton';
 
 export interface WatchlistItem {
   id: string;
@@ -97,7 +98,7 @@ export default function WatchlistClient({ initialItems = [] }: WatchlistClientPr
 
   const total24hVolume = watchlistItems.reduce((acc, item) => acc + item.volume24h, 0);
   const totalWatchlistValue = watchlistItems.reduce((acc, item) => acc + item.currentPrice, 0);
-  const exchangesCount = 781;
+  const exchangesCount = 78;
   const insightsCount = 52;
   const trendingAssetsCount = watchlistItems.filter(
     (item) => item.priceChangePercent24h > 1.0
@@ -113,6 +114,10 @@ export default function WatchlistClient({ initialItems = [] }: WatchlistClientPr
       transition={{ duration: 0.4 }}
     >
       {/* Header */}
+      <div className="mb-6">
+        <BackButton />
+      </div>
+
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-(--text-primary) mb-1">My Watchlist</h1>
@@ -154,15 +159,18 @@ export default function WatchlistClient({ initialItems = [] }: WatchlistClientPr
             <div className="rounded-xl border p-4 bg-(--bg-surface) border-(--border-standard)">
               <p className="text-(--color-60) text-sm mb-2">Total Watchlist Value</p>
               <p className="text-2xl font-bold text-(--text-primary)">
-                ${totalWatchlistValue.toLocaleString('en-US', { maximumFractionDigits: 2 })}B
+                ${Math.floor(totalWatchlistValue / 100).toLocaleString('en-US', { maximumFractionDigits: 2 })}B
               </p>
-              <p className="text-(--color-60) text-xs mt-2">↑ 2.41% in 24h</p>
+              <p className="flex gap-1.5 text-(--color-60) text-xs mt-2">
+                <TrendingUp width={16} height={16} className='text-(--color-success)' />
+                <p className='text-(--color-success)'>2.41%</p>
+              </p>
             </div>
 
             <div className="rounded-xl border p-4 bg-(--bg-surface) border-(--border-standard)">
               <p className="text-(--color-60) text-sm mb-2">Total 24h Volume</p>
               <p className="text-2xl font-bold text-(--color-primary)">
-                ${total24hVolume.toLocaleString('en-US', { maximumFractionDigits: 0 })}M
+                ${total24hVolume.toLocaleString('en-US', { maximumFractionDigits: 0 })}B
               </p>
               <p className="text-(--color-60) text-xs mt-2">All watchlist assets</p>
             </div>
