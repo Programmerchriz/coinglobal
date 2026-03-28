@@ -24,3 +24,10 @@ export async function requireSession() {
 
   return session;
 };
+
+export const unauthorizedSession = async () => {
+  const session = await getServerSession();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+
+  return (session);
+};

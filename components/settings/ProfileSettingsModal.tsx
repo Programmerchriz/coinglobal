@@ -7,6 +7,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 import { updateUsername } from "../../lib/actions/username-actions";
+import { saveUserAvatar } from "@/lib/actions/profile-actions";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import Loading from "./Loading";
 
@@ -22,17 +23,42 @@ export default function ProfileSettingsModal({
   onClose,
 }: ProfileSettingsModalProps) {
   const [username, setUsername] = useState(user.username);
-  const [userImage, setUserImage] = useState("");
+  const [userImage, setUserImage] = useState(user.image || "");
+  const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploading(true);
 
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setUserImage(url);
-      e.target.value = ''; // Reset for re-selection
-    }
+    try {
+      const presignRes = await fetch("/api/uploads/presign", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ filename: file.name, contentType: file.type }),
+      });
+
+      const { url, publicUrl } = await presignRes.json();
+
+      await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": file.type },
+        body: file,
+      });
+
+      await saveUserAvatar(publicUrl);
+      setUserImage(publicUrl);
+      toast.success("Profile image updated!");
+      
+    } catch (err) {
+      console.error(err);
+      toast.error("Image upload failed");
+
+    } finally {
+      setIsUploading(false);
+      e.target.value = "";
+    };
   };
 
   const handleUploadImage = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -108,11 +134,16 @@ export default function ProfileSettingsModal({
               <button
                 className="w-16 h-16 rounded-full flex items-center justify-center border relative hover:cursor-pointer"
                 onClick={handleUploadImage}
+                disabled={isUploading}
               >
                 {
-                  user.image ? (
+                  isUploading ? (
+                    <div className="w-full h-full rounded-full flex items-center justify-center bg-(--bg-elevated)">
+                      <div className="w-5 h-5 border-2 border-(--color-primary) border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  ) : user.image ? (
                     <Image
-                      src={user.image}
+                      src={userImage}
                       alt=""
                       width={48}
                       height={48}
@@ -120,11 +151,7 @@ export default function ProfileSettingsModal({
                     />
                   ) : (
                     <div 
-                      className="w-full h-full rounded-full flex items-center justify-center border"
-                      style={{
-                        backgroundColor: "var(--bg-elevated)",
-                        borderColor: "var(--border-standard)",
-                      }}
+                      className="w-full h-full rounded-full flex items-center justify-center bg-(--bg-elevated) border border-(--border-standard)"
                     >
                       <Avatar className="h-16 w-16">
                         <AvatarFallback className="bg-(--color-primary) text-white text-lg">

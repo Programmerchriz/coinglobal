@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "python routes.py && next dev --turbo",
-    "build": "python routes.py && prisma generate && next build",
+    "build": "python routes.py && next build",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
     "db:push": "prisma db push"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1019.0",
+    "@aws-sdk/s3-request-presigner": "^3.1019.0",
     "@hookform/resolvers": "^5.2.1",
     "@prisma/adapter-pg": "6.15",
     "@prisma/client": "6.15",
@@ -39,7 +41,8 @@
     "resend": "^6.9.2",
     "sonner": "^2.0.7",
     "swr": "^2.4.0",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
