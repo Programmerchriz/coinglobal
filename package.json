@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "python routes.py && next dev --turbo",
+    "dev": "python routes.py && prisma generate && next dev --turbo",
     "build": "python routes.py && next build",
     "start": "next start",
     "lint": "eslint .",
