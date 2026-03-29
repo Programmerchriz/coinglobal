@@ -64,21 +64,24 @@ export default function DashboardSidebar({
             <div className="flex items-center justify-between space-x-3">
 
               <div className="flex items-center justify-between gap-4 overflow-x-auto">
-                {user.image ? (
-                  <Image
-                    src={`${user.image}`}
-                    alt=""
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover"
-                  />
-                ) : (
-                  <Avatar>
-                    <AvatarFallback className="bg-(--color-primary) text-white">
-                      {user.name[0]}
-                    </AvatarFallback>
-                  </Avatar>
-                )}
+                <div className="w-12 h-12 shrink-0 rounded-full overflow-hidden flex items-center justify-center">
+                  {
+                    user.image ? (
+                      <Image
+                        src={`${user.image}`}
+                        alt=""
+                        width={40}
+                        height={40}
+                        className="object-cover w-full h-full"
+                      />
+                    ) : (
+                      <Avatar>
+                        <AvatarFallback className="bg-(--color-primary) text-white">
+                          {user.name[0]}
+                        </AvatarFallback>
+                      </Avatar>
+                  )}
+                </div>
 
                 <div className="text-sm overflow-x-auto custom-scrollbar">
                   <p className="text-(--text-primary) font-medium">
