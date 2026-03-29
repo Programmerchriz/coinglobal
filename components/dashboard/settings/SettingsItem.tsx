@@ -20,7 +20,7 @@ export default function SettingsItem({
     <div className="group flex items-center justify-between border border-(--border-standard) rounded-xl px-5 py-4 bg-(--bg-surface) hover:bg-(--bg-elevated) transition-all duration-200">
       <div className="flex items-center gap-4">
         {icon && (
-          <div className="w-12 h-12 shrink-0">
+          <div className="w-12 h-12 shrink-0 rounded-full overflow-hidden flex items-center justify-center">
             {icon}
           </div>
         )}

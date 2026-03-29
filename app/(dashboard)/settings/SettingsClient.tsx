@@ -61,7 +61,7 @@ export default function SettingsClient({ user }: Props) {
                 alt=""
                 width={48}
                 height={48}
-                className="rounded-full object-cover"
+                className="object-cover w-full h-full"
               />
             ) : (
               <Avatar className="h-12 w-12">
