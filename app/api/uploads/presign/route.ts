@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import {
+  S3Client,
+  PutObjectCommand,
+  ListObjectsV2Command,
+  DeleteObjectsCommand,
+} from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { unauthorizedSession } from '@/lib/session';
 import { v4 as uuidv4 } from 'uuid';
+
+import { unauthorizedSession } from '@/lib/session';
 
 export const runtime = 'nodejs';
 
@@ -12,11 +18,17 @@ export async function POST(req: Request) {
 
     if (!filename || !contentType) {
       return NextResponse.json({ error: 'Missing filename or contentType' }, { status: 400 });
-    }
+    };
 
     const session = await unauthorizedSession();
+    const userId = session.user.id;
 
-    const key = `avatars/${session.user.id}-${uuidv4()}-${filename}`;
+    const ext = filename.split(".").pop()?.toLowerCase();
+    if (!ext) return NextResponse.json({ error: 'Invalid filename' }, { status: 400 });
+
+    const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME!;
+    const key = `avatars/${userId}/avatar-${uuidv4()}.${ext}`;
+    const prefix = `avatars/${userId}/`;
 
     const s3 = new S3Client({
       region: "auto",
@@ -27,8 +39,32 @@ export async function POST(req: Request) {
       },
     });
 
+    // Delete any previous avatar file in this user's avatar folder
+    const existing = await s3.send(
+      new ListObjectsV2Command({
+        Bucket: bucket,
+        Prefix: prefix,
+      })
+    );
+
+    const keysToDelete = 
+      existing.Contents?.map((obj) => obj.Key).filter(
+        (k): k is string => !!k && k !== key
+      ) ?? [];
+
+    if (keysToDelete.length) {
+      await s3.send(
+        new DeleteObjectsCommand({
+          Bucket: bucket,
+          Delete: {
+            Objects: keysToDelete.map((Key) => ({ Key })),
+          },
+        })
+      );
+    };
+
     const cmd = new PutObjectCommand({
-      Bucket: process.env.CLOUDFLARE_R2_BUCKET_NAME!,
+      Bucket: bucket,
       Key: key,
       ContentType: contentType,
     });
@@ -38,9 +74,11 @@ export async function POST(req: Request) {
     const publicBase =
       process.env.CLOUDFLARE_R2_PUBLIC_BASE_URL ??
       `https://${process.env.CLOUDFLARE_R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
-    const publicUrl = `${publicBase}${key}`;
-
+    
+    const publicUrl = `${publicBase.replace(/\/$/, "")}/${key}`;
+    console.log("Public Url:", publicUrl);
     return NextResponse.json({ url, key, publicUrl });
+
   } catch (err) {
     console.error('presign upload error', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
