@@ -50,6 +50,9 @@ scripts/
 # imgs
 /public/demo/
 
+# txt
+*.txt
+
 /app/generated/prisma
 
 /lib/generated/
