@@ -35,10 +35,7 @@ const SearchItem = ({ coin, onSelect, isActiveName }: SearchItemProps) => {
     <CommandItem
       value={coin.id}
       onSelect={() => onSelect(coin.id)}
-      className="group flex items-center justify-between rounded-xl px-4 py-3 transition-all duration-200 cursor-pointer
-                bg-transparent hover:bg-(--color-5)
-                data-[selected=true]:bg-(--color-10)
-                border border-transparent hover:border-(--border-standard)"
+      className="group flex items-center justify-between rounded-lg px-3 py-2.5 cursor-pointer bg-transparent hover:bg-(--bg-hover) data-[selected=true]:bg-(--bg-hover) transition-all"
     >
       <div className="flex items-center gap-3">
 
@@ -176,37 +173,67 @@ export const SearchModal = ({
           <CommandDialog
             open={open}
             onOpenChange={setOpen}
-            className="overflow-hidden rounded-2xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl"
+            className="overflow-hidden rounded-2xl border border-(--border-standard) bg-(--bg-surface)/95 backdrop-blur-2xl shadow-2xl max-w-2xl"
           >
-            {/* Input */}
-            <div className="border-b border-border/50 px-4 py-3 bg-muted/30">
-              <CommandInput
-                placeholder="Search for a token by name or symbol..."
-                value={searchQuery}
-                onValueChange={setSearchQuery}
-                className="h-11 rounded-lg bg-background/60 px-4 text-sm focus:ring-0 focus:outline-none"
-              />
+            {/* SEARCH HEADER */}
+            <div className="px-5 pt-5 pb-3 space-y-3 border-b border-(--border-standard)">
+
+              {/* INPUT */}
+              <div className="flex items-center gap-3 bg-(--bg-elevated) px-4 py-3 rounded-xl border border-(--border-input)">
+                <SearchIcon size={18} className="text-(--color-50)" />
+
+                <CommandInput
+                  placeholder="Search"
+                  value={searchQuery}
+                  onValueChange={setSearchQuery}
+                  className="border-none focus:outline-none focus:ring-0 bg-transparent text-sm"
+                />
+
+                <kbd className="text-xs px-2 py-0.5 rounded-md bg-(--color-5) text-(--color-60)">
+                  /
+                </kbd>
+              </div>
+
+              {/* FILTER CHIPS */}
+              <div className="flex flex-wrap gap-2 pt-1">
+                {["Cryptoassets", "NFTs", "Exchanges"].map((chip) => (
+                  <span
+                    key={chip}
+                    className="text-xs px-3 py-1.5 rounded-lg bg-(--bg-sidebar) border border-(--border-input) text-(--text-primary)"
+                  >
+                    {chip}
+                  </span>
+                ))}
+
+                <span className="text-xs px-3 py-1.5 rounded-lg bg-(--color-5) text-(--color-60)">
+                  Add New
+                </span>
+              </div>
             </div>
 
-            {/* List */}
-            <CommandList className="max-h-100 overflow-y-auto custom-scrollbar px-2 py-3">
+            {/* LIST */}
+            <CommandList className="max-h-[420px] overflow-y-auto custom-scrollbar px-3 py-3">
+
               {isSearching && (
-                <div className="py-6 text-center text-sm text-muted-foreground">
+                <div className="py-6 text-center text-sm text-(--color-50)">
                   Searching...
                 </div>
               )}
 
               {isSearchEmpty && (
-                <div className="py-6 text-center text-sm text-muted-foreground">
-                  Type to search for coins...
+                <div className="py-6 text-center text-sm text-(--color-50)">
+                  Type to search...
                 </div>
               )}
 
+              {/* TRENDING → RECENT SEARCHES */}
               {isTrendingListVisible && (
                 <CommandGroup className="space-y-1">
-                  <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Trending
+
+                  <p className="px-2 pb-2 text-xs font-semibold text-(--color-50)">
+                    Recent searches
                   </p>
+
                   {trendingCoins.map(({ item }) => (
                     <SearchItem
                       key={item.id}
@@ -218,17 +245,19 @@ export const SearchModal = ({
                 </CommandGroup>
               )}
 
+              {/* NO RESULTS */}
               {isNoResults && (
-                <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
+                <CommandEmpty className="py-6 text-center text-sm text-(--color-50)">
                   No coins found.
                 </CommandEmpty>
               )}
 
+              {/* RESULTS */}
               {isResultsVisible && (
                 <CommandGroup
                   heading={
-                    <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      Search Results
+                    <p className="px-2 pb-2 text-xs font-semibold text-(--color-50)">
+                      Trading crypto
                     </p>
                   }
                   className="space-y-1"
