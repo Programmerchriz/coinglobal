@@ -10,6 +10,7 @@ import { updateUsername } from "../../lib/actions/username-actions";
 import { saveUserAvatar } from "@/lib/actions/profile-actions";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import Loading from "./Loading";
+import { useRouter } from "next/navigation";
 
 interface ProfileSettingsModalProps {
   user: UserProps;
@@ -22,6 +23,8 @@ export default function ProfileSettingsModal({
   open,
   onClose,
 }: ProfileSettingsModalProps) {
+  const router = useRouter();
+  
   const [username, setUsername] = useState(user.username);
   const [userImage, setUserImage] = useState(user.image || "");
   const [isUploading, setIsUploading] = useState(false);
@@ -39,16 +42,20 @@ export default function ProfileSettingsModal({
         body: JSON.stringify({ filename: file.name, contentType: file.type }),
       });
 
+      if (!presignRes.ok) throw new Error("Failed to create upload URL");
       const { url, publicUrl } = await presignRes.json();
 
-      await fetch(url, {
+      const uploadRes = await fetch(url, {
         method: "PUT",
         headers: { "Content-Type": file.type },
         body: file,
       });
 
+      if (!uploadRes.ok) throw new Error("Failed to upload image");
+
       await saveUserAvatar(publicUrl);
       setUserImage(publicUrl);
+      router.refresh();
       toast.success("Profile image updated!");
       
     } catch (err) {
