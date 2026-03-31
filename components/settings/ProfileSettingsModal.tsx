@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Camera, X } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
+import imageCompression from "browser-image-compression";
 
 import { updateUsername } from "../../lib/actions/username-actions";
 import { saveUserAvatar } from "@/lib/actions/profile-actions";
@@ -24,7 +25,7 @@ export default function ProfileSettingsModal({
   onClose,
 }: ProfileSettingsModalProps) {
   const router = useRouter();
-  
+
   const [username, setUsername] = useState(user.username);
   const [userImage, setUserImage] = useState(user.image || "");
   const [isUploading, setIsUploading] = useState(false);
@@ -35,11 +36,24 @@ export default function ProfileSettingsModal({
     if (!file) return;
     setIsUploading(true);
 
+    const compressedFile = await imageCompression(file, {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1024,
+      useWebWorker: true,
+      initialQuality: 0.92,
+    });
+
+    const uploadFile = new File(
+      [compressedFile],
+      file.name.replace(/\.\w+$/, ".jpg"),
+      { type: compressedFile.type ||"image/jpeg" },
+    );
+
     try {
       const presignRes = await fetch("/api/uploads/presign", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ filename: file.name, contentType: file.type }),
+        body: JSON.stringify({ filename: uploadFile.name, contentType: uploadFile.type }),
       });
 
       if (!presignRes.ok) throw new Error("Failed to create upload URL");
@@ -241,7 +255,8 @@ export default function ProfileSettingsModal({
 
               <button
                 onClick={handleUsernameUpdate}
-                className="flex-1 py-2 rounded-lg text-white text-sm btn-primary hover:cursor-pointer">
+                disabled={isLoading || username.trim() === "" || username === user.username}
+                className="flex-1 py-2 rounded-lg text-white text-sm btn-primary hover:cursor-pointer disabled:opacity-50 disabled:hover:cursor-not-allowed">
                 Save
               </button>
             </div>
