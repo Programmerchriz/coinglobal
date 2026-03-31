@@ -20,6 +20,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing filename or contentType' }, { status: 400 });
     };
 
+    if (!(contentType === "image/jpeg" || contentType === "image/png" || contentType === "image/webp")) {
+      return NextResponse.json({ error: 'Invalid image type' }, { status: 400 });
+    };
+
     const session = await unauthorizedSession();
     const userId = session.user.id;
 
