@@ -5,11 +5,10 @@ import Link from 'next/link';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 import { cn, formatCurrency, formatPercentage } from '@/lib/utils';
-import { fetcher } from '@/lib/coingecko.actions';
-
 import DataTable from '../../../components/all/DataTable';
 import CoinsPagination from '../../../components/all/CoinsPagination';
 import BackButton from '@/components/ui/BackButton';
+import { getCoins } from '@/lib/api/coins';
 
 const columns: DataTableColumn<CoinMarketData>[] = [
   {
@@ -74,20 +73,7 @@ const Coins = async ({ searchParams }: NextPageProps) => {
   const currentPage = Number(page) || 1;
   const perPage: number = 10;
 
-  let allCoins: CoinMarketData[];
-
-  try {
-    allCoins = await fetcher<CoinMarketData[]>('/coins/markets', {
-      vs_currency: 'usd',
-      order: 'market_cap_desc',
-      per_page: perPage,
-      page: currentPage,
-      price_change_percentage: '24h',
-    });
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-    throw new Error("Failed to fetch categories data");
-  }
+  const allCoins = await getCoins(perPage, currentPage);
 
   const hasMorePages = allCoins.length === perPage;
   const estimatedTotalPages = currentPage >= 100 ? Math.ceil(currentPage / 100) * 100 + 100 : 100;

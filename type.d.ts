@@ -308,6 +308,7 @@ declare global {
 
   interface HeaderProps {
     session: Session | null | undefined;
+    initialTrendingCoins: TrendingCoin[];
   }
 
   type SearchItemCoin = SearchCoin | TrendingCoin['item'];

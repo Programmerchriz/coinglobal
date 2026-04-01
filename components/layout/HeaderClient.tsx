@@ -10,7 +10,6 @@ import { auth } from '@/lib/auth';
 import { cn } from '@/lib/utils';
 
 import { SearchModal } from '@/components/layout/SearchModal';
-import { getTrendingCoins } from "@/lib/api/trendingCoins";
 
 const getNavLinks = (session: Session | null | undefined) => {
   if (!session) {
@@ -54,7 +53,7 @@ const getNavLinks = (session: Session | null | undefined) => {
 
 type Session = typeof auth.$Infer.Session;
 
-export default function HeaderClient ({ session }: HeaderProps) {
+export default function HeaderClient ({ session , initialTrendingCoins }: HeaderProps) {
   const [trendingCoins, setTrendingCoins] = useState<TrendingCoin[]>([]);
   const [isLoadingTrending, setIsLoadingTrending] = useState(false);
 
@@ -65,9 +64,8 @@ export default function HeaderClient ({ session }: HeaderProps) {
     const fetchTrending = async () => {
       try {
         setIsLoadingTrending(true);
-        const data = getTrendingCoins();
-
-        setTrendingCoins((await data).coins || []);
+        setTrendingCoins(initialTrendingCoins);
+        
       } catch (err) {
         console.error("Trending fetch failed:", err);
         throw new Error("Failed to trending coins data");

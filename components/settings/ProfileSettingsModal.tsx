@@ -43,11 +43,15 @@ export default function ProfileSettingsModal({
       initialQuality: 0.92,
     });
 
+    console.log("Original file size:", file.size / 1024, "KB");
+    console.log("Compressed file size:", compressedFile.size / 1024, "KB");
+
     const uploadFile = new File(
       [compressedFile],
-      file.name.replace(/\.\w+$/, ".jpg"),
+      compressedFile.name.replace(/\.\w+$/, ".jpg"),
       { type: compressedFile.type ||"image/jpeg" },
     );
+    console.log("Upload file size:", uploadFile.size / 1024, "KB");
 
     try {
       const presignRes = await fetch("/api/uploads/presign", {
@@ -61,8 +65,8 @@ export default function ProfileSettingsModal({
 
       const uploadRes = await fetch(url, {
         method: "PUT",
-        headers: { "Content-Type": file.type },
-        body: file,
+        headers: { "Content-Type": uploadFile.type },
+        body: uploadFile,
       });
 
       if (!uploadRes.ok) throw new Error("Failed to upload image");
@@ -73,7 +77,7 @@ export default function ProfileSettingsModal({
       toast.success("Profile image updated!");
       
     } catch (err) {
-      console.error(err);
+      console.error("Failed to upload image:", err);
       toast.error("Image upload failed");
 
     } finally {
