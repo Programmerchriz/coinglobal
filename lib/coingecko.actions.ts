@@ -29,6 +29,7 @@ export async function fetcher<T>(
       'Content-Type': 'application/json',
     } as Record<string, string>,
     next: { revalidate },
+    signal: AbortSignal.timeout(8000),
   });
 
   if (!response.ok) {

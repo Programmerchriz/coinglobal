@@ -108,7 +108,7 @@ export const SearchModal = ({
     () => {
       setDebouncedQuery(searchQuery.trim());
     },
-    300,
+    400,
     [searchQuery]
   );
 
@@ -119,6 +119,8 @@ export const SearchModal = ({
     ([, query]) => searchCoins(query as string),
     {
       revalidateOnFocus: false,
+      dedupingInterval: 15000,
+      keepPreviousData: true,
     }
   );
 

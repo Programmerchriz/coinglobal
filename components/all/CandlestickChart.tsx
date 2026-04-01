@@ -4,8 +4,8 @@ import { CandlestickSeries, ColorType, createChart, IChartApi, ISeriesApi } from
 import { useEffect, useRef, useState, useTransition } from "react";
 
 import { getCandlestickConfig, getChartConfig, PERIOD_BUTTONS, PERIOD_CONFIG } from "@/constants";
-import { fetcher } from "@/lib/coingecko.actions";
 import { cn, convertOHLCData, getPricePrecision } from "@/lib/utils";
+import { getCandlestickChart } from "@/lib/api/candlestick-chart";
 
 const CandlestickChart = ({
   children,
@@ -25,19 +25,10 @@ const CandlestickChart = ({
   const [ isPending, startTransition ] = useTransition();
 
   const fetchOHLCData = async (selectedPeriod: Period) => {
-    try {
-      const config = PERIOD_CONFIG[selectedPeriod];
+    const config = PERIOD_CONFIG[selectedPeriod];
+    const newData = await getCandlestickChart(config, coinId);
 
-      const newData = await fetcher<OHLCData[]>(`/coins/${coinId}/ohlc`, {
-        vs_currency: 'usd',
-        days: config.days,
-      });
-
-      setOhlcData(newData ?? []);
-    } catch (e) {
-      console.error("Failed to fetch OHLCData:", e);
-      throw new Error("Failed to fetch chart data");
-    };
+    setOhlcData(newData ?? []);
   };
 
   const handlePeriodChange = (newPeriod: Period) => {

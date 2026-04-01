@@ -1,52 +1,32 @@
-import { fetcher } from '@/lib/coingecko.actions';
 import { formatCurrency } from '@/lib/utils';
 import Image from 'next/image';
 import CandlestickChart from '@/components/all/CandlestickChart';
 import { getTheme } from '@/lib/actions/theme-actions';
+import { getCoin } from '@/lib/api/coin';
 
 const CoinOverview = async () => {
   const theme = await getTheme();
+  const coinId = "bitcoin";
+  const { coin, coinOHLCData } = await getCoin(coinId);
 
-  try {
-    const [coin, coinOHLCData] = await Promise.all([
-      fetcher<CoinDetailsData>('/coins/bitcoin', {
-        localization: false,
-        tickers: false,
-        market_data: true,
-        community_data: false,
-        developer_data: false,
-        sparkline: false,
-      }),
-
-      fetcher<OHLCData[]>('/coins/bitcoin/ohlc', {
-        vs_currency: 'usd',
-        days: 1,
-      }),
-    ]);
-
-    return (
-      <div id="coin-overview" className="animate-fade-in-up">
-        <CandlestickChart data={coinOHLCData} coinId="bitcoin" theme={theme}>
-          <div className="header pt-2 flex items-center gap-4">
-            <Image src={coin.image.large} alt={coin.name} width={56} height={56} />
-            <div className="info">
-              <p className="">
-                {coin.name} / {coin.symbol.toUpperCase()}
-              </p>
-              <h1 className="text-3xl font-bold">
-                {formatCurrency(coin.market_data.current_price.usd)}
-              </h1>
-            </div>
+  return (
+    <div id="coin-overview" className="animate-fade-in-up">
+      <CandlestickChart data={coinOHLCData} coinId={coinId} theme={theme}>
+        <div className="header pt-2 flex items-center gap-4">
+          <Image src={coin.image.large} alt={coin.name} width={56} height={56} />
+          <div className="info">
+            <p className="">
+              {coin.name} / {coin.symbol.toUpperCase()}
+            </p>
+            
+            <h1 className="text-3xl font-bold">
+              {formatCurrency(coin.market_data.current_price.usd)}
+            </h1>
           </div>
-        </CandlestickChart>
-      </div>
-    );
-  } catch (error) {
-    console.error('Error fetching coin overview:', error);
-    throw new Error("Failed to coins data");
-  }
-
-  return;
+        </div>
+      </CandlestickChart>
+    </div>
+  );
 };
 
 export default CoinOverview;

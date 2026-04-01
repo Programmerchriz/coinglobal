@@ -1,8 +1,5 @@
 
-import { notFound } from 'next/navigation';
 import Image from 'next/image';
-
-import { fetcher } from '@/lib/coingecko.actions';
 import { cn, formatCurrency, formatPercentage, trendingClasses } from '@/lib/utils';
 
 import { TrendingDown, TrendingUp } from 'lucide-react';
@@ -15,6 +12,7 @@ import ExchangeListings from '@/components/coin/ExchangeListings';
 import TopMovers from '@/components/coin/TopMovers';
 import BackButton from '@/components/ui/BackButton';
 import { getTheme } from '@/lib/actions/theme-actions';
+import { getCoin } from '@/lib/api/coin';
 
 const recentTradesData = [
   {
@@ -77,32 +75,15 @@ const recentTradesColumns: DataTableColumn<RecentTrade>[] = [
 ];
 
 const Coin = async ({ params }: CoinPageProps) => {
+  const theme = await getTheme();
   const { id } = await params;
   if (!id) throw new Error("Coin id not found");
 
+  const { coin, coinTickers, coinOHLCData } = await getCoin(id);
   const isTrendingUp = (value: number) => value > 0;
-  const theme = await getTheme();
-
-  let coin: CoinDetailsData, coinOHLCData: OHLCData[];
-
-  try {
-    [coin, coinOHLCData] = await Promise.all([
-      fetcher<CoinDetailsData>(`/coins/${id}/`),
-
-      fetcher<OHLCData[]>(`/coins/${id}/ohlc`, {
-        vs_currency: 'usd',
-        days: 1,
-        // interval: 'hourly',
-        precision: 'full',
-      }),
-    ]);
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-    throw new Error("Failed to fetch categories data");
-  }
 
   if (!coin) {
-    notFound();
+    throw new Error("Failed to fetch coin data");
   }
 
   const currencies = [
@@ -153,8 +134,6 @@ const Coin = async ({ params }: CoinPageProps) => {
       href: coin.links.subreddit_url || '/',
     },
   ];
-
-  const coinTickers: Ticker[] = coin.tickers;
 
   return (
     <section className="min-h-screen bg-(--bg-app) text-(--text-primary) px-4 py-6">
