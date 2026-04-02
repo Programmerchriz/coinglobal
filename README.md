@@ -8,19 +8,19 @@ This README is written for both technical and non-technical readers, so anyone l
 
 Coin Global helps users:
 
-- browse live cryptocurrency market data
-- search for coins quickly from anywhere in the app
-- explore trending coins and market categories
-- open detailed coin pages with charts, pricing, market stats, and exchange listings
-- sign up and sign in with email/password or Google
-- access protected dashboard screens after authentication
-- update their username, avatar, and theme preference
+- Browse live cryptocurrency market data
+- Search for coins quickly from anywhere in the app
+- Explore trending coins and market categories
+- Open detailed coin pages with charts, pricing, market stats, and exchange listings
+- Sign up and sign in with email/password or Google
+- Access protected dashboard screens after authentication
+- Update their username, avatar, and theme preference
 
 The product sits at the intersection of three ideas:
 
-- a live crypto market discovery experience
-- an authenticated dashboard application
-- a foundation for more advanced trading, portfolio, wallet, and alerting features
+- A live crypto market discovery experience
+- An authenticated dashboard application
+- A foundation for more advanced trading, portfolio, wallet, and alerting features
 
 ## Core Features
 
@@ -28,15 +28,15 @@ The product sits at the intersection of three ideas:
 
 Users can create accounts and sign in using:
 
-- email and password
+- Email and password
 - Google OAuth
 
 The app uses server-side session checks to protect authenticated routes and dashboard areas. User records also support:
 
-- usernames
-- avatar images
-- theme preference
-- account roles
+- Usernames
+- Avatar images
+- Theme preference
+- Account roles
 
 Relevant files:
 
@@ -50,11 +50,11 @@ Relevant files:
 
 Coin Global includes a live market discovery experience powered by CoinGecko data. Users can:
 
-- view a featured market overview section
-- browse trending coins
-- browse category performance
-- open a paginated all-coins directory
-- search for a specific coin from the global search modal
+- View a featured market overview section
+- Browse trending coins
+- Browse category performance
+- Open a paginated all-coins directory
+- Search for a specific coin from the global search modal
 
 Relevant files:
 
@@ -71,12 +71,12 @@ Relevant files:
 
 Each coin page provides a deeper look into a cryptocurrency, including:
 
-- current price and change metrics
-- candlestick chart with multiple time ranges
-- market cap, volume, and rank
-- project links such as website, whitepaper, and community
-- exchange listings
-- currency conversion support
+- Current price and change metrics
+- Candlestick chart with multiple time ranges
+- Market cap, volume, and rank
+- Project links such as website, whitepaper, and community
+- Exchange listings
+- Currency conversion support
 
 Relevant files:
 
@@ -90,13 +90,13 @@ Relevant files:
 
 After signing in, users can access an application-style dashboard with dedicated sections for:
 
-- dashboard overview
-- portfolio
-- asset allocation
-- watchlist
-- notifications
-- settings
-- swap
+- Dashboard overview
+- Portfolio
+- Asset allocation
+- Watchlist
+- Notifications
+- Settings
+- Swap
 
 Relevant files:
 
@@ -113,9 +113,9 @@ Relevant files:
 
 Users can personalize their account by:
 
-- changing their username
-- uploading a profile avatar
-- switching between light and dark themes
+- Changing their username
+- Uploading a profile avatar
+- Switching between light and dark themes
 
 Avatar uploads are handled through a signed upload flow backed by Cloudflare R2.
 
@@ -134,13 +134,13 @@ Relevant files:
 
 Coin Global uses the CoinGecko API for:
 
-- coin markets
-- search
-- trending coins
-- categories
+- Coin markets
+- Search
+- Trending coins
+- Categories
 - OHLC chart data
-- coin detail data
-- ticker and exchange listing data
+- Coin detail data
+- Ticker and exchange listing data
 
 The API access is centralized so request handling, caching, and revalidation can be tuned in one place.
 
@@ -166,9 +166,9 @@ The app protects user-only routes with server-side session checks:
 
 Profile avatars are uploaded with a presigned URL flow:
 
-1. the client requests a signed upload URL from `/api/uploads/presign`
-2. the browser uploads the image directly to Cloudflare R2
-3. the resulting public image URL is saved to the user profile
+1. The client requests a signed upload URL from `/api/uploads/presign`
+2. The browser uploads the image directly to Cloudflare R2
+3. The resulting public image URL is saved to the user profile
 
 This avoids routing the full image file through the application server.
 
@@ -176,8 +176,8 @@ This avoids routing the full image file through the application server.
 
 The project uses a mix of:
 
-- server components for protected route handling and data loading
-- client components for interactivity, charts, forms, and dashboard UI
+- Server components for protected route handling and data loading
+- Client components for interactivity, charts, forms, and dashboard UI
 - Suspense fallbacks in some market sections for smoother perceived loading
 
 ## Tech Stack
@@ -298,24 +298,24 @@ http://localhost:3000
 
 ### Strongly implemented today
 
-- authentication with email/password and Google
-- protected routing and session-aware layouts
-- live coin market browsing
-- trending coins and category pages
-- global coin search
-- detailed coin pages with charts and stats
-- avatar upload flow
-- username and theme updates
+- Authentication with email/password and Google
+- Protected routing and session-aware layouts
+- Live coin market browsing
+- Trending coins and category pages
+- Global coin search
+- Detailed coin pages with charts and stats
+- Avatar upload flow
+- Username and theme updates
 
 ### Present but still more UI-first or scaffolded
 
-- dashboard analytics values
-- portfolio metrics and recent activity
-- watchlist persistence and management
-- swap execution
-- notification actions
-- parts of the settings area
-- deeper trading and wallet operations
+- Dashboard analytics values
+- Portfolio metrics and recent activity
+- Watchlist persistence and management
+- Swap execution
+- Notification actions
+- Parts of the settings area
+- Deeper trading and wallet operations
 
 That means the repository already works well as a crypto market exploration and authenticated dashboard foundation, while still leaving room for future product depth.
 
@@ -323,9 +323,9 @@ That means the repository already works well as a crypto market exploration and 
 
 If you are reviewing this repository:
 
-- the strongest live-data part of the app is the market discovery and coin-detail experience
-- the dashboard side already has a polished application shell and account flow
-- some dashboard modules currently use demo values as product scaffolding
+- The strongest live-data part of the app is the market discovery and coin-detail experience
+- The dashboard side already has a polished application shell and account flow
+- Some dashboard modules currently use demo values as product scaffolding
 
 This makes Coin Global more than a static UI mockup, while also being honest about which areas are still evolving.
 
@@ -333,9 +333,9 @@ This makes Coin Global more than a static UI mockup, while also being honest abo
 
 This codebase is well-positioned for future additions such as:
 
-- persistent watchlists
-- live portfolio synchronization
-- alerting and notification preferences
-- trading execution flows
-- wallet funding and withdrawal workflows
-- deeper analytics and AI-assisted insights
+- Persistent watchlists
+- Live portfolio synchronization
+- Alerting and notification preferences
+- Trading execution flows
+- Wallet funding and withdrawal workflows
+- Deeper analytics and AI-assisted insights
