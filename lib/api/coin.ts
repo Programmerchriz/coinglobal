@@ -1,5 +1,6 @@
 
 import { fetcher } from "@/lib/coingecko.actions";
+import { COINGECKO_REVALIDATE } from '@/constants';
 
 export interface GetCoinResponse {
   coin: CoinDetailsData;
@@ -12,16 +13,28 @@ export async function getCoin(id: string): Promise<GetCoinResponse> {
 
   try {
     [coin, coinTickersRes, coinOHLCData ] = await Promise.all([
-      fetcher<CoinDetailsData>(`/coins/${id}/`),
+      fetcher<CoinDetailsData>(
+        `/coins/${id}/`,
+        undefined,
+        COINGECKO_REVALIDATE.COIN_DETAILS
 
-      fetcher<{ tickers: Ticker[] }>(`/coins/${id}/tickers`, { page: 1, per_page: 5 }),
+      ),
 
-      fetcher<OHLCData[]>(`/coins/${id}/ohlc`, {
-        vs_currency: 'usd',
-        days: 1,
-        // interval: 'hourly',
-        precision: 'full',
-      }),
+      fetcher<{ tickers: Ticker[] }>(
+        `/coins/${id}/tickers`, { page: 1, per_page: 5 },
+        COINGECKO_REVALIDATE.COIN_TICKERS
+      ),
+
+      fetcher<OHLCData[]>(
+        `/coins/${id}/ohlc`,
+        {
+          vs_currency: 'usd',
+          days: 1,
+          // interval: 'hourly',
+          precision: 'full',
+        },
+        COINGECKO_REVALIDATE.OHLC_INTRADAY
+      ),
     ]);
 
   } catch (error) {

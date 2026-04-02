@@ -1,6 +1,7 @@
 'use server';
 
 import qs from 'query-string';
+import { COINGECKO_REVALIDATE } from '@/constants';
 
 const BASE_URL = process.env.COINGECKO_BASE_URL;
 const API_KEY = process.env.COINGECKO_API_KEY;
@@ -21,7 +22,8 @@ export async function fetcher<T>(
         skipNull: true,
       })}`
     : baseUrl;
-  console.log(url);
+  
+  if (process.env.NODE_ENV === "development") console.log(url);
 
   const response = await fetch(url, {
     headers: {
@@ -47,9 +49,11 @@ export async function searchCoins(query: string): Promise<SearchCoin[]> {
   // -----------------------------
   // STEP 1: Search endpoint
   // -----------------------------
-  const searchData = await fetcher<SearchResponse>('/search', {
-    query,
-  });
+  const searchData = await fetcher<SearchResponse>(
+    '/search',
+    { query, },
+    COINGECKO_REVALIDATE.SEARCH
+  );
 
   // sort coins by market cap
   const topCoins = searchData.coins
@@ -67,11 +71,15 @@ export async function searchCoins(query: string): Promise<SearchCoin[]> {
   // -----------------------------
   // STEP 2: Fetch price data
   // -----------------------------
-  const marketData = await fetcher<MarketsResponse[]>('/coins/markets', {
-    vs_currency: 'usd',
-    ids,
-    price_change_percentage: '24h',
-  });
+  const marketData = await fetcher<MarketsResponse[]>(
+    '/coins/markets',
+    {
+      vs_currency: 'usd',
+      ids,
+      price_change_percentage: '24h',
+    },
+    COINGECKO_REVALIDATE.SEARCH
+  );
 
   // Convert markets array to lookup map
   const marketMap = new Map(
