@@ -1,5 +1,6 @@
 
-import { fetcher, COINGECKO_REVALIDATE } from "@/lib/coingecko.actions";
+import { fetcher } from "@/lib/coingecko.actions";
+import { COINGECKO_REVALIDATE } from '@/constants';
 
 export async function getCategories() {
   return fetcher<Category[]>(

@@ -119,3 +119,14 @@ export const LIVE_INTERVAL_BUTTONS: { value: '1s' | '1m'; label: string }[] = [
   { value: '1s', label: '1s' },
   { value: '1m', label: '1m' },
 ];
+
+export const COINGECKO_REVALIDATE = {
+  SEARCH: 15,
+  MARKETS: 30,
+  TRENDING: 300,
+  CATEGORIES: 600,
+  COIN_DETAILS: 120,
+  COIN_TICKERS: 120,
+  OHLC_INTRADAY: 60,
+  OHLC_SWING: 300,
+} as const;

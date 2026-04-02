@@ -1,23 +1,13 @@
 'use server';
 
 import qs from 'query-string';
+import { COINGECKO_REVALIDATE } from '@/constants';
 
 const BASE_URL = process.env.COINGECKO_BASE_URL;
 const API_KEY = process.env.COINGECKO_API_KEY;
 
 if (!BASE_URL) throw new Error('Could not get base url');
 if (!API_KEY) throw new Error('Could not get api key');
-
-export const COINGECKO_REVALIDATE = {
-  SEARCH: 15,
-  MARKETS: 30,
-  TRENDING: 300,
-  CATEGORIES: 600,
-  COIN_DETAILS: 120,
-  COIN_TICKERS: 120,
-  OHLC_INTRADAY: 60,
-  OHLC_SWING: 300,
-} as const;
 
 export async function fetcher<T>(
   endpoint: string,
