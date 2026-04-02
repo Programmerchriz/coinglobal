@@ -1,5 +1,5 @@
 
-import { fetcher } from "@/lib/coingecko.actions";
+import { fetcher, COINGECKO_REVALIDATE } from "@/lib/coingecko.actions";
 
 interface PeriodConfig {
   days: string | number;
@@ -10,13 +10,22 @@ export async function getCandlestickChart(
   config: PeriodConfig,
   coinId: string,
 ) {
+  const revalidate = 
+    Number(config.days) <= 1
+      ? COINGECKO_REVALIDATE.OHLC_INTRADAY
+      : COINGECKO_REVALIDATE.OHLC_SWING;
+
   let newData: OHLCData[];
 
   try {
-    newData = await fetcher<OHLCData[]>(`/coins/${coinId}/ohlc`, {
-      vs_currency: 'usd',
-      days: config.days,
-    });
+    newData = await fetcher<OHLCData[]>(
+      `/coins/${coinId}/ohlc`,
+      {
+        vs_currency: 'usd',
+        days: config.days,
+      },
+      revalidate
+    );
     
   } catch (e) {
     console.error("Failed to fetch OHLCData:", e);
