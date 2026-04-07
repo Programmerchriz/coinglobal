@@ -127,7 +127,7 @@ const Watchlist = ({
 
     try {
       await (nextState ? addToWatchlist(id) : removeFromWatchlist(id));
-      router.refresh();
+      
     } catch(e) {
       setOptimisticWatchlistIds(prev => {
         const next = new Set(prev);
