@@ -2,16 +2,32 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { TrendingUp, TrendingDown, Bell, ChevronRightIcon } from "lucide-react";
 import { motion } from "framer-motion";
+
+import { addToWatchlist, removeFromWatchlist } from "@/lib/actions/watchlist-actions";
+import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import WatchlistToggle from "@/components/watchlist/WatchlistToggle";
+import DataTable from "@/components/all/DataTable";
+import BackButton from "@/components/ui/BackButton";
+import Watchlist from "@/components/watchlist/Watchlist";
 
-export default function DashboardClientPage() {
+interface DashboardClientProps {
+  allCoins: CoinMarketData[];
+  watchlistCoinIds: string[];
+};
+
+export default function DashboardClientPage({
+  allCoins,
+  watchlistCoinIds,
+}: DashboardClientProps) {
   const router = useRouter();
 
   return (
@@ -118,24 +134,38 @@ export default function DashboardClientPage() {
             <Input
               placeholder="Search by name or symbol"
               className="w-full sm:w-64 bg-(--bg-sidebar) border-(--border-input) text-(--text-primary) rounded-xl"
+              disabled={true}
             />
           </div>
 
           <div className="space-y-3">
-            {["Bitcoin", "Ethereum", "Solana"].map((coin, i) => (
-              <div
-                key={i}
-                className="flex justify-between p-3 bg-(--bg-sidebar) rounded-xl hover:bg-(--color-5) transition"
-              >
-                <span className="text-(--text-primary)">
-                  {coin}
-                </span>
-
-                <span className="text-(--color-60)">
-                  $--
-                </span>
+            <Watchlist
+              allCoins={allCoins}
+              watchlistCoinIds={watchlistCoinIds}
+              maxItems={3}
+            />
+            {/* <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl">
+              <div id="coins-page" className="custom-scrollbar py-4 md:py-2">
+                <DataTable
+                  data={visibleWatchlistCoins}
+                  columns={columns}
+                  rowKey={(row) => row.id}
+                  tableClassName="coins-table"
+                  headerClassName="py-3!"
+                  bodyCellClassName="py-2! px-4"
+                />
               </div>
-            ))}
+            </div> */}
+
+            {/* Pagination */}
+            {/* <div className="flex justify-center">
+              <CoinsPagination
+                currentPage={currentPage}
+                totalPages={estimatedTotalPages}
+                hasMorePages={hasMorePages}
+                basePath="coins"
+              />
+            </div> */}
           </div>
 
           <div className="flex justify-end items-center mt-6">

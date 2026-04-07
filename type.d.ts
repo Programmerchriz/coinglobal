@@ -410,6 +410,15 @@ declare global {
     price_change_percentage_24h: number | null;
   };
 
+  interface WatchlistStats {
+    totalMarketCap: number;
+    totalMarketCapChange24h: number;
+    totalMarketCapChange24hPercentage: number;
+    total24hVolume: number;
+    uniqueExchangeCount: number;
+    trendingAssetsCount: number;
+  };
+
   interface AuthClientPageProps {
     defaultMode: string;
   };

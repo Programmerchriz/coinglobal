@@ -23,6 +23,7 @@ model User {
   
   transactions  Transaction[]
   wallets       Wallet[]
+  watchlists    Watchlist[]
   accounts      Account[]
   sessions      Session[]
 
@@ -130,6 +131,19 @@ model LedgerEntry {
   adminWallet   AdminWallet?    @relation(fields: [adminWalletId], references: [id], onDelete: Cascade)
   transaction   Transaction     @relation(fields: [transactionId], references: [id], onDelete: Cascade)
   wallet        Wallet?         @relation(fields: [walletId], references: [id], onDelete: Cascade)
+}
+
+model Watchlist {
+  id         String   @id @default(uuid())
+  userId     String
+  coinId     String
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, coinId])
+  @@index([userId, createdAt])
+  @@index([coinId])
 }
 
 enum Role {

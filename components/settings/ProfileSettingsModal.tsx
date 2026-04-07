@@ -43,15 +43,11 @@ export default function ProfileSettingsModal({
       initialQuality: 0.92,
     });
 
-    console.log("Original file size:", file.size / 1024, "KB");
-    console.log("Compressed file size:", compressedFile.size / 1024, "KB");
-
     const uploadFile = new File(
       [compressedFile],
       compressedFile.name.replace(/\.\w+$/, ".jpg"),
       { type: compressedFile.type ||"image/jpeg" },
     );
-    console.log("Upload file size:", uploadFile.size / 1024, "KB");
 
     try {
       const presignRes = await fetch("/api/uploads/presign", {
