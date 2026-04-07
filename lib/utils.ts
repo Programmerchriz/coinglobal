@@ -51,7 +51,32 @@ export function formatCurrency(
     minimumFractionDigits,
     maximumFractionDigits,
   });
-}
+};
+
+export function formatCompactCurrency(
+  value: number | null | undefined,
+  currency: string = 'USD',
+  showSymbol: boolean = true
+) {
+  if (value === null || value === undefined || isNaN(value)) {
+    return showSymbol ? '$0' : '0';
+  }
+
+  const absValue = Math.abs(value);
+
+  const maximumFractionDigits =
+    absValue >= 1_000_000 ? 2 :
+    2;
+
+  return new Intl.NumberFormat('en-US', {
+    style: showSymbol ? 'currency' : 'decimal',
+    currency: showSymbol ? currency : undefined,
+    notation: 'compact',
+    compactDisplay: 'short',
+    minimumFractionDigits: 0,
+    maximumFractionDigits,
+  }).format(value);
+};
 
 export function formatPercentage(change: number | null | undefined): string {
   if (change === null || change === undefined || isNaN(change)) {
