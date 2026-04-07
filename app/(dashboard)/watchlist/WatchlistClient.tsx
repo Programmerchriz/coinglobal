@@ -7,6 +7,7 @@ import BackButton from '@/components/ui/BackButton';
 import Watchlist from '@/components/watchlist/Watchlist';
 import { formatCompactCurrency, formatPercentage } from '@/lib/utils';
 import StatCard from '@/components/watchlist/StatCard';
+import EmptyWatchlist from '@/components/watchlist/EmptyWatchlist';
 
 interface WatchlistClientProps {
   allCoins: CoinMarketData[];
@@ -53,66 +54,74 @@ export default function WatchlistClient({
         </div>
       </div>
 
-        <>
-          {/* Watchlist Stats */}
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-6">
-            <StatCard
-              label="Total Watchlist Market Cap"
-              value={formatCompactCurrency(stats.totalMarketCap)}
-              footer={
-                <div className="flex gap-1.5 text-(--color-60)">
-                  {isMarketCapUp ? (
-                    <TrendingUp width={16} height={16} className="text-(--color-success)" />
-                  ) : (
-                    <TrendingUp width={16} height={16} className="text-(--color-error) rotate-180" />
-                  )}
-                  <p className={isMarketCapUp ? "text-(--color-success)" : "text-(--color-error)"}>
-                    {formatPercentage(stats.totalMarketCapChange24hPercentage)}
-                  </p>
-                </div>
-              }
-            />
 
-            <StatCard
-              label="Total 24h Volume"
-              value={formatCompactCurrency(stats.total24hVolume)}
-              valueClassName="text-(--color-primary)"
-              footer={<p className="text-(--color-60)">All watchlist assets</p>}
-            />
+      {
+        watchlistCoinIds.length < 1 ? (
+          <EmptyWatchlist />
+        ) : (
+          <div>
+            {/* Watchlist Stats */}
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-6">
+              <StatCard
+                label="Total Watchlist Market Cap"
+                value={formatCompactCurrency(stats.totalMarketCap)}
+                footer={
+                  <div className="flex gap-1.5 text-(--color-60)">
+                    {isMarketCapUp ? (
+                      <TrendingUp width={16} height={16} className="text-(--color-success)" />
+                    ) : (
+                      <TrendingUp width={16} height={16} className="text-(--color-error) rotate-180" />
+                    )}
+                    <p className={isMarketCapUp ? "text-(--color-success)" : "text-(--color-error)"}>
+                      {formatPercentage(stats.totalMarketCapChange24hPercentage)}
+                    </p>
+                  </div>
+                }
+              />
 
-            {exchangeCountCard}
+              <StatCard
+                label="Total 24h Volume"
+                value={formatCompactCurrency(stats.total24hVolume)}
+                valueClassName="text-(--color-primary)"
+                footer={<p className="text-(--color-60)">All watchlist assets</p>}
+              />
 
-            <StatCard
-              label="AI Insights"
-              value={12}
-              valueClassName="text-(--color-accent)"
-              footer={<p className="text-(--color-60)">Trending signals</p>}
-            />
+              {exchangeCountCard}
 
-            <StatCard
-              label="Trending Assets"
-              value={stats.trendingAssetsCount}
-              valueClassName="text-(--color-success)"
-              footer={<p className="text-(--color-60)">Top movers</p>}
-            />
+              <StatCard
+                label="AI Insights"
+                value={12}
+                valueClassName="text-(--color-accent)"
+                footer={<p className="text-(--color-60)">Trending signals</p>}
+              />
+
+              <StatCard
+                label="Trending Assets"
+                value={stats.trendingAssetsCount}
+                valueClassName="text-(--color-success)"
+                footer={<p className="text-(--color-60)">Top movers</p>}
+              />
+            </div>
+
+
+            {/* Watchlist Table */}
+            <div className="rounded-2xl border overflow-hidden custom-scrollbar bg-(--bg-surface) border-(--border-standard)">
+              <Watchlist allCoins={allCoins} watchlistCoinIds={watchlistCoinIds} />
+            </div>
+
+            {/* Footer Info */}
+            <div className="mt-6 p-4 rounded-lg border text-(--color-60) text-sm bg-(--bg-elevated) border-(--border-standard)">
+              <p>
+                💡{' '}
+                <span className="text-(--color-50) ml-2">
+                  Prices update every 60 seconds. Click the heart icon to manage your watchlist.
+                </span>
+              </p>
+            </div>
           </div>
-
-
-          {/* Watchlist Table */}
-          <div className="rounded-2xl border overflow-hidden custom-scrollbar bg-(--bg-surface) border-(--border-standard)">
-            <Watchlist allCoins={allCoins} watchlistCoinIds={watchlistCoinIds} />
-          </div>
-
-          {/* Footer Info */}
-          <div className="mt-6 p-4 rounded-lg border text-(--color-60) text-sm bg-(--bg-elevated) border-(--border-standard)">
-            <p>
-              💡{' '}
-              <span className="text-(--color-50) ml-2">
-                Prices update every 60 seconds. Click the heart icon to manage your watchlist.
-              </span>
-            </p>
-          </div>
-        </>
+        )
+      }
+      
     </motion.div>
   );
 };

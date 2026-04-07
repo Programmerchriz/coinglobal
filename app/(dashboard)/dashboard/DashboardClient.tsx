@@ -2,22 +2,17 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { TrendingUp, TrendingDown, Bell, ChevronRightIcon } from "lucide-react";
+import { TrendingUp, TrendingDown, Bell, ChevronRightIcon, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
-import { addToWatchlist, removeFromWatchlist } from "@/lib/actions/watchlist-actions";
-import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import WatchlistToggle from "@/components/watchlist/WatchlistToggle";
-import DataTable from "@/components/all/DataTable";
-import BackButton from "@/components/ui/BackButton";
 import Watchlist from "@/components/watchlist/Watchlist";
+import EmptyWatchlist from "@/components/watchlist/EmptyWatchlist";
 
 interface DashboardClientProps {
   allCoins: CoinMarketData[];
@@ -138,47 +133,41 @@ export default function DashboardClientPage({
             />
           </div>
 
-          <div className="space-y-3">
-            <Watchlist
-              allCoins={allCoins}
-              watchlistCoinIds={watchlistCoinIds}
-              maxItems={3}
-            />
-            {/* <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl">
-              <div id="coins-page" className="custom-scrollbar py-4 md:py-2">
-                <DataTable
-                  data={visibleWatchlistCoins}
-                  columns={columns}
-                  rowKey={(row) => row.id}
-                  tableClassName="coins-table"
-                  headerClassName="py-3!"
-                  bodyCellClassName="py-2! px-4"
-                />
+          {
+            watchlistCoinIds.length < 1 ? (
+              <EmptyWatchlist />
+            ) : (
+              <div>
+                <div className="space-y-3">
+                  <Watchlist
+                    allCoins={allCoins}
+                    watchlistCoinIds={watchlistCoinIds}
+                    maxItems={3}
+                  />
+                  {/* Pagination */}
+                  {/* <div className="flex justify-center">
+                    <CoinsPagination
+                      currentPage={currentPage}
+                      totalPages={estimatedTotalPages}
+                      hasMorePages={hasMorePages}
+                      basePath="coins"
+                    />
+                  </div> */}
+                </div>
+                <div className="flex justify-end items-center mt-6">
+                  <button
+                    onClick={() => router.push("/watchlist")}
+                    className={cn(
+                      'btn-primary group px-6 py-3 hover:bg-(--color-primary-hover) active:scale-95 font-medium rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-indigo-600/30 hover:-translate-y-1 hover:cursor-pointer'
+                    )}
+                  >
+                    <span>Full Watchlist</span>
+                    <ChevronRightIcon className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                </div>
               </div>
-            </div> */}
-
-            {/* Pagination */}
-            {/* <div className="flex justify-center">
-              <CoinsPagination
-                currentPage={currentPage}
-                totalPages={estimatedTotalPages}
-                hasMorePages={hasMorePages}
-                basePath="coins"
-              />
-            </div> */}
-          </div>
-
-          <div className="flex justify-end items-center mt-6">
-            <button
-              onClick={() => router.push("/watchlist")}
-              className={cn(
-                'btn-primary group px-6 py-3 hover:bg-(--color-primary-hover) active:scale-95 font-medium rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-indigo-600/30 hover:-translate-y-1 hover:cursor-pointer'
-              )}
-            >
-              <span>Full Watchlist</span>
-              <ChevronRightIcon className="transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
-          </div>
+            )
+          }
         </CardContent>
       </Card>
     </>
