@@ -10,7 +10,7 @@ type StatCardProps = {
 export default function StatCard({
   label,
   value,
-  valueClassName = 'text-(--text-primary)',
+  valueClassName,
   footer,
 }: StatCardProps) {
   return (
