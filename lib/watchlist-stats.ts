@@ -39,7 +39,6 @@ export function getUniqueExchangeCount(tickerGroups: Ticker[][]) {
       if (name) exchanges.add(name);
     }
   };
-  console.log('Unique Exchanges:', exchanges);
 
   return (exchanges.size);
 };
