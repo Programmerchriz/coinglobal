@@ -11,12 +11,8 @@ import WatchlistTableSection from '@/components/watchlist/WatchlistTableSection'
 import WatchlistStatsFallback from '@/components/watchlist/fallback/WatchlistStatsFallback';
 import WatchlistTableFallback from '@/components/watchlist/fallback/WatchlistTableFallback';
 
-export default async function WatchlistPage({ searchParams }: NextPageProps) {
+export default async function WatchlistPage() {
   const watchlistCoinIds = await getWatchlistIds();
-
-  const { page } = await searchParams;
-  const requestedPage = Number(page) || 1;
-  const currentPage = Math.max(1, requestedPage);
 
   return (
     <div
@@ -53,7 +49,6 @@ export default async function WatchlistPage({ searchParams }: NextPageProps) {
               <Suspense fallback={<WatchlistTableFallback />}>
                 <WatchlistTableSection
                   watchlistCoinIds={watchlistCoinIds}
-                  currentPage={currentPage}
                 />
               </Suspense>
 

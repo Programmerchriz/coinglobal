@@ -1,5 +1,5 @@
-import StatCardFallback from './StatCardFallback';
+// import StatCardFallback from './StatCardFallback';
 
-export default function ExchangeCountStatCardFallback() {
-  return <StatCardFallback label="Exchanges" />;
-};
+// export default function ExchangeCountStatCardFallback() {
+//   return <StatCardFallback label="Exchanges" />;
+// };

@@ -17,10 +17,16 @@ const CoinsPagination = ({
   totalPages,
   hasMorePages,
   basePath,
+  onPageChange,
 }: Pagination) => {
   const router = useRouter();
 
   const handlePageChange = (page: number) => {
+    if (onPageChange) {
+      onPageChange(page);
+      return;
+    }
+
     const normalizedBasePath = basePath.startsWith('/')
       ? basePath
       : `/${basePath}`;

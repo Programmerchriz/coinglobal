@@ -1,8 +1,10 @@
 
 "use server";
 
+
 import { prisma } from "../prisma";
 import { unauthorizedSession } from "../session";
+import { getCoinsByIds } from '@/lib/api/coins-id';
 
 export async function addToWatchlist(coinId: string) {
   const session = await unauthorizedSession();
@@ -114,4 +116,15 @@ export async function isInWatchlist(coinId: string) {
   });
 
   return (!!existing);
+};
+
+export async function getWatchlistCoinsPage(
+  watchlistCoinIds: string[],
+  page: number,
+  perPage = 10
+) {
+  const safePage = Math.max(1, page);
+  const safePerPage = Math.max(1, perPage);
+
+  return getCoinsByIds(watchlistCoinIds, safePerPage, safePage);
 };
