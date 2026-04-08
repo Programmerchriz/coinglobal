@@ -12,6 +12,7 @@ Coin Global helps users:
 - Search for coins quickly from anywhere in the app
 - Explore trending coins and market categories
 - Open detailed coin pages with charts, pricing, market stats, and exchange listings
+- Build and manage a personal watchlist with live stats and paginated tracking
 - Sign up and sign in with email/password or Google
 - Access protected dashboard screens after authentication
 - Update their username, avatar, and theme preference
@@ -103,13 +104,36 @@ Relevant files:
 - `app/(dashboard)/dashboard/DashboardClient.tsx`
 - `app/(dashboard)/portfolio/PortfolioClient.tsx`
 - `app/(dashboard)/allocation/AllocationClient.tsx`
-- `app/(dashboard)/watchlist/WatchlistClient.tsx`
+- `app/(dashboard)/watchlist/page.tsx`
 - `app/(dashboard)/notifications/NotificationsClient.tsx`
 - `app/(dashboard)/settings/SettingsClient.tsx`
 - `app/(dashboard)/swap/SwapClient.tsx`
 - `components/dashboard/DashboardSidebar.tsx`
 
-### 5. Profile and personalization
+### 5. Watchlist management
+
+The watchlist feature lets signed-in users save coins they care about and revisit them in a dedicated dashboard page. It currently includes:
+
+- Persistent saved coins tied to the authenticated user
+- Optimistic add/remove watchlist interactions
+- A dedicated watchlist dashboard page with empty and loading states
+- Watchlist summary cards for market cap, 24h volume, and trending assets
+- Client-side pagination for browsing saved coins in smaller batches
+- A dashboard preview of the top-ranked watchlist assets
+
+Relevant files:
+
+- `app/(dashboard)/watchlist/page.tsx`
+- `app/(dashboard)/watchlist/loading.tsx`
+- `components/watchlist/Watchlist.tsx`
+- `components/watchlist/WatchlistStatsSection.tsx`
+- `components/watchlist/WatchlistTableSection.tsx`
+- `components/watchlist/WatchlistTablePaginationClient.tsx`
+- `components/watchlist/EmptyWatchlist.tsx`
+- `lib/actions/watchlist-actions.ts`
+- `lib/watchlist-stats.ts`
+
+### 6. Profile and personalization
 
 Users can personalize their account by:
 
@@ -333,7 +357,6 @@ This makes Coin Global more than a static UI mockup, while also being honest abo
 
 This codebase is well-positioned for future additions such as:
 
-- Persistent watchlists
 - Live portfolio synchronization
 - Alerting and notification preferences
 - Trading execution flows

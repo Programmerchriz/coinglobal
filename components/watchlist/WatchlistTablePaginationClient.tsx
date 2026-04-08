@@ -50,7 +50,7 @@ export default function WatchlistTablePaginationClient({
       <div
         className={cn(
           'rounded-2xl border overflow-hidden custom-scrollbar bg-(--bg-surface) border-(--border-standard) transition-opacity',
-          isPending && 'opacity-60 pointer-events-none'
+          isPending && 'disabled cursor-not-allowed opacity-60 pointer-events-none'
         )}
       >
         <Watchlist
@@ -60,13 +60,15 @@ export default function WatchlistTablePaginationClient({
         />
       </div>
 
-      <div className="mt-4 flex min-h-5 items-center justify-center">
-        {isPending ? (
-          <p className="text-xs text-(--color-60)">Loading watchlist page...</p>
-        ) : error ? (
-          <p className="text-xs text-(--color-error)">{error}</p>
-        ) : null}
-      </div>
+            {isPending ? (
+              <div className="flex min-h-5 items-center justify-center">
+                <p className="text-xs text-(--color-60)">Loading...</p>
+              </div>
+            ) : error ? (
+              <div className="flex min-h-5 items-center justify-center">
+                <p className="text-xs text-(--color-error)">{error}</p>
+              </div>
+            ) : null}
 
       <div className="flex justify-center">
         <CoinsPagination

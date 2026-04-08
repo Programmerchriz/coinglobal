@@ -2,6 +2,10 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@theme {
+  --breakpoint-xs: 520px;
+}
+
 /* Root CSS Variables */
 :root {
   /* Backgrounds */

@@ -153,7 +153,7 @@ const Watchlist = ({
   };
 
   return (
-    <div id="categories" className="custom-scrollbar animate-fade-in-up">
+    <div id="coins" className="custom-scrollbar animate-fade-in-up">
       <WatchlistTable watchlist={displayedWatchlistCoins} columns={columns} />
     </div>
   );
