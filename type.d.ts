@@ -302,6 +302,7 @@ declare global {
     totalPages: number;
     hasMorePages: boolean;
     basePath: string;
+    onPageChange?: (page: number) => void;
   }
 
   type Session = typeof auth.$Infer.Session;

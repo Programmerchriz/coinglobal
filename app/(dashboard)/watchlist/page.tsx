@@ -1,6 +1,6 @@
 
 import { Suspense } from 'react';
-import { Heart } from 'lucide-react';
+import { Bell, Heart } from 'lucide-react';
 
 import { getWatchlistIds } from '@/lib/actions/watchlist-actions';
 
@@ -47,12 +47,14 @@ export default async function WatchlistPage() {
               </Suspense>
 
               <Suspense fallback={<WatchlistTableFallback />}>
-                <WatchlistTableSection watchlistCoinIds={watchlistCoinIds} />
+                <WatchlistTableSection
+                  watchlistCoinIds={watchlistCoinIds}
+                />
               </Suspense>
 
               <div className="mt-6 p-4 rounded-lg border text-(--color-60) text-sm bg-(--bg-elevated) border-(--border-standard)">
                 <p>
-                  ðŸ’¡{' '}
+                  <Bell size={16} className="inline text-(--color-warning)" />
                   <span className="text-(--color-50) ml-2">
                     Prices update every 60 seconds. Click the heart icon to manage your watchlist.
                   </span>

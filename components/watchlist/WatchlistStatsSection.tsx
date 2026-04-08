@@ -7,8 +7,6 @@ import { getWatchlistCoreStats } from '@/lib/watchlist-stats';
 import { formatCompactCurrency, formatPercentage } from '@/lib/utils';
 
 import StatCard from './StatCard';
-import ExchangeCountStatCard from './ExchangeCountStatCard';
-import ExchangeCountStatCardFallback from './fallback/ExchangeCountStatCardFallback';
 
 interface WatchlistStatsSectionProps {
   watchlistCoinIds: string[];
@@ -52,9 +50,10 @@ export default async function WatchlistStatsSection({
         footer={<p className="text-(--color-60)">All watchlist assets</p>}
       />
 
-      <Suspense fallback={<ExchangeCountStatCardFallback />}>
+      {/* Exchange Count */}
+      {/* <Suspense fallback={<ExchangeCountStatCardFallback />}>
         <ExchangeCountStatCard watchlistCoinIds={watchlistCoinIds} />
-      </Suspense>
+      </Suspense> */}
 
       <StatCard
         label="AI Insights"

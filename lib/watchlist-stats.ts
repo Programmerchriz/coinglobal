@@ -1,13 +1,13 @@
 import "server-only";
 
-import { cache } from 'react';
+// import { cache } from 'react';
 
 import { getTrendingCoins } from "@/lib/api/trendingCoins";
 import { getAllCoinTickers } from "@/lib/api/coin-tickers";
 
-const getCachedCoinTickers = cache(async (id: string) => {
-  return getAllCoinTickers(id);
-});
+// const getCachedCoinTickers = cache(async (id: string) => {
+//   return getAllCoinTickers(id);
+// });
 
 export function getTotalWatchlistMarketCap(coins: CoinMarketData[]) {
   return (coins.reduce((sum, coin) => sum + (coin.market_cap ?? 0), 0));
@@ -124,12 +124,12 @@ export function getWatchlistCoreStats(
   );
 };
 
-export async function getWatchlistExchangeCount(watchlistCoinIds: string[]) {
-  if (watchlistCoinIds.length === 0) return 0;
+// export async function getWatchlistExchangeCount(watchlistCoinIds: string[]) {
+//   if (watchlistCoinIds.length === 0) return 0;
 
-  const tickerGroups = await Promise.all(
-    watchlistCoinIds.map(id => getCachedCoinTickers(id).catch(() => []))
-  );
+//   const tickerGroups = await Promise.all(
+//     watchlistCoinIds.map(id => getCachedCoinTickers(id).catch(() => []))
+//   );
 
-  return (getUniqueExchangeCount(tickerGroups));
-};
+//   return (getUniqueExchangeCount(tickerGroups));
+// };

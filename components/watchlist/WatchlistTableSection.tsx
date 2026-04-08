@@ -1,6 +1,6 @@
 import { getCoinsByIds } from '@/lib/api/coins-id';
 
-import Watchlist from './Watchlist';
+import WatchlistTablePaginationClient from './WatchlistTablePaginationClient';
 
 interface WatchlistTableSectionProps {
   watchlistCoinIds: string[];
@@ -9,11 +9,17 @@ interface WatchlistTableSectionProps {
 export default async function WatchlistTableSection({
   watchlistCoinIds,
 }: WatchlistTableSectionProps) {
-  const watchlistCoins = await getCoinsByIds(watchlistCoinIds);
+  const perPage = 6;
+  const totalPages = Math.max(1, Math.ceil(watchlistCoinIds.length / perPage));
+  const initialCoins = await getCoinsByIds(watchlistCoinIds, perPage, 1);
 
   return (
-    <div className="rounded-2xl border overflow-hidden custom-scrollbar bg-(--bg-surface) border-(--border-standard)">
-      <Watchlist allCoins={watchlistCoins} watchlistCoinIds={watchlistCoinIds} />
-    </div>
+    <WatchlistTablePaginationClient
+      watchlistCoinIds={watchlistCoinIds}
+      initialCoins={initialCoins}
+      initialPage={1}
+      perPage={perPage}
+      totalPages={totalPages}
+    />
   );
-}
+};
