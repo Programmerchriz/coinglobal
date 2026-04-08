@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { TrendingUp } from 'lucide-react';
 
 import { getCoinsByIds } from '@/lib/api/coins-id';
@@ -24,7 +23,7 @@ export default async function WatchlistStatsSection({
   const isMarketCapUp = stats.totalMarketCapChange24h >= 0;
 
   return (
-    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-6">
+    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-8 mb-6">
       <StatCard
         label="Total Watchlist Market Cap"
         value={formatCompactCurrency(stats.totalMarketCap)}
@@ -49,12 +48,6 @@ export default async function WatchlistStatsSection({
         valueClassName="text-(--color-primary)"
         footer={<p className="text-(--color-60)">All watchlist assets</p>}
       />
-
-      {/* Exchange Count */}
-      {/* <Suspense fallback={<ExchangeCountStatCardFallback />}>
-        <ExchangeCountStatCard watchlistCoinIds={watchlistCoinIds} />
-      </Suspense> */}
-
       <StatCard
         label="AI Insights"
         value={12}

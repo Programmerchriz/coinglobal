@@ -416,7 +416,6 @@ declare global {
     totalMarketCapChange24h: number;
     totalMarketCapChange24hPercentage: number;
     total24hVolume: number;
-    uniqueExchangeCount: number;
     trendingAssetsCount: number;
   };
 

@@ -11,7 +11,7 @@ export default function WatchlistTable({ watchlist, columns }: Props) {
       data={watchlist}
       columns={columns}
       rowKey={(row) => row.id}
-      tableClassName="watchlist-table"
+      tableClassName="coins-table"
       headerClassName="py-3!"
       bodyCellClassName="py-2! px-4"
     />
