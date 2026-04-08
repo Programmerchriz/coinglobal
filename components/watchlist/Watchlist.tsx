@@ -16,24 +16,29 @@ interface WatchlistProps {
   allCoins: CoinMarketData[];
   watchlistCoinIds: string[];
   maxItems?: number;
+  isSorted?: boolean;
 };
 
 const Watchlist = ({
   allCoins,
   watchlistCoinIds,
   maxItems,
+  isSorted,
 }: WatchlistProps) => {
   const router = useRouter();
   const [optimisticWatchlistIds, setOptimisticWatchlistIds] = useState(() => new Set(watchlistCoinIds));
   const [pendingIds, setPendingIds] = useState<Set<string>>(new Set());
 
-  const sortedWatchlistCoins = allCoins
-    .filter(coin => optimisticWatchlistIds.has(coin.id))
-    .sort(
-      (a, b) => 
-        (a.market_cap_rank ?? Number.MAX_SAFE_INTEGER) -
-        (b.market_cap_rank ?? Number.MAX_SAFE_INTEGER)
-    );
+  let sortedWatchlistCoins = allCoins.filter(coin => optimisticWatchlistIds.has(coin.id));
+
+  if (!isSorted) {
+    sortedWatchlistCoins = sortedWatchlistCoins
+      .sort(
+        (a, b) => 
+          (a.market_cap_rank ?? Number.MAX_SAFE_INTEGER) -
+          (b.market_cap_rank ?? Number.MAX_SAFE_INTEGER)
+      );
+  };
   
   const displayedWatchlistCoins = maxItems
     ? sortedWatchlistCoins.slice(0, maxItems)
@@ -127,7 +132,7 @@ const Watchlist = ({
 
     try {
       await (nextState ? addToWatchlist(id) : removeFromWatchlist(id));
-      
+
     } catch(e) {
       setOptimisticWatchlistIds(prev => {
         const next = new Set(prev);
