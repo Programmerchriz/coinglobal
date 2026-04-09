@@ -41,7 +41,7 @@ export default function TradeClient() {
 
   return (
     <motion.div
-      className="w-full h-full px-4 py-5 sm:px-6 sm:py-6 lg:px-8"
+      className="w-full h-full px-2 py-5"
       initial="hidden"
       animate="visible"
       variants={containerVariants}

@@ -91,7 +91,7 @@ export default function PortfolioClient() {
               </div>
 
               {/* CHART TYPE TOGGLE */}
-              <div className="flex gap-2 text-xs">
+              {/* <div className="flex gap-2 text-xs">
                 <Button
                   onClick={() => setChartType("portfolio")}
                   className={`rounded-lg ${
@@ -113,7 +113,7 @@ export default function PortfolioClient() {
                 >
                   Market
                 </Button>
-              </div>
+              </div> */}
 
               {/* CHART */}
               <div className="pt-2">
