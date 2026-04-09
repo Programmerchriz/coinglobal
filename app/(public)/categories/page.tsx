@@ -17,7 +17,7 @@ export default async function CategoriesPage({ searchParams }: NextPageProps) {
   const hasMorePages = currentPage < totalPages;
 
   return (
-    <div className="min-h-screen bg-(--bg-app) text-(--text-primary) px-4 md:px-8 py-8">
+    <div className="min-h-screen bg-(--bg-app) text-(--text-primary) px-2 py-8">
       <div className="absolute -top-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 
@@ -26,7 +26,7 @@ export default async function CategoriesPage({ searchParams }: NextPageProps) {
           <BackButton />
         </div>
 
-        <div>
+        <div className='px-4'>
           <h1 className="text-2xl md:text-3xl font-semibold">All Categories</h1>
           <p className="text-(--color-50) text-sm mt-1">
             Explore crypto market categories and sector performance.

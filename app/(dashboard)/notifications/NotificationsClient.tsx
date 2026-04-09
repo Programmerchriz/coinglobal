@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function NotificationsClient() {
   return (
-    <div className="relative min-h-screen bg-(--bg-app) text-(--text-primary) px-4 md:px-8 pb-8">
+    <div className="relative min-h-screen bg-(--bg-app) text-(--text-primary) px-2">
       {/* Glow */}
       <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--bg-indigo-10) rounded-full blur-3xl pointer-events-none" />
 

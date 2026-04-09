@@ -10,7 +10,6 @@ import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
 import WatchlistToggle from "@/components/watchlist/WatchlistToggle";
 import CoinsPagination from "@/components/all/CoinsPagination";
 import DataTable from "@/components/all/DataTable";
-import BackButton from "@/components/ui/BackButton";
 import { addToWatchlist, removeFromWatchlist } from "@/lib/actions/watchlist-actions";
 
 interface CoinsClientProps {
@@ -146,48 +145,27 @@ export default function CoinsClient({
   ];
 
   return (
-    <div className="relative min-h-screen bg-(--bg-base) text-(--color-100) px-4 md:px-8 py-8">
-      {/* Background Glow */}
-      <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--bg-glass-indigo) rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative z-10 max-w-7xl mx-auto space-y-6">
-        <div>
-          <BackButton />
-        </div>
-
-        <div>
-          <h1 className="text-2xl md:text-3xl font-semibold">
-            All Coins
-          </h1>
-
-          <p className="text-(--color-50) text-sm mt-1">
-            Explore different cryptocurrencies and their performance.
-          </p>
-        </div>
-
-        {/* Table Card */}
-        <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl">
-          <div id="coins-page" className="custom-scrollbar py-4 md:py-2">
-            <DataTable
-              data={allCoins}
-              columns={columns}
-              rowKey={(row) => row.id}
-              tableClassName="coins-table"
-              headerClassName="py-3!"
-              bodyCellClassName="py-2! px-4"
-            />
-          </div>
-        </div>
-
-        {/* Pagination */}
-        <div className="flex justify-center">
-          <CoinsPagination
-            currentPage={currentPage}
-            totalPages={estimatedTotalPages}
-            hasMorePages={hasMorePages}
-            basePath="coins"
+    <div className="space-y-6">
+      <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl shadow-xl">
+        <div id="coins-page" className="custom-scrollbar py-4 md:py-2">
+          <DataTable
+            data={allCoins}
+            columns={columns}
+            rowKey={(row) => row.id}
+            tableClassName="coins-table"
+            headerClassName="py-3!"
+            bodyCellClassName="py-2! px-4"
           />
         </div>
+      </div>
+
+      <div className="flex justify-center">
+        <CoinsPagination
+          currentPage={currentPage}
+          totalPages={estimatedTotalPages}
+          hasMorePages={hasMorePages}
+          basePath="coins"
+        />
       </div>
     </div>
   );
