@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Watchlist from "@/components/watchlist/Watchlist";
 import EmptyWatchlist from "@/components/watchlist/EmptyWatchlist";
+import PortfolioLineChart from "@/components/charts/PortfolioLineChart";
 
 interface DashboardClientProps {
   allCoins: CoinMarketData[];
@@ -79,7 +80,9 @@ export default function DashboardClientPage({
               </div>
             </div>
 
-            <div className="h-40 sm:h-56 bg-(--bg-indigo-10) rounded-xl" />
+            <div className="pt-2">
+              <PortfolioLineChart />
+            </div>
           </CardContent>
         </Card>
 
