@@ -1,8 +1,9 @@
 'use client';
 
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
@@ -23,8 +24,7 @@ import {
 } from '@/components/auth/Form';
 import { Input } from '@/components/ui/input';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
-import Loading from '../../../components/auth/fallback';
-import { useState } from 'react';
+import Loading from '@/app/(auth)/loading';
 
 const signUpSchema = z
   .object({

@@ -3,7 +3,7 @@
 
 export default function Fallback() {
   return (
-    <div className="min-h-screen py-16 bg-(--bg-app) flex justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen py-16 bg-(--bg-app) flex justify-center px-2 relative overflow-hidden">
 
       {/* Glow background */}
       <div className="absolute top-[-200px] left-[-200px] w-[400px] h-[400px] bg-(--bg-glass-indigo) rounded-full blur-3xl" />

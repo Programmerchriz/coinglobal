@@ -16,7 +16,7 @@ export default async function EmailVerifiedPage() {
   if (true) redirect('/dashboard'); // Unaccesssible
 
   return (
-    <main className="relative min-h-screen flex items-center justify-center px-4 bg-(--bg-app) text-(--color-100) overflow-hidden">
+    <main className="relative min-h-screen flex items-center justify-center px-2 bg-(--bg-app) text-(--color-100) overflow-hidden">
       <div className="absolute -top-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 

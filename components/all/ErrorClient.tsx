@@ -12,7 +12,7 @@ export default function ErrorClient({ title, page, reset }: Props) {
   const router = useRouter();
 
   return (
-    <section className="relative min-h-screen flex items-start lg:items-center justify-center px-4 py-16">
+    <section className="relative min-h-screen flex items-start lg:items-center justify-center px-2 py-16">
       <div className="absolute -top-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
 
