@@ -43,7 +43,7 @@ type SignUpValues = z.infer<typeof signUpSchema>;
 export function SignUpForm() {
   const searchParams = useSearchParams();
   let redirect = searchParams.get('redirect') ?? '/dashboard?welcome=signup';
-  if (redirect?.startsWith("/sign")) redirect = "/dashboard?welcome=signup";
+  if (redirect?.includes('sign')) redirect = '/dashboard?welcome=signup';
   
   const [googleLoading, setGoogleLoading] = useState(false);
   const { error, isLocked, handleAuth } = useAuthHandler(redirect);
