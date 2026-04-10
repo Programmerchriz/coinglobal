@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import Loading from "@/components/dashboard/SignOutLoading";
 
-const LOADING_DELAY = 3500;
+const LOADING_DELAY = 4000;
 const REPLACE_DELAY = 500;
 
 export default function LayoutClient({

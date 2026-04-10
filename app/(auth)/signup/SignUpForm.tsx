@@ -80,8 +80,7 @@ export function SignUpForm() {
 
           {error && (
             <div
-              className="mb-4 p-3 rounded-xl bg-(--color-error-10) border border-(--color-error-2
-            0) text-(--text-error) text-sm"
+              className="mb-4 p-3 rounded-xl bg-(--color-error-10) border border-(--color-error-20) text-(--text-error) text-sm"
             >
               {error}
             </div>
@@ -140,7 +139,7 @@ export function SignUpForm() {
                   })
                 );
               })}
-              className="space-y-4"
+              className="space-y-4 "
             >
               <FormField
                 control={form.control}
@@ -151,7 +150,7 @@ export function SignUpForm() {
                     <FormControl>
                       <Input disabled={loading} {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='bg-(--color-error-10) border border-(--color-error-20) text-(--text-error) text-sm' />
                   </FormItem>
                 )}
               />
