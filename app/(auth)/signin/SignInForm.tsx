@@ -59,7 +59,7 @@ export function SignInForm() {
 
       <motion.div
         initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="relative z-10 w-full max-w-md"
       >
@@ -73,8 +73,7 @@ export function SignInForm() {
 
           {error && (
             <div
-              className="mb-4 p-3 rounded-xl bg-(--color-error-10) border border-(--color-error-2
-              0) text-(--text-error) text-sm"
+              className="mb-4 p-3 rounded-xl bg-(--color-error-10) border border-(--color-error-20) text-(--text-error) text-sm"
             >
               {error}
             </div>
