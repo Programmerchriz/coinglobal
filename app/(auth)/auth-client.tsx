@@ -31,7 +31,7 @@ export function useAuthHandler(redirectParam: string) {
         return;
       }
 
-      setTimeout(() => setIsLocked(false), 3500);
+      setTimeout(() => setIsLocked(false), 4500);
       router.replace(redirectParam);
       router.refresh();
 
