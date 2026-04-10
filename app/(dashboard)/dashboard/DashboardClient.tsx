@@ -27,9 +27,9 @@ export default function DashboardClientPage({
   const router = useRouter();
 
   return (
-    <>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+    <div className="relative min-h-screen bg-(--bg-app) text-(--text-primary) pb-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6 px-2">
         <h1 className="text-xl sm:text-2xl font-semibold text-(--text-primary)">
           Dashboard Overview
         </h1>
@@ -173,6 +173,6 @@ export default function DashboardClientPage({
           }
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 };

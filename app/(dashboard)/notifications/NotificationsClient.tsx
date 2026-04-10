@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function NotificationsClient() {
   return (
-    <div className="relative min-h-screen bg-(--bg-app) text-(--text-primary) px-2">
+    <div className=" min-h-screen bg-(--bg-app) text-(--text-primary)">
       {/* Glow */}
       <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--bg-indigo-10) rounded-full blur-3xl pointer-events-none" />
 
@@ -40,7 +40,7 @@ export default function NotificationsClient() {
 
         {/* Tabs */}
         <div className="overflow-x-auto custom-scrollbar">
-          <div className="flex gap-6 min-w-max border-b border-(--color-5) pb-3">
+          <div className="flex gap-6 border-b border-(--color-5) pb-3">
             {[
               "All",
               "System Notifications",
@@ -69,7 +69,7 @@ export default function NotificationsClient() {
         {/* Notifications List */}
         <div className="space-y-4">
           <div className="bg-(--bg-surface) border border-(--color-5) rounded-2xl p-5 hover:border-(--color-primary)/40 transition">
-            <div className="flex justify-between items-start gap-4">
+            <div className="flex justify-between items-center gap-4">
               <div>
                 <h3 className="font-medium">
                   Login Attempt From New IP
@@ -85,7 +85,7 @@ export default function NotificationsClient() {
               </div>
 
               <button className="text-(--color-primary) hover:text-(--color-primary-hover) text-sm transition">
-                View More →
+                View More
               </button>
             </div>
           </div>

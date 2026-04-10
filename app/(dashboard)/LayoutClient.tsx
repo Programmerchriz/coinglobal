@@ -78,6 +78,7 @@ export default function LayoutClient({
 
   return (
     <div className="min-h-screen bg-(--bg-app) text-(--text-primary) flex relative">
+
       {/* SignOut Overlay */}
       <AnimatePresence>
         {isLoading && (
@@ -114,7 +115,7 @@ export default function LayoutClient({
         isDisabled={isDisabled}
       />
 
-      <main className="flex-1 w-full lg:ml-64 p-4 sm:p-6">
+      <main className="flex-1 w-full lg:ml-64 px-2 md:px-4 py-4">
         <div className="lg:hidden mb-6">
           <button
             onClick={() => setIsOpen(true)}

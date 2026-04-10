@@ -15,11 +15,7 @@ export default async function WatchlistPage() {
   const watchlistCoinIds = await getWatchlistIds();
 
   return (
-    <div
-      className="relative w-full min-h-screen bg-(--bg-app) px-2"
-    >
-      <div className="absolute -top-50 w-100 h-100 bg-(--color-primary)/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 w-100 h-100 bg-(--color-accent)/20 rounded-full blur-3xl" />
+    <div className="relative min-h-screen bg-(--bg-app) text-(--text-primary) pb-8">
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="mb-6">

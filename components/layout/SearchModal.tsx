@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
 import { searchCoins } from '@/lib/coingecko.actions';
-import { Search as SearchIcon, TrendingDown, TrendingUp } from 'lucide-react';
+import { Search as SearchIcon, TrendingDown, TrendingUp, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn, formatPercentage } from '@/lib/utils';
 import useSWR from 'swr';
@@ -175,14 +175,22 @@ export const SearchModal = ({
           <CommandDialog
             open={open}
             onOpenChange={setOpen}
+            showCloseButton={false}
             className="overflow-hidden rounded-2xl border border-(--border-standard) bg-(--bg-surface)/95 backdrop-blur-2xl shadow-2xl max-w-2xl"
           >
             {/* SEARCH HEADER */}
-            <div className="px-5 pt-5 pb-3 space-y-3 border-b border-(--border-standard)">
+            <div className="relative px-5 pt-5 pb-3 space-y-3 border-b border-(--border-standard)">
+              
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute top-10 right-8 p-1 rounded-lg hover:bg-(--bg-hover) transition-colors text-(--color-60) hover:text-(--text-primary)"
+              >
+                <X size={20} />
+              </button>
 
               {/* INPUT */}
               <div className="flex items-center gap-3 bg-(--bg-elevated) px-4 py-3 rounded-xl border border-(--border-input)">
-                <SearchIcon size={18} className="text-(--color-50)" />
 
                 <CommandInput
                   placeholder="Search"
@@ -191,9 +199,6 @@ export const SearchModal = ({
                   className="border-none focus:outline-none focus:ring-0 bg-transparent text-sm"
                 />
 
-                <kbd className="text-xs px-2 py-0.5 rounded-md bg-(--color-5) text-(--color-60)">
-                  /
-                </kbd>
               </div>
 
               {/* FILTER CHIPS */}
@@ -214,7 +219,7 @@ export const SearchModal = ({
             </div>
 
             {/* LIST */}
-            <CommandList className="max-h-[420px] overflow-y-auto custom-scrollbar px-3 py-3">
+            <CommandList className="max-h-105 overflow-y-auto custom-scrollbar px-3 py-3">
 
               {isSearching && (
                 <div className="py-6 text-center text-sm text-(--color-50)">
