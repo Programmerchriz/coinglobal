@@ -10,14 +10,14 @@ export default function Loading() {
       
       {/* Background Glow Effects */}
       <div className="absolute -top-50 -left-50 w-100 h-100 bg-(--bg-glass-indigo) rounded-full blur-3xl" />
-      <div className="absolute -bottom-50 -right-50 w-100 h-100 bg-(--bg-glass-purple) rounded-full blur-3xl" />
+      <div className="absolute -bottom-50 -right-50 w-150 h-100 bg-(--bg-glass-purple) rounded-full blur-3xl" />
 
-      {/* Center Loader Card */}
+      {/* Center Loader Card (--color-5) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative z-10 bg-(--bg-surface) border border-(--color-5) rounded-2xl px-10 py-8 shadow-2xl flex flex-col items-center gap-4"
+        className="relative z-10 bg-(--bg-surface) border border-(--color-5) rounded-2xl px-10 shadow-2xl flex flex-col items-center gap-4 h-40 w-50"
       >
         {/* Logo */}
         <motion.div
@@ -26,7 +26,7 @@ export default function Loading() {
             duration: 2.5,
             ease: "linear",
           }}
-          className="flex items-center justify-center"
+          className="mt-3 mr-1.5 flex items-center justify-center"
         >
           <Image
             src="/coin-glob.png"
