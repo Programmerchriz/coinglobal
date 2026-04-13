@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
 import OnboardingFooter from '@/components/public/OnboardingFooter';
+import ParticlesHero from '../../components/layout/ParticleBackground';
 
 const FEATURES = [
   { label: 'Dashboard', available: true },
@@ -25,6 +26,7 @@ export default function OnboardingClient({ session }: { session: Session | null 
     <main className="text-(--text-primary)">
       {/* Hero Section */}
       <section className="min-h-screen flex pt-50 md:pt-0 items-start md:items-center justify-center px-6 lg:px-24 text-center">
+        <ParticlesHero />
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
