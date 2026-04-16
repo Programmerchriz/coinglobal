@@ -1,4 +1,4 @@
-# Coin Global not coin-global
+# Coin Global
 
 Coin Global is a crypto market dashboard and trading-oriented web app built with Next.js. It combines live cryptocurrency market data, authentication, protected user areas, charting, profile personalization, and dashboard-style portfolio screens in a modern responsive interface.
 
