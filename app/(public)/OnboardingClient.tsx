@@ -25,13 +25,13 @@ export default function OnboardingClient({ session }: { session: Session | null 
   return (
     <main className="text-(--text-primary)">
       {/* Hero Section */}
-      <section className="min-h-screen flex pt-50 md:pt-0 items-start md:items-center justify-center px-6 lg:px-24 text-center">
+      <section className="relative isolate overflow-hidden min-h-screen flex pt-50 md:pt-0 items-start md:items-center justify-center px-6 lg:px-24 text-center">
         <ParticlesHero />
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="space-y-6 max-w-3xl"
+          className="relative z-10 space-y-6 max-w-3xl"
         >
           <h1 className="text-4xl lg:text-6xl font-bold">
             Build Your Crypto World with Coin Global
